@@ -1,0 +1,111 @@
++ PROJECT_DIR=/home/zzy/projects/occ_study/D-FINE
++ MODEL=l
++ CONDA_ENV=dfine
++ CONFIG_FILE=configs/dfine/dfine_hgnetv2_l_coco.yml
++ cd /home/zzy/projects/occ_study/D-FINE
++ module load gcc/8.3.0
++ local _mlredir=1
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 1 -eq 0 ']'
++ _module_raw load gcc/8.3.0
++ module load cuda/cuda12.4
++ local _mlredir=1
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 1 -eq 0 ']'
++ _module_raw load cuda/cuda12.4
++ source /soft/anaconda3/bin/activate dfine
+++ _CONDA_ROOT=/soft/anaconda3
+++ . /soft/anaconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/soft/anaconda3/bin/conda
++++ CONDA_EXE=/soft/anaconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ '[' -z x ']'
+++ conda activate dfine
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate dfine
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate dfine
++++ '[' -n '' ']'
++++ /soft/anaconda3/bin/conda shell.posix activate dfine
+++ ask_conda='. "/home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/tesseract_deactivate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/libglib_deactivate.sh"
+unset _CE_M
+unset _CE_CONDA
+PS1='\''(dfine) '\''
+export PATH='\''/soft/gcc/8.3.0/bin:/soft/cuda12.4/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_PROMPT_MODIFIER='\''(dfine) '\''
+export CONDA_EXE='\''/soft/anaconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/soft/anaconda3/bin/python'\''
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh"'
+++ eval '. "/home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/tesseract_deactivate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/libglib_deactivate.sh"
+unset _CE_M
+unset _CE_CONDA
+PS1='\''(dfine) '\''
+export PATH='\''/soft/gcc/8.3.0/bin:/soft/cuda12.4/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_PROMPT_MODIFIER='\''(dfine) '\''
+export CONDA_EXE='\''/soft/anaconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/soft/anaconda3/bin/python'\''
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh"'
++++ . /home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/tesseract_deactivate.sh
+++++ unset TESSDATA_PREFIX
++++ . /home/zzy/.conda/envs/dfine/etc/conda/deactivate.d/libglib_deactivate.sh
+++++ export GSETTINGS_SCHEMA_DIR=
+++++ GSETTINGS_SCHEMA_DIR=
+++++ unset GSETTINGS_SCHEMA_DIR_CONDA_BACKUP
+++++ '[' -z ']'
+++++ unset GSETTINGS_SCHEMA_DIR
++++ unset _CE_M
++++ unset _CE_CONDA
++++ PS1='(dfine) '
++++ export PATH=/soft/gcc/8.3.0/bin:/soft/cuda12.4/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin
++++ PATH=/soft/gcc/8.3.0/bin:/soft/cuda12.4/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin
++++ export CONDA_SHLVL=2
++++ CONDA_SHLVL=2
++++ export 'CONDA_PROMPT_MODIFIER=(dfine) '
++++ CONDA_PROMPT_MODIFIER='(dfine) '
++++ export CONDA_EXE=/soft/anaconda3/bin/conda
++++ CONDA_EXE=/soft/anaconda3/bin/conda
++++ export CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ . /home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh
+++++ export GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+++++ GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+++++ export GSETTINGS_SCHEMA_DIR=/home/zzy/.conda/envs/dfine/share/glib-2.0/schemas
+++++ GSETTINGS_SCHEMA_DIR=/home/zzy/.conda/envs/dfine/share/glib-2.0/schemas
++++ . /home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh
+++++ export TESSDATA_PREFIX=/home/zzy/.conda/envs/dfine/share/tessdata/
+++++ TESSDATA_PREFIX=/home/zzy/.conda/envs/dfine/share/tessdata/
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ test -f configs/dfine/dfine_hgnetv2_l_coco.yml
++ THREADS_PER_RANK=4
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ export MKL_NUM_THREADS=4
++ MKL_NUM_THREADS=4
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ JOB_NUMBER=14875
++ MASTER_PORT=34875
+++ hostname
++ echo 'Job: 14875 | Model: l | Node: gpu12 | Port: 34875'
++ echo CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
++ torchrun --nnodes=1 --nproc_per_node=8 --master_port=34875 train.py -c configs/dfine/dfine_hgnetv2_l_coco.yml --use-amp --seed=0
+slurmstepd: error: *** JOB 14875 ON gpu12 CANCELLED AT 2026-09-20T19:36:57 ***
