@@ -1,0 +1,73 @@
+__include__: ['../dfine_hgnetv2_l_coco.yml']
+
+# G1: stage-one oracle. Train/evaluate only the added GT strip refiner.
+# Supply a complete trained D-FINE-L checkpoint with -t /path/baseline.pth,
+# or set DFINEGTRefiner.baseline_checkpoint. Use -r only for stage-one resume.
+# Adapt the dataset/classes to the baseline before loading; no partial baseline
+# or randomly initialized detector is accepted. This file does not run anything.
+model: DFINEGTRefiner
+criterion: GTRefinementCriterion
+output_dir: ./output/dfine_hgnetv2_l_gt_stage1_g1
+exp_name: gt_stage1_g1_oracle
+
+HGNetv2:
+  pretrained: False
+
+DFINEGTRefiner:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    alpha: 0.25
+    gamma: 2.0
+  baseline_checkpoint: null
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  kernel_size: 3
+  offset_pixels: 1.0
+  max_log_scale: 2.0
+  feature_mode: real
+  random_seed: 0
+  train_target_format: cxcywh_normalized
+  eval_target_format: xyxy_absolute
+
+GTRefinementCriterion:
+  weight_dict: {loss_bbox: 5, loss_giou: 2}
+
+# Keep the frozen baseline and its scores identical across all controls.
+use_ema: False
+sync_bn: False
+find_unused_parameters: False
+epochs: 12
+checkpoint_freq: 1
+optimizer:
+  type: AdamW
+  params:
+    - {params: '^refiner\.', lr: 0.00025}
+  lr: 0.00025
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [10]
+  gamma: 0.1
+
+# Fixed-size initial probe: avoid a second-stage detector reload or multi-scale
+# resampling. Validation remains resized absolute xyxy, as in the original code.
+train_dataloader:
+  total_batch_size: 16
+  dataset:
+    transforms:
+      ops:
+        - {type: Resize, size: [640, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 1000000
+val_dataloader:
+  total_batch_size: 16

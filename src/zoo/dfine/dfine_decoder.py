@@ -385,6 +385,7 @@ class TransformerDecoder(nn.Module):
         attn_mask=None,
         memory_mask=None,
         dn_meta=None,
+        return_query=False,
     ):
         output = target
         output_detach = pred_corners_undetach = 0
@@ -446,7 +447,7 @@ class TransformerDecoder(nn.Module):
             ref_points_detach = inter_ref_bbox.detach()
             output_detach = output.detach()
 
-        return (
+        result = (
             torch.stack(dec_out_bboxes),
             torch.stack(dec_out_logits),
             torch.stack(dec_out_pred_corners),
@@ -454,6 +455,7 @@ class TransformerDecoder(nn.Module):
             pre_bboxes,
             pre_scores,
         )
+        return result + (output,) if return_query else result
 
 
 @register()
@@ -837,7 +839,10 @@ class DFINETransformer(nn.Module):
 
         return topk_memory, topk_logits, topk_anchors
 
-    def forward(self, feats, targets=None):
+    def forward(self, feats, targets=None, return_query=False):
+        # The GT-only diagnostic reads an eval query, never denoising queries.
+        if return_query and self.training:
+            raise ValueError("return_query is only supported with the decoder in eval mode")
         # input projection and embedding
         memory, spatial_shapes = self._get_encoder_input(feats)
 
@@ -862,7 +867,7 @@ class DFINETransformer(nn.Module):
         )
 
         # decoder
-        out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = self.decoder(
+        decoder_outputs = self.decoder(
             init_ref_contents,
             init_ref_points_unact,
             memory,
@@ -876,7 +881,9 @@ class DFINETransformer(nn.Module):
             self.reg_scale,
             attn_mask=attn_mask,
             dn_meta=dn_meta,
+            return_query=return_query,
         )
+        out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = decoder_outputs[:6]
 
         if self.training and dn_meta is not None:
             dn_pre_logits, pre_logits = torch.split(pre_logits, dn_meta["dn_num_split"], dim=1)
@@ -898,6 +905,8 @@ class DFINETransformer(nn.Module):
             }
         else:
             out = {"pred_logits": out_logits[-1], "pred_boxes": out_bboxes[-1]}
+        if return_query:
+            out["pred_queries"] = decoder_outputs[6]
 
         if self.training and self.aux_loss:
             out["aux_outputs"] = self._set_aux_loss2(

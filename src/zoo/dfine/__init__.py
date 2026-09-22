@@ -9,3 +9,6 @@ from .dfine_decoder import DFINETransformer
 from .hybrid_encoder import HybridEncoder
 from .matcher import HungarianMatcher
 from .postprocessor import DFINEPostProcessor
+
+from .gt_refinement import DFINEGTRefiner
+from .gt_refinement_criterion import GTRefinementCriterion

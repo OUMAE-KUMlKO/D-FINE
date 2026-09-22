@@ -1,0 +1,6 @@
+__include__: ['./dfine_hgnetv2_l_gt_stage1.yml']
+# Independently train the same added head with constant sampled visual content.
+output_dir: ./output/dfine_hgnetv2_l_gt_stage1_g2
+exp_name: gt_stage1_g2_constant_oracle
+DFINEGTRefiner:
+  feature_mode: constant

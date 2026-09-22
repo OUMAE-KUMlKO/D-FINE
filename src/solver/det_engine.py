@@ -20,6 +20,7 @@ from ..data import CocoEvaluator
 from ..data.dataset import mscoco_category2label
 from ..misc import MetricLogger, SmoothedValue, dist_utils, save_samples
 from ..optim import ModelEMA, Warmup
+from .gt_refinement_metrics import GTRefinementMetrics
 from .validator import Validator, scale_boxes
 
 
@@ -166,9 +167,19 @@ def evaluate(
     criterion.eval()
     coco_evaluator.cleanup()
 
+    requires_gt = bool(getattr(dist_utils.de_parallel(model), "requires_gt", False))
+    oracle_metrics = GTRefinementMetrics(
+        device=device, sampler=getattr(data_loader, "sampler", None)
+    ) if requires_gt else None
+    if requires_gt:
+        print(
+            "ORACLE EVALUATION: ground-truth boxes guide refinement; "
+            "all queries and baseline scores are retained. These are not GT-free detection results."
+        )
+
     metric_logger = MetricLogger(delimiter="  ")
     # metric_logger.add_meter('class_error', SmoothedValue(window_size=1, fmt='{value:.2f}'))
-    header = "Test:"
+    header = "Oracle Test:" if requires_gt else "Test:"
 
     # iou_types = tuple(k for k in ('segm', 'bbox') if k in postprocessor.keys())
     iou_types = coco_evaluator.iou_types
@@ -190,7 +201,9 @@ def evaluate(
         samples = samples.to(device)
         targets = [{k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in t.items()} for t in targets]
 
-        outputs = model(samples)
+        outputs = model(samples, targets=targets) if requires_gt else model(samples)
+        if oracle_metrics is not None:
+            oracle_metrics.update(outputs, input_size=samples.shape[-2:])
         # with torch.autocast(device_type=str(device)):
         #     outputs = model(samples)
 
@@ -231,9 +244,10 @@ def evaluate(
 
     # Conf matrix, F1, Precision, Recall, box IoU
     metrics = Validator(gt, preds).compute_metrics()
-    print("Metrics:", metrics)
+    print("Oracle metrics:" if requires_gt else "Metrics:", metrics)
     if use_wandb:
-        metrics = {f"metrics/{k}": v for k, v in metrics.items()}
+        prefix = "oracle_metrics" if requires_gt else "metrics"
+        metrics = {f"{prefix}/{k}": v for k, v in metrics.items()}
         metrics["epoch"] = epoch
         wandb.log(metrics)
 
@@ -246,6 +260,8 @@ def evaluate(
     # accumulate predictions from all images
     if coco_evaluator is not None:
         coco_evaluator.accumulate()
+        if requires_gt:
+            print("ORACLE COCO results (GT-guided boxes, fixed baseline scores):")
         coco_evaluator.summarize()
 
     stats = {}
@@ -255,5 +271,11 @@ def evaluate(
             stats["coco_eval_bbox"] = coco_evaluator.coco_eval["bbox"].stats.tolist()
         if "segm" in iou_types:
             stats["coco_eval_masks"] = coco_evaluator.coco_eval["segm"].stats.tolist()
+
+    if oracle_metrics is not None:
+        oracle_metrics.synchronize_between_processes()
+        stats["oracle_evaluation"] = True
+        stats["oracle_geometry"] = oracle_metrics.compute()
+        print("Oracle fixed-pair geometry:", stats["oracle_geometry"])
 
     return stats, coco_evaluator

@@ -15,6 +15,15 @@ def stats(
     base_size = cfg.train_dataloader.collate_fn.base_size
     input_shape = (1, 3, base_size, base_size)
 
+    if getattr(cfg.model, "requires_gt", False):
+        params = sum(p.numel() for p in cfg.model.parameters())
+        trainable = sum(p.numel() for p in cfg.model.parameters() if p.requires_grad)
+        return params, {
+            "Oracle model Params:%s   Trainable Params:%s   "
+            "FLOPs/MACs: not profiled (real images and GT are required; deployment is unavailable)"
+            % (params, trainable)
+        }
+
     model_for_info = copy.deepcopy(cfg.model).deploy()
 
     flops, macs, _ = calculate_flops(

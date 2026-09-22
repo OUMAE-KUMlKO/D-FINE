@@ -1,0 +1,44 @@
+__include__: [
+  '../custom/dfine_hgnetv2_l_custom.yml',
+  '../../dataset/uavswarm_detection.yml',
+]
+
+# Step 1: train a UAVSwarm D-FINE-L baseline using only backbone pretraining.
+# Start without -t or -r; HGNetv2 automatically downloads/caches its B4 weights.
+# The Encoder, Decoder, and detection heads are initialized by the model.
+output_dir: ./output/dfine_hgnetv2_l_uavswarm
+exp_name: dfine_l_uavswarm_baseline
+
+HGNetv2:
+  pretrained: True
+  local_model_dir: weight/hgnetv2/
+
+epochs: 80
+checkpoint_freq: 10
+use_amp: True
+use_ema: True
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [60, 72]
+  gamma: 0.1
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 100
+
+train_dataloader:
+  total_batch_size: 96  # 6 GPU processes x 16 images.
+  num_workers: 4       # Per process.
+  dataset:
+    transforms:
+      policy:
+        epoch: 72
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null  # Keep the network input fixed at 640 x 640.
+    # Continuous training without the solver's automatic detector reload.
+    # The best validation checkpoint is output_dir/best_stg1.pth throughout.
+    stop_epoch: 1000000
+
+val_dataloader:
+  total_batch_size: 96
+  num_workers: 4

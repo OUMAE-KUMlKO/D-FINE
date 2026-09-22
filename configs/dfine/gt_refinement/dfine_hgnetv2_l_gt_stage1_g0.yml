@@ -1,0 +1,6 @@
+__include__: ['./dfine_hgnetv2_l_gt_stage1.yml']
+# Evaluation-only original predictions with the same GT pairing diagnostics.
+output_dir: ./output/dfine_hgnetv2_l_gt_stage1_g0
+exp_name: gt_stage1_g0_baseline
+DFINEGTRefiner:
+  feature_mode: baseline

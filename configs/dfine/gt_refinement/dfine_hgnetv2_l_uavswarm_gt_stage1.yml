@@ -1,0 +1,28 @@
+__include__: [
+  './dfine_hgnetv2_l_gt_stage1.yml',
+  '../../dataset/uavswarm_detection.yml',
+]
+
+# Step 2 / G1: train the GT-only strip head with the UAVSwarm baseline frozen.
+# Use -t output/dfine_hgnetv2_l_uavswarm/best_stg1.pth after Step 1 finishes.
+# Step 1 starts from backbone pretraining; this step needs its completed
+# UAVSwarm detector, including trained Encoder, Decoder, and detection heads.
+# Use -r only to resume an existing strip-head experiment.
+output_dir: ./output/dfine_hgnetv2_l_uavswarm_gt_stage1_g1
+exp_name: dfine_l_uavswarm_gt_stage1_g1
+
+use_amp: True
+epochs: 12
+lr_warmup_scheduler:
+  type: LinearWarmup
+  # About 35 iterations/epoch at total batch 96. Finish warmup early instead
+  # of inheriting 500 iterations, which would exceed this whole 12-epoch run.
+  warmup_duration: 50
+
+train_dataloader:
+  total_batch_size: 96  # 6 GPU processes x 16 images.
+  num_workers: 4
+
+val_dataloader:
+  total_batch_size: 96
+  num_workers: 4

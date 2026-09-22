@@ -1,0 +1,18 @@
+# Dataset overlay for the existing D-FINE training configurations.
+# train.json contains both halves; using it with val_half.json would overlap.
+# test.json has no annotations, so GT-guided validation uses val_half.json.
+num_classes: 1
+# The supplied annotations use category_id=1 (legacy name: pedestrian).
+# Reuse the existing 1 <-> 0 mapping for the single UAV class, including COCO
+# postprocessing. This flag does not add other COCO classes to the model.
+remap_mscoco_category: True
+
+train_dataloader:
+  dataset:
+    img_folder: /home/data/dataset/UAVSwarm-dataset-master/train
+    ann_file: /home/data/dataset/UAVSwarm-dataset-master/annotations/train_half.json
+
+val_dataloader:
+  dataset:
+    img_folder: /home/data/dataset/UAVSwarm-dataset-master/train
+    ann_file: /home/data/dataset/UAVSwarm-dataset-master/annotations/val_half.json

@@ -52,7 +52,7 @@ class DetSolver(BaseSolver):
                 self.last_epoch,
                 self.use_wandb
             )
-            for k in test_stats:
+            for k in (key for key in test_stats if key in ("coco_eval_bbox", "coco_eval_masks")):
                 best_stat["epoch"] = self.last_epoch
                 best_stat[k] = test_stats[k][0]
                 top1 = test_stats[k][0]
@@ -117,11 +117,13 @@ class DetSolver(BaseSolver):
                 output_dir=self.output_dir,
             )
 
-            # TODO
-            for k in test_stats:
+            # Oracle evaluations also contain metadata and geometry dictionaries;
+            # only the COCO performance arrays participate in checkpoint selection.
+            test_prefix = "OracleTest" if test_stats.get("oracle_evaluation", False) else "Test"
+            for k in (key for key in test_stats if key in ("coco_eval_bbox", "coco_eval_masks")):
                 if self.writer and dist_utils.is_main_process():
                     for i, v in enumerate(test_stats[k]):
-                        self.writer.add_scalar(f"Test/{k}_{i}".format(k), v, epoch)
+                        self.writer.add_scalar(f"{test_prefix}/{k}_{i}", v, epoch)
 
                 if k in best_stat:
                     best_stat["epoch"] = (
@@ -179,8 +181,9 @@ class DetSolver(BaseSolver):
 
             if self.use_wandb:
                 wandb_logs = {}
+                metric_prefix = "oracle_metrics" if test_stats.get("oracle_evaluation", False) else "metrics"
                 for idx, metric_name in enumerate(metric_names):
-                    wandb_logs[f"metrics/{metric_name}"] = test_stats["coco_eval_bbox"][idx]
+                    wandb_logs[f"{metric_prefix}/{metric_name}"] = test_stats["coco_eval_bbox"][idx]
                 wandb_logs["epoch"] = epoch
                 wandb.log(wandb_logs)
 
@@ -224,5 +227,8 @@ class DetSolver(BaseSolver):
             dist_utils.save_on_master(
                 coco_evaluator.coco_eval["bbox"].eval, self.output_dir / "eval.pth"
             )
+            if test_stats.get("oracle_evaluation", False) and dist_utils.is_main_process():
+                with (self.output_dir / "oracle_eval.json").open("w") as handle:
+                    json.dump(test_stats, handle, indent=2)
 
         return
