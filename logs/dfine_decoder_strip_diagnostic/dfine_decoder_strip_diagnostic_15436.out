@@ -1,0 +1,18 @@
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.24s)
+creating index...
+index created!
+Decoder strip diagnostic: 8/96 images
+Decoder strip diagnostic: 16/96 images
+Decoder strip diagnostic: 24/96 images
+Decoder strip diagnostic: 32/96 images
+Decoder strip diagnostic: 40/96 images
+Decoder strip diagnostic: 48/96 images
+Decoder strip diagnostic: 56/96 images
+Decoder strip diagnostic: 64/96 images
+Decoder strip diagnostic: 72/96 images
+Decoder strip diagnostic: 80/96 images
+Decoder strip diagnostic: 88/96 images
+Decoder strip diagnostic: 96/96 images
+Saved diagnostic: output/decoder_strip_diagnostics_beststg2/summary.json

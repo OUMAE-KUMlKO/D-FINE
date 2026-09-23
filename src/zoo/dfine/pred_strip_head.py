@@ -7,6 +7,40 @@ from .dfine_utils import weighting_function
 from .gt_strip_head import GTStripHead
 
 
+def encode_distribution_candidates(
+    projected, grid, point_valid, batch_indices, strip_encoder, edge_fusion,
+    hidden_dim, num_points, query_chunk_size,
+):
+    """Encode [N, 4, K] strip candidates without replicating feature maps."""
+    n, _, k = grid.shape[:3]
+    edge_features = projected.new_zeros((n, 4, k, hidden_dim))
+    for image_index in range(len(projected)):
+        image_rows = torch.where(batch_indices == image_index)[0]
+        for start in range(0, len(image_rows), query_chunk_size):
+            rows = image_rows[start:start + query_chunk_size]
+            if not len(rows):
+                continue
+            sampled = F.grid_sample(
+                projected[image_index:image_index + 1],
+                grid[rows].reshape(1, -1, 3, 2), mode="bilinear",
+                padding_mode="border", align_corners=False,
+            ).reshape(hidden_dim, len(rows), 4, k, num_points, 3)
+            sampled = sampled.permute(1, 2, 3, 0, 4, 5)
+            sampled = sampled * point_valid[rows, :, :, None].to(sampled.dtype)
+            encoded = strip_encoder(sampled.reshape(
+                len(rows) * 4 * k, hidden_dim, num_points, 3
+            ))
+            mask = point_valid[rows].reshape(
+                len(rows) * 4 * k, 1, num_points, 3
+            ).to(encoded.dtype)
+            pooled = (encoded * mask).sum(2) / mask.sum(2).clamp_min(1)
+            fused = edge_fusion(
+                pooled.transpose(1, 2).reshape(len(rows) * 4 * k, -1)
+            ).reshape(len(rows), 4, k, hidden_dim)
+            edge_features = edge_features.index_copy(0, rows, fused)
+    return edge_features
+
+
 class PredictionStripHead(GTStripHead):
     """Use predicted boxes or full edge distributions to guide strip sampling."""
 
@@ -180,31 +214,12 @@ class PredictionStripHead(GTStripHead):
                     "candidate_probabilities": probabilities,
                     "excluded_probability_mass": excluded,
                 }
-            edge_features = feature_map.new_zeros((n, 4, k, self.hidden_dim), dtype=torch.float32)
             projected = self.projection(feature_map.float())
-            for image_index in range(len(feature_map)):
-                image_rows = torch.where(batch_indices == image_index)[0]
-                for start in range(0, len(image_rows), self.query_chunk_size):
-                    rows = image_rows[start:start + self.query_chunk_size]
-                    if not len(rows):
-                        continue
-                    sampled = F.grid_sample(
-                        projected[image_index:image_index + 1], grid[rows].reshape(1, -1, 3, 2),
-                        mode="bilinear", padding_mode="border", align_corners=False,
-                    ).reshape(self.hidden_dim, len(rows), 4, k, self.num_points, 3)
-                    sampled = sampled.permute(1, 2, 3, 0, 4, 5)
-                    sampled = sampled * point_valid[rows, :, :, None].to(sampled.dtype)
-                    encoded = self.strip_encoder(sampled.reshape(
-                        len(rows) * 4 * k, self.hidden_dim, self.num_points, 3
-                    ))
-                    mask = point_valid[rows].reshape(
-                        len(rows) * 4 * k, 1, self.num_points, 3
-                    ).to(encoded.dtype)
-                    pooled = (encoded * mask).sum(2) / mask.sum(2).clamp_min(1)
-                    fused = self.edge_fusion(
-                        pooled.transpose(1, 2).reshape(len(rows) * 4 * k, -1)
-                    ).reshape(len(rows), 4, k, self.hidden_dim)
-                    edge_features = edge_features.index_copy(0, rows, fused)
+            edge_features = encode_distribution_candidates(
+                projected, grid, point_valid, batch_indices,
+                self.strip_encoder, self.edge_fusion, self.hidden_dim,
+                self.num_points, self.query_chunk_size,
+            )
             edge_features = (edge_features * weights[..., None]).sum(dim=2)
             original = pred_boxes.float()
             valid = (

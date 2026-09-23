@@ -1,0 +1,19 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_pred_p2.yml']
+
+# Previous-layer distributions guide strips; query updates enter the original FDR.
+model: DFINEDecoderStripRefiner
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/decoder_strip_last2
+exp_name: dfine_l_uavswarm_decoder_strip_last2
+
+DFINEDecoderStripRefiner:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  baseline_checkpoint: null
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  kernel_size: 3
+  offset_pixels: 1.0
+  query_chunk_size: 32
+  refine_layers: [4, 5]

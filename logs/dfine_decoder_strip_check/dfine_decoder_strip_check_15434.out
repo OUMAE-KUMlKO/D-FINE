@@ -1,0 +1,39 @@
+building val_dataloader with batch_size=12...
+loading annotations into memory...
+Done (t=0.23s)
+creating index...
+index created!
+{
+  "config": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_decoder_strip.yml",
+  "baseline_checkpoint": "/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth",
+  "images": 12,
+  "batch_size": 12,
+  "image_size": [
+    640,
+    640
+  ],
+  "ignored_targets": 0,
+  "refine_layers": [
+    4,
+    5
+  ],
+  "candidate_count_per_edge": 33,
+  "query_chunk_size": 32,
+  "zero_initialization_max_box_error": 0.0,
+  "gt_independent_forward": true,
+  "baseline_classification_preserved": true,
+  "frozen_detector_has_no_gradients": true,
+  "disposable_train_step_losses": [
+    0.3130630850791931,
+    0.313039094209671
+  ],
+  "query_projection_gradient_norms": [
+    0.00047155734500847757,
+    0.0004642937856260687
+  ],
+  "max_box_change_after_two_steps": 0.0023473501205444336,
+  "full_training": false,
+  "checkpoint_saved": false,
+  "elapsed_seconds": 3.7190635511651635,
+  "peak_cuda_memory_allocated_gib": 12.487627506256104
+}

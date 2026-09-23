@@ -2,9 +2,9 @@
 
 日期：2026-09-22
 
-状态：当前集群的 B0、强基线 G1/P1/P2 和 GT 最近候选选择对照均已完成。P2 的候选覆盖充分，但正常检测收益很小；GT 最近候选对照达到 AP 78.15%，接近 G1 的 78.74%，支持下一阶段学习候选选择。训练和诊断结果见第 14–15 节；可学习候选评分及 P3 尚未实现。
+状态：当前集群的 B0、强基线 G1/P1/P2 和 GT 最近候选选择对照均已完成。GT 最近候选对照达到 AP 78.15%，接近 G1 的 78.74%。Decoder 最后两层 strip 反馈已完成训练，最佳 AP 59.8597，未形成明确收益；96 图固定匹配逐层诊断见第 18 节。该阶段停止追加验证，代码入口见第 19 节。下一阶段采用独立的 [P3 候选概率校准方案](strip_candidate_probability_calibration_plan.md)；第 16 节 P2-S 保留为历史备选。
 
-本文承接 [GT 引导阶段方案](distribution_guided_strip_head_with_gt_oracle.md)，细化其中第 6 节的后续方向。原文关于“当前实施 GT 阶段”的表述保留为历史背景，下一阶段以本文为准。
+本文承接 [GT 引导阶段方案](distribution_guided_strip_head_with_gt_oracle.md)，保留预测引导各阶段的设计和实验记录。关于“当前实施”及“下一步”的早期表述按其所在章节的实验阶段理解；后续实施方向以文首链接的 P3 方案为准。
 
 **目标：** 在推理完全不使用 GT 的条件下，利用预测框及 D-FINE 四边分布选择 strip 采样位置，检验能否保留 GT 实验中的定位收益。
 
@@ -577,7 +577,7 @@ P2 已为绝大多数匹配目标提供接近 GT 的法向采样候选，但现�
 
 ## 16. 下一阶段建议：P2-S 可学习候选评分
 
-本节是当前结果支持的下一轮研究计划，尚未执行。代码整理按 P2 实现、P2 联合诊断、GT 最近候选对照三个阶段提交；本节随第三阶段一并归档。
+本节是 GT 最近候选对照完成时提出的研究计划，尚未执行。其后先开展了第 17 节 decoder strip 实验；最新方向见独立 P3 方案。代码整理按 P2 实现、P2 联合诊断、GT 最近候选对照三个阶段提交；本节随第三阶段一并归档。
 
 ### 16.1 要验证的问题与路线选择
 
@@ -628,3 +628,118 @@ S0/S1 仅有候选监督项不同；使用同一初始参数、seed 0、12 epoch
 - **选择也学不好：** 优先检查候选特征可分性和监督目标。若 S0 优于 S1，则最近 GT 候选的硬标签可能限制了有效融合，届时再考虑按几何距离生成软标签。
 
 无论哪种结果，都先使用上述同一候选集合的对照定位问题，不同时解冻检测器、增加采样范围或更换输出参数化。
+
+## 17. Decoder 内的预测分布引导 strip 反馈实施方案
+
+用户认可“上一层概率引导 strip 采样 → 边界特征融入本层 query → 原有回归头更新分布 → 传给下一层”，选择直接实施，不先运行原概率 argmax 对照。原预测框采用分布期望，argmax 采用分布峰值，两者并不等价；跳过该对照是实验路线选择。
+
+**目标：** 验证局部边界证据进入 decoder 的迭代过程后，能否在无 GT 前向时改善定位。
+
+**首轮结构：** 六层 decoder 的最后两层（零起始索引 4、5）各调用同一个 strip-to-query 适配器。上一层累计 logits、固定初始分布参考框和上一层解码框决定候选位置、原概率权重及沿边跨度；本层 decoder layer 输出后，将边界特征投影成 query 残差并相加，再调用原有 bbox head。修改后的 query、累计 logits 和注意力参考框继续沿原 decoder 路径传递。
+
+**约束：** 保留全部 33 候选及原概率加权，不增加候选评分器；复用 P2 strip 编码及有效性规则。适配器的 query 投影零初始化，初始输出须与 B0 一致。冻结 backbone、encoder、全部原 decoder 参数，仅训练适配器；冻结参数并不阻断从原 bbox head 到适配器的梯度。候选几何和采样权重 detach，query 与累计 logits 的主反馈路径保留梯度。
+
+原检测器保持 eval 模式；不向 decoder 输入训练 GT 或去噪 query。每批共享一次 backbone/encoder 特征，再执行一次无适配器的冻结 decoder 前向和一次带适配器前向；前者提供固定匹配原框和原分类分数，后者提供定位预测。分类分数使用 B0 原值，损失复用 `5×L1+2×GIoU`。这是控制定位变量的首轮方案，额外 decoder 前向的成本需在真实接入检查中记录。
+
+### 实现任务与接口
+
+- [x] **Decoder 接口及反馈测试**：修改 `src/zoo/dfine/dfine_decoder.py`，新增可选 `query_refiner` callback。在第 1 层以后调用 `query_refiner(layer_index, queries, previous_boxes, distribution)`，接收替换后的 queries；`distribution` 提供上一层的 `pred_corners`、固定初始 `ref_points`、`up`、`reg_scale`。默认 `None` 完全保留原路径；带 callback 只支持 decoder eval 模式。测试放在 `tests/test_decoder_strip_feedback.py`，检查上一层信息、早停、零残差等价、早层修改向后反馈和梯度。
+- [x] **Strip 到 query 的适配器**：新增 `src/zoo/dfine/decoder_strip_adapter.py`，类 `DistributionStripQueryAdapter`。接口为 `forward(feature_map, queries, pred_boxes, image_size, distribution) -> (query_delta, valid)`；queries 为 `[B,Q,D]`，boxes 为 `[B,Q,4]`，候选分布保持批维。复用候选几何与编码，输出 `[B,Q,D]` 的零初始化残差和 `[B,Q]` 有效性标志。仅必要地抽取 `pred_strip_head.py` 的候选编码函数，不改变 P2/G1 默认行为。新增 `tests/test_decoder_strip_adapter.py`，验证零残差、概率融合、无效候选、分块及梯度。
+- [x] **模型封装与配置**：新增 `src/zoo/dfine/decoder_strip_refinement.py`，注册 `DFINEDecoderStripRefiner`；复用预测版本的 baseline 加载、冻结和 criterion，输出 `baseline_boxes`、B0 `pred_logits`、新 `pred_boxes`、`refinement_mask` 和 `refinement_zero_loss`。新增 `tests/test_decoder_strip_refinement.py`。配置 `configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_decoder_strip.yml` 继承 P2 的数据、12 epochs、总 batch 96、学习率 0.00025 和 seed 0，默认 `refine_layers: [4, 5]`。
+- [x] **最小接入验证及 Slurm 入口**：新增独立训练脚本，默认输出 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/decoder_strip_last2`。先运行相关 CPU 测试，再以真实 B0 权重和数据验证初始等价、非零更新、冻结状态、AMP 反传及每 GPU batch 12 的显存；不覆盖已有实验。
+
+实现采用先写行为测试、确认新接口尚不存在、再实现并运行局部验证的顺序。继续使用当前已整理的研究分支，不另建工作区、不自动 commit。正式结果仍以正常 AP/AP75 和固定基线配对定位为准；初始等价或梯度检查通过仅代表接入正确，不代表定位收益。
+
+### 接入结果与运行入口
+
+新增 decoder 反馈、query 适配器和模型集成三组测试各 6 项，共 18 项通过；相关旧分布导出、P1/P2、GT 候选头及 criterion 回归通过。两个新增 Slurm 脚本语法检查通过。
+
+单 GPU 接入作业 `15434` 已 `COMPLETED`，退出码 `0:0`，Slurm 用时 14 秒。使用真实 B0 `best_stg2.pth` 和 12 张 640×640 验证图像；[接入检查 JSON](results/decoder_strip_integration_check_beststg2.json)已归档。初始框与 B0 最大误差为 0，GT 更换不改变前向输出，分类分数始终为 B0 原值。两次临时 AMP 更新 loss 为 0.313063、0.313039；query 投影梯度范数为 0.000472、0.000464，全部适配器参数梯度有限，冻结检测器无梯度。更新后框最大变化为 0.002347（归一化坐标），峰值 CUDA allocated 显存 12.488 GiB。该检查不保存 checkpoint，不构成完整训练或性能 benchmark。
+
+正式训练已由作业 `15435` 完成，沿用强基线、数据路径、12 epochs 和总 batch 96。原运行入口如下；再次训练需要显式设置新的输出目录：
+
+```bash
+mkdir -p logs/dfine_uavswarm_decoder_strip
+sbatch slurm_files/run_train_dfine_uavswarm_decoder_strip.slurm
+```
+
+默认输出为 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/decoder_strip_last2`。脚本拒绝覆盖已有输出目录；恢复本实验应使用相应 checkpoint，而不是把 P1/P2/oracle 头作为新分支初始化。首轮配置为最后两层；`refine_layers` 支持指定第 2 层到有效末层的子集，第 1 层因无上一层分布而不接入。
+
+### 正式训练结果
+
+作业 `15435` 为 `COMPLETED`、退出码 `0:0`，Slurm 用时 13 分 46 秒，日志训练用时 13 分 20 秒，峰值显存 12,922 MiB。最佳权重 `decoder_strip_last2/best_stg1.pth` 对应 epoch 0（第 1 轮），末轮为 epoch 11。
+
+| 各自最佳 AP 对应轮次 | AP | AP75 | AP small |
+| --- | --- | --- | --- |
+| B0 | 59.8366 | 65.9820 | 58.6336 |
+| P2，epoch 5 | 59.8749 | 65.8302 | 58.6855 |
+| Decoder strip，epoch 0 | 59.8597 | 66.0038 | 58.6552 |
+| Decoder strip，末轮 epoch 11 | 59.7805 | 65.9378 | 58.5599 |
+
+最佳 AP/AP75 比 B0 仅高 0.0231/0.0219 个百分点；从 epoch 2 起 AP 均低于 B0。训练 loss 从 0.185673 降至 0.180874，下降 2.58%，未转化为持续的验证收益。当前结果只约束“最后两层共享适配器、原概率融合、冻结原回归头”这一配置，不代表所有逐层 refine 方案无效。
+
+## 18. Decoder strip 小批量逐层定位诊断
+
+用户同意后，新增只读追踪工具 `tools/analysis/decoder_strip_trace.py`、固定配对统计 `decoder_strip_metrics.py` 和入口 `diagnose_decoder_strip.py`；未改动模型前向或训练逻辑。新增 9 项局部测试通过，覆盖实际回归/解码一致、开关和零初始化、异常清理 hook、固定 B0 分组、跨 batch 分位数及空/无效匹配。Slurm 入口为 `slurm_files/run_diagnose_dfine_uavswarm_decoder_strip.slurm`。
+
+### 方法与核对
+
+作业 `15436` 已 `COMPLETED`、退出码 `0:0`，Slurm 用时 22 秒。按验证集索引均匀抽取 96/3,394 张图像，包含 685 个 B0 固定 Hungarian 匹配对；其中 small 566 对、原 IoU 0.50–0.75 组 156 对。无忽略 GT 或无效统计对。原始结果归档为 [decoder_strip_diagnostics_subset_beststg2.json](results/decoder_strip_diagnostics_subset_beststg2.json)。
+
+- 比较最佳轮 epoch 0 和末轮 epoch 11；两份 checkpoint 的冻结检测器张量完全一致。全部开关/层次使用同一 B0 最终框确定匹配和 IoU 分组。
+- FP32 推理，GT 只用于匹配和统计。追踪的双层启用输出在首批图像上与正常模型输出最大误差均为 0。
+- 每层的注入前/后框使用相同的上游历史，只改变本层 query 残差；另比较同深度的无适配器 baseline，避免混入 decoder 自身逐层更新的作用。
+- 比较两层都启用、仅第 5 层、仅第 6 层。开关均复用原双层共同训练的权重，属于推理反事实，不是三个独立训练实验。
+- 本次为小样本几何诊断，不计算 COCO AP，不替代全验证集检测结果。
+
+### 最终定位与逐层影响
+
+同一子集 B0 的平均 IoU 为 0.793779，四边平均绝对误差为 1.681097 输入像素。
+
+| 权重 / 推理开关 | 相对 B0 的平均 IoU 变化 | 四边平均绝对误差（像素） | 相对原框的平均边移动（像素） |
+| --- | --- | --- | --- |
+| 最佳轮，两层 | +0.000094 | 1.681057 | 0.013130 |
+| 最佳轮，仅第 5 层 | +0.000064 | 1.681102 | 0.009262 |
+| 最佳轮，仅第 6 层 | +0.000022 | 1.681022 | 0.002129 |
+| 末轮，两层 | −0.000035 | 1.685761 | 0.109761 |
+| 末轮，仅第 5 层 | +0.000033 | 1.683873 | 0.087094 |
+| 末轮，仅第 6 层 | +0.000072 | 1.681011 | 0.025822 |
+
+最佳轮两层的局部注入分别令平均 IoU 增加 0.000034 和 0.000030，均很小。末轮第 5 层局部注入使平均 IoU 增加 0.000022，但边误差增加 0.002187 像素；第 6 层在此前历史上又使平均 IoU 降低 0.000067、边误差增加 0.001888 像素。因而存在后层负向作用，但不是“前层已有很大的收益，被后层全部抹掉”。
+
+末轮双层启用时，small 组平均 IoU 下降 0.000128、边误差增加 0.008314 像素；原 IoU 0.50–0.75 组平均 IoU 下降 0.000293、边误差增加 0.017221 像素。仅启用第 6 层的整体变化也很小，不能据此认定单层训练将有效。
+
+### 修正幅度与解释
+
+下表为匹配 query 上的均值；query 相对幅度定义为 `||delta_query||₂ / ||query_before||₂`，概率变化为四边概率总变差的均值。
+
+| 权重 | 第 5 层 query 相对幅度 | 第 6 层 query 相对幅度 | 第 5 层概率变化 | 第 6 层概率变化 |
+| --- | --- | --- | --- | --- |
+| 最佳轮 | 0.2288 | 0.2290 | 0.004144 | 0.002963 |
+| 末轮 | 3.0275 | 3.0227 | 0.057264 | 0.024875 |
+
+修正并未停留在无效分支：全部 685 个匹配 query 可注入，边界 logits、概率和框均发生变化。但 query 修正幅度大幅增加后，实际定位没有改善；末轮两层的最终边移动约 0.110 像素，仍只产生接近零的平均 IoU 收益。最佳轮第 5 层改善的 372 对中，最终两层结果不再改善的有 16 对；末轮对应为 361 对中的 92 对。
+
+这些证据支持优先检查注入幅度与冻结回归头的配合，而不是继续增加接入层数。范数较大本身不能证明唯一根因，也尚不能排除候选融合后视觉证据不足或缺乏针对具体目标的纠错方向。
+
+诊断后曾建议复用末轮权重，将两层残差统一乘 0.1 做同子集对照。用户随后决定停止追加验证，因此该缩放诊断未执行，也不再作为下一步任务。当前转向 [P3 候选概率校准方案](strip_candidate_probability_calibration_plan.md)：保留逐候选特征，直接学习边界 logits 修正并增加候选分布监督；首版只处理最终有效层输出。
+
+## 19. Decoder strip 阶段代码索引
+
+本阶段模型、运行入口和诊断工具分别保留，便于复现已有结果。以下文件均属于已实现的 decoder strip 阶段，P3 的拟新增文件见新方案，不能混作已实现功能。
+
+| 职责 | 文件 | 说明 |
+| --- | --- | --- |
+| Decoder 反馈接口 | `src/zoo/dfine/dfine_decoder.py` | 可选 `query_refiner`；默认路径不启用反馈 |
+| 共用候选编码 | `src/zoo/dfine/pred_strip_head.py` | `encode_distribution_candidates` 保留逐候选 strip 特征，供 P2 和适配器复用 |
+| Query 适配器 | `src/zoo/dfine/decoder_strip_adapter.py` | 原概率融合后生成 query 残差 |
+| 模型封装 | `src/zoo/dfine/decoder_strip_refinement.py` | 冻结 B0，默认最后两层共享适配器，保留 B0 分类分数 |
+| 配置与训练入口 | `configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_decoder_strip.yml`；`slurm_files/run_train_dfine_uavswarm_decoder_strip.slurm` | 对应已完成作业 15435 |
+| 接入检查入口 | `tools/analysis/check_decoder_strip.py`；`slurm_files/run_check_dfine_uavswarm_decoder_strip.slurm` | 对应已完成作业 15434 |
+| 逐层前向追踪 | `tools/analysis/decoder_strip_trace.py` | 记录同一上游历史下的注入前后 query、logits、框；使用零起始层索引 |
+| 固定配对统计 | `tools/analysis/decoder_strip_metrics.py` | 用同一 B0 匹配和分组，累计 IoU、边误差及移动量 |
+| 诊断编排入口 | `tools/analysis/diagnose_decoder_strip.py`；`slurm_files/run_diagnose_dfine_uavswarm_decoder_strip.slurm` | 对应已完成作业 15436，比较最佳/末轮及层开关 |
+| 已有局部测试 | `tests/test_decoder_strip_{adapter,feedback,refinement,trace,metrics}.py` | 保留阶段测试，不因文档整理重新运行 |
+| 结果归档 | `docs/research/results/decoder_strip_*_beststg2.json` | 接入检查与 96 图诊断原始结果 |
+
+正式训练权重目录为 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/decoder_strip_last2`。其中 `best_stg1.pth` 是本次适配器实验最佳轮，`last.pth` 是末轮；它们均不替代 B0 初始化权重 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth`。训练日志保留在 `logs/dfine_uavswarm_decoder_strip/`，诊断日志保留在 `logs/dfine_decoder_strip_diagnostic/`。

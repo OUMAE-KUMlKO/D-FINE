@@ -386,7 +386,10 @@ class TransformerDecoder(nn.Module):
         memory_mask=None,
         dn_meta=None,
         return_query=False,
+        query_refiner=None,
     ):
+        if query_refiner is not None and self.training:
+            raise ValueError("query_refiner is only supported with the decoder in eval mode")
         output = target
         output_detach = pred_corners_undetach = 0
         value = self.value_op(memory, None, None, memory_mask, spatial_shapes)
@@ -424,6 +427,14 @@ class TransformerDecoder(nn.Module):
                 pre_bboxes = F.sigmoid(pre_bbox_head(output) + inverse_sigmoid(ref_points_detach))
                 pre_scores = score_head[0](output)
                 ref_points_initial = pre_bboxes.detach()
+
+            if query_refiner is not None and i >= 1:
+                output = query_refiner(i, output, ref_points_detach, {
+                    "pred_corners": pred_corners_undetach,
+                    "ref_points": ref_points_initial,
+                    "up": up,
+                    "reg_scale": reg_scale,
+                })
 
             # Refine bounding box corners using FDR, integrating previous layer's corrections
             pred_corners = bbox_head[i](output + output_detach) + pred_corners_undetach
@@ -839,12 +850,17 @@ class DFINETransformer(nn.Module):
 
         return topk_memory, topk_logits, topk_anchors
 
-    def forward(self, feats, targets=None, return_query=False, return_distribution=False):
+    def forward(
+        self, feats, targets=None, return_query=False, return_distribution=False,
+        query_refiner=None,
+    ):
         # Refinement reads eval queries/distributions, never denoising queries.
         if return_query and self.training:
             raise ValueError("return_query is only supported with the decoder in eval mode")
         if return_distribution and self.training:
             raise ValueError("return_distribution is only supported with the decoder in eval mode")
+        if query_refiner is not None and self.training:
+            raise ValueError("query_refiner is only supported with the decoder in eval mode")
         # input projection and embedding
         memory, spatial_shapes = self._get_encoder_input(feats)
 
@@ -884,6 +900,7 @@ class DFINETransformer(nn.Module):
             attn_mask=attn_mask,
             dn_meta=dn_meta,
             return_query=return_query,
+            query_refiner=query_refiner,
         )
         out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = decoder_outputs[:6]
 

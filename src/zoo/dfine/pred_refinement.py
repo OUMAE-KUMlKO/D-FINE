@@ -37,7 +37,7 @@ class DFINEPredRefiner(DFINE):
         if feature_level < 0:
             raise ValueError("feature_level must be nonnegative")
         self.feature_level = feature_level
-        self.refiner = PredictionStripHead(
+        self.refiner = self._build_refiner(
             in_channels=encoder.hidden_dim,
             query_dim=decoder.hidden_dim,
             hidden_dim=hidden_dim,
@@ -54,6 +54,9 @@ class DFINEPredRefiner(DFINE):
             module.eval()
         if baseline_checkpoint is not None:
             self.load_baseline_checkpoint(baseline_checkpoint)
+
+    def _build_refiner(self, **kwargs):
+        return PredictionStripHead(**kwargs)
 
     def train(self, mode=True):
         super().train(mode)

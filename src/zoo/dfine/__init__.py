@@ -14,4 +14,5 @@ from .gt_refinement import DFINEGTRefiner
 from .gt_candidate_refinement import DFINEGTCandidateRefiner
 from .gt_refinement_criterion import GTRefinementCriterion
 from .pred_refinement import DFINEPredRefiner
+from .decoder_strip_refinement import DFINEDecoderStripRefiner
 from .pred_refinement_criterion import PredRefinementCriterion
