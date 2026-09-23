@@ -1,0 +1,81 @@
+__include__: [
+  '../dfine_hgnetv2_l_coco.yml',
+  '../../dataset/uavswarm_detection.yml',
+]
+
+# P1: train a new strip head using only predicted boxes for sampling.
+# Supply the original trained UAVSwarm baseline explicitly with
+# -u DFINEPredRefiner.baseline_checkpoint=/path/to/baseline.pth.
+# Use -r only to resume this P1 experiment.
+model: DFINEPredRefiner
+criterion: PredRefinementCriterion
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/p1
+exp_name: dfine_l_uavswarm_pred_p1
+
+HGNetv2:
+  pretrained: False
+
+DFINEPredRefiner:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  baseline_checkpoint: null
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  kernel_size: 3
+  offset_pixels: 1.0
+  max_log_scale: 2.0
+  sampling_mode: box
+
+PredRefinementCriterion:
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    alpha: 0.25
+    gamma: 2.0
+  weight_dict: {loss_bbox: 5, loss_giou: 2}
+
+use_amp: True
+use_ema: False
+sync_bn: False
+find_unused_parameters: False
+epochs: 12
+checkpoint_freq: 1
+optimizer:
+  type: AdamW
+  params:
+    - {params: '^refiner\.', lr: 0.00025}
+  lr: 0.00025
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+lr_scheduler:
+  type: MultiStepLR
+  milestones: [10]
+  gamma: 0.1
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 50
+
+# Match the fixed-size GT experiment; the frozen detector stays in eval mode.
+train_dataloader:
+  total_batch_size: 96  # 8 GPU processes x 12 images.
+  num_workers: 4
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json
+    transforms:
+      ops:
+        - {type: Resize, size: [640, 640]}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 1000000
+val_dataloader:
+  total_batch_size: 96
+  num_workers: 4
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json

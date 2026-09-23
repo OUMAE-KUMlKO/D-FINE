@@ -1,0 +1,27 @@
+__include__: [
+  './dfine_hgnetv2_l_coco.yml',
+]
+
+# Retrain B0 from backbone pretraining with the original detector schedule.
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0
+exp_name: baseline_retrain
+
+HGNetv2:
+  pretrained: True
+
+num_classes: 1
+# UAVSwarm has only category_id=1. The existing COCO mapping converts
+# 1 -> label 0 for training and label 0 -> 1 for evaluation.
+remap_mscoco_category: True
+
+# test.json has no annotations. Use the supplied, disjoint half splits;
+# both splits reference images under train/.
+train_dataloader:
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train/
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json
+
+val_dataloader:
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train/
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json

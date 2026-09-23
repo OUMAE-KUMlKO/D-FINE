@@ -1,0 +1,21 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_gt_stage1.yml']
+
+# G1 and P1 freeze the same newly trained B0; each starts a fresh strip head.
+# The Slurm script supplies DFINEGTRefiner.baseline_checkpoint explicitly.
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/g1
+exp_name: uavswarm_strip_20260923_g1
+
+DFINEGTRefiner:
+  baseline_checkpoint: null
+
+# Inherit fixed 640 input, 12 epochs, warmup 50 and strip-head optimizer/loss.
+train_dataloader:
+  total_batch_size: 96  # 8 GPU processes x 12 images.
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json
+val_dataloader:
+  total_batch_size: 96
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json

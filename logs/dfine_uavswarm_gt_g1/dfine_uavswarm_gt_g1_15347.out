@@ -1,0 +1,692 @@
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load gcc/8.3.0
++ eval 'LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LD_LIBRARY_PATH;
+LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LIBRARY_PATH;
+LOADEDMODULES=gcc/8.3.0; export LOADEDMODULES;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0; export _LMFILES_;
+CXX=g++; export CXX;
+F90=gfortran; export F90;
+FC=gfortran; export FC;
+__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest; export __MODULES_LMALTNAME;
+C_INCLUDE_PATH=/soft/gcc/8.3.0/include; export C_INCLUDE_PATH;
+F77=gfortran; export F77;
+PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts; export PATH;
+CC=gcc; export CC;
+test 0;'
+++ LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LD_LIBRARY_PATH
+++ LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LIBRARY_PATH
+++ LOADEDMODULES=gcc/8.3.0
+++ export LOADEDMODULES
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0
+++ export _LMFILES_
+++ CXX=g++
+++ export CXX
+++ F90=gfortran
+++ export F90
+++ FC=gfortran
+++ export FC
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest'
+++ export __MODULES_LMALTNAME
+++ C_INCLUDE_PATH=/soft/gcc/8.3.0/include
+++ export C_INCLUDE_PATH
+++ F77=gfortran
+++ export F77
+++ PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts
+++ export PATH
+++ CC=gcc
+++ export CC
+++ test 0
++ _mlstatus=0
++ return 0
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load cuda/cuda12.4
++ eval '__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest:cuda/cuda12.4\&as\|cuda/default\&as\|cuda/latest; export __MODULES_LMALTNAME;
+MANPATH=/soft/cuda12.4/lib64; export MANPATH;
+PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts; export PATH;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4; export _LMFILES_;
+LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4; export LOADEDMODULES;
+MODULESHOME=/soft/cuda12.4; export MODULESHOME;
+test 0;'
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest:cuda/cuda12.4&as|cuda/default&as|cuda/latest'
+++ export __MODULES_LMALTNAME
+++ MANPATH=/soft/cuda12.4/lib64
+++ export MANPATH
+++ PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts
+++ export PATH
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4
+++ export _LMFILES_
+++ LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4
+++ export LOADEDMODULES
+++ MODULESHOME=/soft/cuda12.4
+++ export MODULESHOME
+++ test 0
++ _mlstatus=0
++ return 0
+Initialized distributed mode...
+cfg: 
+{'_collate_fn': None,
+ '_criterion': None,
+ '_ema': None,
+ '_evaluator': None,
+ '_lr_scheduler': None,
+ '_lr_warmup_scheduler': None,
+ '_model': None,
+ '_optimizer': None,
+ '_postprocessor': None,
+ '_scaler': None,
+ '_train_batch_size': None,
+ '_train_dataloader': None,
+ '_train_dataset': None,
+ '_train_shuffle': None,
+ '_val_batch_size': None,
+ '_val_dataloader': None,
+ '_val_dataset': None,
+ '_val_shuffle': None,
+ '_writer': None,
+ 'batch_size': None,
+ 'checkpoint_freq': 1,
+ 'clip_max_norm': 0.1,
+ 'device': '',
+ 'ema_decay': 0.9999,
+ 'ema_warmups': 2000,
+ 'epochs': 12,
+ 'find_unused_parameters': False,
+ 'last_epoch': -1,
+ 'num_workers': 0,
+ 'output_dir': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/g1',
+ 'print_freq': 100,
+ 'resume': None,
+ 'seed': 0,
+ 'summary_dir': None,
+ 'sync_bn': False,
+ 'task': 'detection',
+ 'tuning': None,
+ 'use_amp': True,
+ 'use_ema': False,
+ 'yaml_cfg': {'DFINE': {'backbone': 'HGNetv2',
+                        'decoder': 'DFINETransformer',
+                        'encoder': 'HybridEncoder'},
+              'DFINECriterion': {'alpha': 0.75,
+                                 'gamma': 2.0,
+                                 'losses': ['vfl', 'boxes', 'local'],
+                                 'matcher': {'alpha': 0.25,
+                                             'gamma': 2.0,
+                                             'type': 'HungarianMatcher',
+                                             'weight_dict': {'cost_bbox': 5,
+                                                             'cost_class': 2,
+                                                             'cost_giou': 2}},
+                                 'reg_max': 32,
+                                 'weight_dict': {'loss_bbox': 5,
+                                                 'loss_ddf': 1.5,
+                                                 'loss_fgl': 0.15,
+                                                 'loss_giou': 2,
+                                                 'loss_vfl': 1}},
+              'DFINEGTRefiner': {'backbone': 'HGNetv2',
+                                 'baseline_checkpoint': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth',
+                                 'decoder': 'DFINETransformer',
+                                 'encoder': 'HybridEncoder',
+                                 'eval_target_format': 'xyxy_absolute',
+                                 'feature_level': 0,
+                                 'feature_mode': 'real',
+                                 'hidden_dim': 64,
+                                 'kernel_size': 3,
+                                 'matcher': {'alpha': 0.25,
+                                             'gamma': 2.0,
+                                             'type': 'HungarianMatcher',
+                                             'weight_dict': {'cost_bbox': 5,
+                                                             'cost_class': 2,
+                                                             'cost_giou': 2}},
+                                 'max_log_scale': 2.0,
+                                 'num_points': 5,
+                                 'offset_pixels': 1.0,
+                                 'random_seed': 0,
+                                 'train_target_format': 'cxcywh_normalized'},
+              'DFINEPostProcessor': {'num_top_queries': 300},
+              'DFINETransformer': {'box_noise_scale': 1.0,
+                                   'cross_attn_method': 'default',
+                                   'eval_idx': -1,
+                                   'feat_channels': [256, 256, 256],
+                                   'feat_strides': [8, 16, 32],
+                                   'hidden_dim': 256,
+                                   'label_noise_ratio': 0.5,
+                                   'layer_scale': 1,
+                                   'num_denoising': 100,
+                                   'num_layers': 6,
+                                   'num_levels': 3,
+                                   'num_points': [3, 6, 3],
+                                   'num_queries': 300,
+                                   'query_select_method': 'default',
+                                   'reg_max': 32,
+                                   'reg_scale': 4},
+              'GTRefinementCriterion': {'weight_dict': {'loss_bbox': 5,
+                                                        'loss_giou': 2}},
+              'HGNetv2': {'freeze_at': 0,
+                          'freeze_norm': True,
+                          'freeze_stem_only': True,
+                          'local_model_dir': 'weight/hgnetv2/',
+                          'name': 'B4',
+                          'pretrained': False,
+                          'return_idx': [1, 2, 3]},
+              'HybridEncoder': {'act': 'silu',
+                                'depth_mult': 1,
+                                'dim_feedforward': 1024,
+                                'dropout': 0.0,
+                                'enc_act': 'gelu',
+                                'expansion': 1.0,
+                                'feat_strides': [8, 16, 32],
+                                'hidden_dim': 256,
+                                'in_channels': [512, 1024, 2048],
+                                'nhead': 8,
+                                'num_encoder_layers': 1,
+                                'use_encoder_idx': [2]},
+              '__include__': ['./dfine_hgnetv2_l_uavswarm_gt_stage1.yml'],
+              'checkpoint_freq': 1,
+              'clip_max_norm': 0.1,
+              'config': 'configs/dfine/gt_refinement/dfine_hgnetv2_l_uavswarm_gt_stage1_cluster.yml',
+              'criterion': 'GTRefinementCriterion',
+              'ema': {'decay': 0.9999,
+                      'start': 0,
+                      'type': 'ModelEMA',
+                      'warmups': 1000},
+              'epochs': 12,
+              'eval_spatial_size': [640, 640],
+              'evaluator': {'iou_types': ['bbox'], 'type': 'CocoEvaluator'},
+              'exp_name': 'uavswarm_strip_20260923_g1',
+              'find_unused_parameters': False,
+              'lr_scheduler': {'gamma': 0.1,
+                               'milestones': [10],
+                               'type': 'MultiStepLR'},
+              'lr_warmup_scheduler': {'type': 'LinearWarmup',
+                                      'warmup_duration': 50},
+              'model': 'DFINEGTRefiner',
+              'num_classes': 1,
+              'optimizer': {'betas': [0.9, 0.999],
+                            'lr': 0.00025,
+                            'params': [{'lr': 0.00025,
+                                        'params': '^refiner\\.'}],
+                            'type': 'AdamW',
+                            'weight_decay': 0.000125},
+              'output_dir': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/g1',
+              'postprocessor': 'DFINEPostProcessor',
+              'print_freq': 100,
+              'print_method': 'builtin',
+              'print_rank': 0,
+              'project_name': 'D-FINE',
+              'remap_mscoco_category': True,
+              'scaler': {'enabled': True, 'type': 'GradScaler'},
+              'seed': 0,
+              'sync_bn': False,
+              'task': 'detection',
+              'test_only': False,
+              'train_dataloader': {'collate_fn': {'base_size': 640,
+                                                  'base_size_repeat': None,
+                                                  'ema_restart_decay': 0.9999,
+                                                  'stop_epoch': 1000000,
+                                                  'type': 'BatchImageCollateFunction'},
+                                   'dataset': {'ann_file': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json',
+                                               'img_folder': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/train',
+                                               'return_masks': False,
+                                               'transforms': {'ops': [{'size': [640,
+                                                                                640],
+                                                                       'type': 'Resize'},
+                                                                      {'dtype': 'float32',
+                                                                       'scale': True,
+                                                                       'type': 'ConvertPILImage'},
+                                                                      {'fmt': 'cxcywh',
+                                                                       'normalize': True,
+                                                                       'type': 'ConvertBoxes'}],
+                                                              'policy': {'epoch': 72,
+                                                                         'name': 'stop_epoch',
+                                                                         'ops': ['RandomPhotometricDistort',
+                                                                                 'RandomZoomOut',
+                                                                                 'RandomIoUCrop']},
+                                                              'type': 'Compose'},
+                                               'type': 'CocoDetection'},
+                                   'drop_last': True,
+                                   'num_workers': 4,
+                                   'shuffle': True,
+                                   'total_batch_size': 96,
+                                   'type': 'DataLoader'},
+              'use_amp': True,
+              'use_ema': False,
+              'use_focal_loss': True,
+              'use_wandb': False,
+              'val_dataloader': {'collate_fn': {'type': 'BatchImageCollateFunction'},
+                                 'dataset': {'ann_file': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json',
+                                             'img_folder': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/train',
+                                             'return_masks': False,
+                                             'transforms': {'ops': [{'size': [640,
+                                                                              640],
+                                                                     'type': 'Resize'},
+                                                                    {'dtype': 'float32',
+                                                                     'scale': True,
+                                                                     'type': 'ConvertPILImage'}],
+                                                            'type': 'Compose'},
+                                             'type': 'CocoDetection'},
+                                 'drop_last': False,
+                                 'num_workers': 4,
+                                 'shuffle': False,
+                                 'total_batch_size': 96,
+                                 'type': 'DataLoader'}}}
+Initial lr: [0.00025]
+building train_dataloader with batch_size=12...
+loading annotations into memory...
+Done (t=0.14s)
+creating index...
+index created!
+building val_dataloader with batch_size=12...
+loading annotations into memory...
+Done (t=0.25s)
+creating index...
+index created!
+{'Oracle model Params:31156691   Trainable Params:74884   FLOPs/MACs: not profiled (real images and GT are required; deployment is unavailable)'}
+------------------------------------------Start training-------------------------------------------
+Epoch: [0/12]  [ 0/36]  eta: 0:06:13  lr: 0.000010  loss: 0.1790 (0.1790)  loss_bbox: 0.0146 (0.0146)  loss_giou: 0.1645 (0.1645)  time: 10.3883  data: 1.3941  max mem: 1416
+Epoch: [0/12]  [35/36]  eta: 0:00:00  lr: 0.000185  loss: 0.1809 (0.1826)  loss_bbox: 0.0155 (0.0155)  loss_giou: 0.1654 (0.1671)  time: 0.2823  data: 0.0235  max mem: 1433
+Epoch: [0/12] Total time: 0:00:21 (0.5862 s / it)
+Averaged stats: lr: 0.000185  loss: 0.1809 (0.1826)  loss_bbox: 0.0155 (0.0155)  loss_giou: 0.1654 (0.1671)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:01:05    time: 1.8276  data: 0.7649  max mem: 1507
+Oracle Test:  [10/36]  eta: 0:00:13    time: 0.5290  data: 0.0871  max mem: 1509
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4094  data: 0.0218  max mem: 1510
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.4189  data: 0.0251  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3886  data: 0.0235  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4434 s / it)
+Oracle metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6974517726212351, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.83s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.943
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.662
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.708
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.412
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.699
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.688
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.794
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.615
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.797
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.2681302058802373, 1.9762779330927245, 1.4421192657547146, 2.119301753291734], 'mean_edge_mae_px': 1.7014572895048528, 'center_mae_px_xy': [0.9770392029157207, 1.502315337630171], 'size_mae_px_wh': [1.7295381362821893, 2.5045132461022575], 'mean_iou': 0.7967296910243578}, 'mean_iou_change': 0.0004226626574230077, 'iou_improved': 12874, 'iou_degraded': 10660, 'iou_stable': 731}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.1632276801975008, 1.9795145186711993, 1.3047068655905147, 2.059173952150872], 'mean_edge_mae_px': 1.6266557541525217, 'center_mae_px_xy': [0.916943194252341, 1.5039277108089704], 'size_mae_px_wh': [1.4803920666797976, 2.356928594634321], 'mean_iou': 0.782857388990159}, 'mean_iou_change': 0.0004066531795569697, 'iou_improved': 10570, 'iou_degraded': 8893, 'iou_stable': 536}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.250052841838236, 1.6132116894615396, 1.4630544270557844, 2.0403288720252033], 'mean_edge_mae_px': 1.591661957595191, 'center_mae_px_xy': [0.8837679115626654, 1.2346614692639262], 'size_mae_px_wh': [1.9890680294955165, 2.7627622890870653], 'mean_iou': 0.867627915585258}, 'mean_iou_change': 0.00043662260174441743, 'iou_improved': 2178, 'iou_degraded': 1705, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.40422538610605, 9.224043075854961, 15.0979323387146, 9.934658136123266], 'mean_edge_mae_px': 11.66521473419972, 'center_mae_px_xy': [9.08764178936298, 6.924741219251584], 'size_mae_px_wh': [21.863517883496407, 12.249198326697716], 'mean_iou': 0.7393219792014015}, 'mean_iou_change': 0.0017731376036758425, 'iou_improved': 126, 'iou_degraded': 62, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.531128906915265, 14.418347163366214, 10.447078425317041, 16.50547414176887], 'mean_edge_mae_px': 12.975507159341849, 'center_mae_px_xy': [9.013423350369257, 13.101442414636333], 'size_mae_px_wh': [7.644115133030761, 10.061639981464513], 'mean_iou': 0.3128820463270038}, 'mean_iou_change': 0.0007952437902231496, 'iou_improved': 541, 'iou_degraded': 227, 'iou_stable': 224}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.6152539878258887, 2.754611421652311, 1.9501067342469294, 2.909881907251225], 'mean_edge_mae_px': 2.307463512744089, 'center_mae_px_xy': [1.0867353890957723, 1.8448792450358462], 'size_mae_px_wh': [2.8557523584624414, 4.221504928018945], 'mean_iou': 0.672286635277418}, 'mean_iou_change': 0.0006517103676595984, 'iou_improved': 2979, 'iou_degraded': 2224, 'iou_stable': 145}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6519342395052251, 1.055493544069128, 0.7922092814990832, 1.0872735428178326], 'mean_edge_mae_px': 0.8967276519728172, 'center_mae_px_xy': [0.4995637062370694, 0.7581945098926166], 'size_mae_px_wh': [1.066204577509828, 1.5740172217580564], 'mean_iou': 0.8606347580075889}, 'mean_iou_change': 0.0003337060248944949, 'iou_improved': 9354, 'iou_degraded': 8209, 'iou_stable': 362}}}
+best_stat: {'epoch': 0, 'coco_eval_bbox': 0.5984721940684732}
+Epoch: [1/12]  [ 0/36]  eta: 0:00:43  lr: 0.000190  loss: 0.1869 (0.1869)  loss_bbox: 0.0153 (0.0153)  loss_giou: 0.1717 (0.1717)  time: 1.2160  data: 1.0126  max mem: 1511
+Epoch: [1/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1744 (0.1775)  loss_bbox: 0.0146 (0.0150)  loss_giou: 0.1585 (0.1624)  time: 0.2828  data: 0.0250  max mem: 1511
+Epoch: [1/12] Total time: 0:00:11 (0.3241 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1744 (0.1775)  loss_bbox: 0.0146 (0.0150)  loss_giou: 0.1585 (0.1624)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:46    time: 1.2848  data: 0.9120  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4991  data: 0.1005  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4061  data: 0.0220  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3817  data: 0.0234  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3783  data: 0.0239  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4170 s / it)
+Oracle metrics: {'f1': 0.9219926317475573, 'precision': 0.8996561425445452, 'recall': 0.9454664914586071, 'iou': 0.7093553323093885, 'TPs': 2878, 'FPs': 321, 'FNs': 166}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.72s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.617
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.944
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.692
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.607
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.721
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.430
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.104
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.596
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.710
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.699
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.800
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.623
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.968
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.809
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.2586448761990898, 1.8767769599412856, 1.428567164587331, 1.853069799722113], 'mean_edge_mae_px': 1.604264700112455, 'center_mae_px_xy': [0.9662207484662889, 1.259297621052412], 'size_mae_px_wh': [1.7167921545282974, 2.449912519312976], 'mean_iou': 0.8074357538262653}, 'mean_iou_change': 0.011128725459330625, 'iou_improved': 17434, 'iou_degraded': 6102, 'iou_stable': 729}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.1570838666437888, 1.8883573098584194, 1.2996083283711686, 1.808319394096946], 'mean_edge_mae_px': 1.5383422247425806, 'center_mae_px_xy': [0.9096906678284029, 1.277716475599402], 'size_mae_px_wh': [1.4771988993436374, 2.3047380048702095], 'mean_iou': 0.7939131555198494}, 'mean_iou_change': 0.011462419709247423, 'iou_improved': 14363, 'iou_degraded': 5102, 'iou_stable': 534}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.2252143253070136, 1.518169258771731, 1.4425372270658132, 1.6935587544254986], 'mean_edge_mae_px': 1.4698698913925141, 'center_mae_px_xy': [0.8671354437834857, 0.9277294432317499], 'size_mae_px_wh': [1.953488294043432, 2.6781043476919026], 'mean_iou': 0.8766714069832833}, 'mean_iou_change': 0.009480113999769717, 'iou_improved': 2929, 'iou_degraded': 954, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.372564890445807, 8.175733541830992, 14.362801221700815, 9.772725325364332], 'mean_edge_mae_px': 11.170956244835487, 'center_mae_px_xy': [8.832484123034355, 6.292402132963523], 'size_mae_px_wh': [21.34774357233292, 12.574918575775929], 'mean_iou': 0.748872161661089}, 'mean_iou_change': 0.011323320063363349, 'iou_improved': 142, 'iou_degraded': 46, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.534308202444546, 14.323591504906934, 10.458314871836093, 16.21442601805733], 'mean_edge_mae_px': 12.882660149311226, 'center_mae_px_xy': [9.022170365637828, 12.893161561430222], 'size_mae_px_wh': [7.639252791601804, 10.000568302949109], 'mean_iou': 0.3182705976673621}, 'mean_iou_change': 0.00618379513058147, 'iou_improved': 647, 'iou_degraded': 121, 'iou_stable': 224}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.6074096627126635, 2.6302752892919323, 1.9331627723077562, 2.5500377177880074], 'mean_edge_mae_px': 2.18022136052509, 'center_mae_px_xy': [1.0721713580363887, 1.539887478414898], 'size_mae_px_wh': [2.847256822624399, 4.152566338084755], 'mean_iou': 0.6846539048517297}, 'mean_iou_change': 0.01301897994197133, 'iou_improved': 4005, 'iou_degraded': 1199, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6412584272222372, 0.9631396325229767, 0.7782973160138522, 0.850344567119327], 'mean_edge_mae_px': 0.8082599857195982, 'center_mae_px_xy': [0.4887799741167736, 0.5317446176477058], 'size_mae_px_wh': [1.0517541630663798, 1.5240523709080376], 'mean_iou': 0.8711394728346586}, 'mean_iou_change': 0.010838420851964244, 'iou_improved': 12782, 'iou_degraded': 4782, 'iou_stable': 361}}}
+best_stat: {'epoch': 1, 'coco_eval_bbox': 0.6172386526207423}
+Epoch: [2/12]  [ 0/36]  eta: 0:00:41  lr: 0.000250  loss: 0.1572 (0.1572)  loss_bbox: 0.0135 (0.0135)  loss_giou: 0.1437 (0.1437)  time: 1.1519  data: 0.9393  max mem: 1511
+Epoch: [2/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1536 (0.1567)  loss_bbox: 0.0127 (0.0133)  loss_giou: 0.1395 (0.1434)  time: 0.2780  data: 0.0273  max mem: 1511
+Epoch: [2/12] Total time: 0:00:11 (0.3221 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1536 (0.1567)  loss_bbox: 0.0127 (0.0133)  loss_giou: 0.1395 (0.1434)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:42    time: 1.1896  data: 0.8443  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4799  data: 0.0964  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4002  data: 0.0239  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3788  data: 0.0357  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3567  data: 0.0341  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4071 s / it)
+Oracle metrics: {'f1': 0.9261572961717124, 'precision': 0.9037199124726477, 'recall': 0.9497371879106439, 'iou': 0.7267573312245007, 'TPs': 2891, 'FPs': 308, 'FNs': 153}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.70s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.648
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.948
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.745
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.637
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.742
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.437
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.108
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.618
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.728
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.719
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.809
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.626
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.968
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.830
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.234314741485025, 1.6518771950299043, 1.384473517779687, 1.6778411570097427], 'mean_edge_mae_px': 1.4871266528260898, 'center_mae_px_xy': [0.9497992990435999, 1.0485344618012333], 'size_mae_px_wh': [1.6535422760703846, 2.2424903970366037], 'mean_iou': 0.8220035280260592}, 'mean_iou_change': 0.02569649965912456, 'iou_improved': 20984, 'iou_degraded': 2553, 'iou_stable': 728}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.132135304804295, 1.659948282721305, 1.2607090730024306, 1.631257818608804], 'mean_edge_mae_px': 1.4210126197842086, 'center_mae_px_xy': [0.8960196240686573, 1.0603283351063997], 'size_mae_px_wh': [1.4155881179798315, 2.1005999772088146], 'mean_iou': 0.8097812596488475}, 'mean_iou_change': 0.02733052383824549, 'iou_improved': 17703, 'iou_degraded': 1763, 'iou_stable': 533}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.2058806988918291, 1.2951877248342838, 1.390941429565709, 1.5297546755093316], 'mean_edge_mae_px': 1.3554411322002884, 'center_mae_px_xy': [0.8444817537348969, 0.751367147945122], 'size_mae_px_wh': [1.8977138897149224, 2.4330036706345815], 'mean_iou': 0.8854042193872116}, 'mean_iou_change': 0.01821292640369795, 'iou_improved': 3135, 'iou_degraded': 748, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.307348288022554, 8.270693351060917, 13.942597939417912, 9.546970648643297], 'mean_edge_mae_px': 11.016902556786171, 'center_mae_px_xy': [8.66409389789288, 6.042906064253587], 'size_mae_px_wh': [20.960324678665554, 12.817295367901142], 'mean_iou': 0.7518954805624898}, 'mean_iou_change': 0.01434663896476408, 'iou_improved': 146, 'iou_degraded': 42, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.474609038642337, 14.069379961058017, 10.407824626853388, 15.922737755782661], 'mean_edge_mae_px': 12.718637845584102, 'center_mae_px_xy': [9.01450411717017, 12.712882954717404], 'size_mae_px_wh': [7.514938067404493, 9.743589007505967], 'mean_iou': 0.3305904917982281}, 'mean_iou_change': 0.018503689261447482, 'iou_improved': 737, 'iou_degraded': 32, 'iou_stable': 223}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.556217752803861, 2.258078667684197, 1.8597500947935866, 2.247926765020516], 'mean_edge_mae_px': 1.9804933200755401, 'center_mae_px_xy': [1.0508575109888925, 1.1980108618067553], 'size_mae_px_wh': [2.7216793750548596, 3.8273547764758877], 'mean_iou': 0.7069758061084321}, 'mean_iou_change': 0.03534088119867372, 'iou_improved': 5079, 'iou_degraded': 125, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6268999996544427, 0.7838086751049367, 0.7433051253628697, 0.719416874854967], 'mean_edge_mae_px': 0.7183576687443041, 'center_mae_px_xy': [0.47333366461877546, 0.3584126491260662], 'size_mae_px_wh': [1.0104794124512826, 1.3545158071996777], 'mean_iou': 0.8835181717501019}, 'mean_iou_change': 0.023217119767407587, 'iou_improved': 15168, 'iou_degraded': 2396, 'iou_stable': 361}}}
+best_stat: {'epoch': 2, 'coco_eval_bbox': 0.6475681814588746}
+Epoch: [3/12]  [ 0/36]  eta: 0:00:39  lr: 0.000250  loss: 0.1647 (0.1647)  loss_bbox: 0.0152 (0.0152)  loss_giou: 0.1494 (0.1494)  time: 1.0836  data: 0.8851  max mem: 1511
+Epoch: [3/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1362 (0.1422)  loss_bbox: 0.0112 (0.0120)  loss_giou: 0.1249 (0.1302)  time: 0.2751  data: 0.0268  max mem: 1511
+Epoch: [3/12] Total time: 0:00:11 (0.3230 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1362 (0.1422)  loss_bbox: 0.0112 (0.0120)  loss_giou: 0.1249 (0.1302)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:42    time: 1.1853  data: 0.8314  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:13    time: 0.5026  data: 0.0994  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4301  data: 0.0250  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3873  data: 0.0215  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3551  data: 0.0207  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4140 s / it)
+Oracle metrics: {'f1': 0.9296812429921512, 'precision': 0.907158487027196, 'recall': 0.9533508541392904, 'iou': 0.7473134456798367, 'TPs': 2902, 'FPs': 297, 'FNs': 142}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.66s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.689
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.953
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.805
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.680
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.774
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.449
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.114
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.648
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.756
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.748
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.826
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.631
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.970
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.860
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.2238506651553522, 1.4373657543979035, 1.2242759709600908, 1.5076487669742356], 'mean_edge_mae_px': 1.3482852893718955, 'center_mae_px_xy': [0.8985779200439328, 0.9886226141708255], 'size_mae_px_wh': [1.523271482653552, 1.8921042790173157], 'mean_iou': 0.8409071542545661}, 'mean_iou_change': 0.04460012588763141, 'iou_improved': 22095, 'iou_degraded': 1443, 'iou_stable': 727}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.1203526588933301, 1.451027798404681, 1.1097709176134924, 1.4620120296973491], 'mean_edge_mae_px': 1.2857908511522131, 'center_mae_px_xy': [0.8463003136311849, 0.9956142695491103], 'size_mae_px_wh': [1.2951972748769618, 1.7586961458030834], 'mean_iou': 0.8302113225587291}, 'mean_iou_change': 0.04776058674812707, 'iou_improved': 18567, 'iou_degraded': 900, 'iou_stable': 532}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.2058817379833644, 1.071704354341245, 1.200866726451528, 1.3606924071882376], 'mean_edge_mae_px': 1.2097863064910936, 'center_mae_px_xy': [0.791866215784583, 0.7189641681709561], 'size_mae_px_wh': [1.7351577964821134, 2.055867381249327], 'mean_iou': 0.8973298930132445}, 'mean_iou_change': 0.030138600029730896, 'iou_improved': 3370, 'iou_degraded': 513, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.21363594593146, 7.670085454598452, 13.45650979800102, 9.256102354098589], 'mean_edge_mae_px': 10.64908338815738, 'center_mae_px_xy': [8.487927656907301, 5.901204243684426], 'size_mae_px_wh': [20.490794035104607, 12.155435904478415], 'mean_iou': 0.7599275060415609}, 'mean_iou_change': 0.022378664443835142, 'iou_improved': 158, 'iou_degraded': 30, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.427660348134175, 13.788827932890385, 10.235400877352204, 15.663028903485786], 'mean_edge_mae_px': 12.528729515465638, 'center_mae_px_xy': [8.945667433943, 12.631309878892235], 'size_mae_px_wh': [7.366215772926807, 9.296696722928074], 'mean_iou': 0.34626176225749494}, 'mean_iou_change': 0.03417495972071435, 'iou_improved': 743, 'iou_degraded': 27, 'iou_stable': 222}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.5308697094824568, 1.8893422279437264, 1.6094875969856466, 1.9497508688278848], 'mean_edge_mae_px': 1.7448626008099286, 'center_mae_px_xy': [0.9866053522992865, 1.087383160349497], 'size_mae_px_wh': [2.492609227671049, 3.2446347897009966], 'mean_iou': 0.7367731396850121}, 'mean_iou_change': 0.06513821477525367, 'iou_improved': 5151, 'iou_degraded': 53, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6228957388191543, 0.6189657174892506, 0.610655458651826, 0.5923629016390738], 'mean_edge_mae_px': 0.6112199541498262, 'center_mae_px_xy': [0.4269749350793857, 0.3148308614474128], 'size_mae_px_wh': [0.9107069640312567, 1.0787883026995586], 'mean_iou': 0.899350498119507}, 'mean_iou_change': 0.03904944613681259, 'iou_improved': 16201, 'iou_degraded': 1363, 'iou_stable': 361}}}
+best_stat: {'epoch': 3, 'coco_eval_bbox': 0.6891762964551228}
+Epoch: [4/12]  [ 0/36]  eta: 0:00:41  lr: 0.000250  loss: 0.1290 (0.1290)  loss_bbox: 0.0100 (0.0100)  loss_giou: 0.1190 (0.1190)  time: 1.1423  data: 0.9636  max mem: 1511
+Epoch: [4/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1277 (0.1282)  loss_bbox: 0.0107 (0.0110)  loss_giou: 0.1170 (0.1171)  time: 0.2719  data: 0.0231  max mem: 1511
+Epoch: [4/12] Total time: 0:00:11 (0.3134 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1277 (0.1282)  loss_bbox: 0.0107 (0.0110)  loss_giou: 0.1170 (0.1171)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:41    time: 1.1645  data: 0.8234  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4774  data: 0.0912  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:06    time: 0.3988  data: 0.0194  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3881  data: 0.0221  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3857  data: 0.0321  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4128 s / it)
+Oracle metrics: {'f1': 0.9309626781995834, 'precision': 0.9084088777743045, 'recall': 0.954664914586071, 'iou': 0.7618644682097157, 'TPs': 2906, 'FPs': 293, 'FNs': 138}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.75s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.721
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.954
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.840
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.715
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.793
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.457
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.117
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.673
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.781
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.775
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.839
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.635
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.971
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.881
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.2046249248601715, 1.3364046385994208, 1.0640779772960303, 1.4021520128256018], 'mean_edge_mae_px': 1.2518148883953062, 'center_mae_px_xy': [0.8296664215082389, 0.9325429407525451], 'size_mae_px_wh': [1.4271104481204033, 1.7300576007098432], 'mean_iou': 0.8556236365344606}, 'mean_iou_change': 0.05931660816752593, 'iou_improved': 22179, 'iou_degraded': 1359, 'iou_stable': 727}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.1036201214288448, 1.3474165060006473, 0.9583210605663969, 1.3594009876370436], 'mean_edge_mae_px': 1.1921896689082332, 'center_mae_px_xy': [0.7847320190924002, 0.9422412547992345], 'size_mae_px_wh': [1.2040178807617825, 1.594392990799533], 'mean_iou': 0.8462223746582268}, 'mean_iou_change': 0.06377163884762473, 'iou_improved': 18665, 'iou_degraded': 802, 'iou_stable': 532}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.1812746606801952, 0.980687379778471, 1.041174392915715, 1.2450552226811302], 'mean_edge_mae_px': 1.112047914013878, 'center_mae_px_xy': [0.7168169987638001, 0.6510492373789537], 'size_mae_px_wh': [1.6309733430046731, 1.9031771322750277], 'mean_iou': 0.9060919862922584}, 'mean_iou_change': 0.03890069330874475, 'iou_improved': 3347, 'iou_degraded': 536, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.051055639218061, 7.633320661691519, 12.388555257748335, 9.06635091243646], 'mean_edge_mae_px': 10.284820617773594, 'center_mae_px_xy': [7.7940413646208935, 5.8146161910815115], 'size_mae_px_wh': [20.051225368793194, 12.029477706322304], 'mean_iou': 0.7661835565283577}, 'mean_iou_change': 0.028634714930632008, 'iou_improved': 167, 'iou_degraded': 21, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.422208865864143, 13.66441988085787, 10.016872522030626, 15.44111642626024], 'mean_edge_mae_px': 12.386154423753219, 'center_mae_px_xy': [8.868268235856968, 12.513845609050364], 'size_mae_px_wh': [7.234194354424553, 9.10167730533548], 'mean_iou': 0.3582985950812341}, 'mean_iou_change': 0.04621179254445348, 'iou_improved': 743, 'iou_degraded': 27, 'iou_stable': 222}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.5242044498939165, 1.6965434903093657, 1.3260297795441405, 1.7310810821909643], 'mean_edge_mae_px': 1.569464700484597, 'center_mae_px_xy': [0.9008379297842263, 0.9773326320218434], 'size_mae_px_wh': [2.305025937803307, 2.9356547012066967], 'mean_iou': 0.7612286748373934}, 'mean_iou_change': 0.08959374992763505, 'iou_improved': 5159, 'iou_degraded': 45, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.5991602347984474, 0.5467023401745859, 0.49046065920400156, 0.5270744473531821], 'mean_edge_mae_px': 0.5408494203825542, 'center_mae_px_xy': [0.3635621969004888, 0.27825075018854817], 'size_mae_px_wh': [0.8438067229389313, 0.9624045998481527], 'mean_iou': 0.911309588906986}, 'mean_iou_change': 0.05100853692429162, 'iou_improved': 16277, 'iou_degraded': 1287, 'iou_stable': 361}}}
+best_stat: {'epoch': 4, 'coco_eval_bbox': 0.7212506913548463}
+Epoch: [5/12]  [ 0/36]  eta: 0:00:38  lr: 0.000250  loss: 0.1312 (0.1312)  loss_bbox: 0.0124 (0.0124)  loss_giou: 0.1187 (0.1187)  time: 1.0827  data: 0.8098  max mem: 1511
+Epoch: [5/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1184 (0.1209)  loss_bbox: 0.0103 (0.0105)  loss_giou: 0.1082 (0.1104)  time: 0.2693  data: 0.0220  max mem: 1511
+Epoch: [5/12] Total time: 0:00:11 (0.3057 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1184 (0.1209)  loss_bbox: 0.0103 (0.0105)  loss_giou: 0.1082 (0.1104)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:46    time: 1.2839  data: 0.9313  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4791  data: 0.0986  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:06    time: 0.3909  data: 0.0204  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3722  data: 0.0235  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3487  data: 0.0210  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4014 s / it)
+Oracle metrics: {'f1': 0.9316033958032996, 'precision': 0.9090340731478587, 'recall': 0.9553219448094612, 'iou': 0.7661258227642865, 'TPs': 2908, 'FPs': 291, 'FNs': 136}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.71s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.729
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.955
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.846
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.722
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.799
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.459
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.118
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.786
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.781
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.843
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.972
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.886
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.2093313656933107, 1.3276441992127523, 1.0211082499542605, 1.3331897253231635], 'mean_edge_mae_px': 1.2228183850458718, 'center_mae_px_xy': [0.8265302351963979, 0.9249529769598468], 'size_mae_px_wh': [1.3962391968144845, 1.6550573382135914], 'mean_iou': 0.8597291793718295}, 'mean_iou_change': 0.06342215100489472, 'iou_improved': 22555, 'iou_degraded': 983, 'iou_stable': 727}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.1053421316704062, 1.3415429467135378, 0.9166949705616451, 1.291892250151424], 'mean_edge_mae_px': 1.1638680747742531, 'center_mae_px_xy': [0.7789311708107645, 0.935627469529664], 'size_mae_px_wh': [1.1752764295831883, 1.5243745880327473], 'mean_iou': 0.8506584910277355}, 'mean_iou_change': 0.06820775521713347, 'iou_improved': 18854, 'iou_degraded': 613, 'iou_stable': 532}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.2006532428481895, 0.9591079256043216, 0.9878855661103134, 1.1731196556709755], 'mean_edge_mae_px': 1.08019159755845, 'center_mae_px_xy': [0.7234557222248266, 0.6396785765717932], 'size_mae_px_wh': [1.593743549814039, 1.8160603779066813], 'mean_iou': 0.9087099326494806}, 'mean_iou_change': 0.0415186396659671, 'iou_improved': 3529, 'iou_degraded': 354, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [12.055533054547432, 7.596106345836933, 12.423214508936955, 8.910386953598413], 'mean_edge_mae_px': 10.246310215729933, 'center_mae_px_xy': [7.860120137532552, 5.785839679913643], 'size_mae_px_wh': [19.93467079064785, 11.696498088347607], 'mean_iou': 0.7674422542447241}, 'mean_iou_change': 0.02989341264699845, 'iou_improved': 172, 'iou_degraded': 16, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.377388437909465, 13.635756777178857, 9.946306654883008, 15.321197318393857], 'mean_edge_mae_px': 12.320162297091297, 'center_mae_px_xy': [8.836982377894945, 12.479741631466295], 'size_mae_px_wh': [7.182548438469248, 8.982468692946338], 'mean_iou': 0.36418753116704533}, 'mean_iou_change': 0.05210072863026471, 'iou_improved': 745, 'iou_degraded': 25, 'iou_stable': 222}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.5155701753289823, 1.6810253989745543, 1.262867197996213, 1.612272481409667], 'mean_edge_mae_px': 1.5179338134273541, 'center_mae_px_xy': [0.8957951626250703, 0.9575428476552956], 'size_mae_px_wh': [2.243530178970602, 2.8190420021873495], 'mean_iou': 0.7686606837052549}, 'mean_iou_change': 0.09702575879549642, 'iou_improved': 5171, 'iou_degraded': 33, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6105878360101867, 0.541059522299587, 0.4550427731443482, 0.47580405659921665], 'mean_edge_mae_px': 0.5206235470133347, 'center_mae_px_xy': [0.3625526978214748, 0.27576798539780173], 'size_mae_px_wh': [0.823222129015743, 0.9022661501061134], 'mean_iou': 0.9143239704370449}, 'mean_iou_change': 0.054022918454350546, 'iou_improved': 16639, 'iou_degraded': 925, 'iou_stable': 361}}}
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.7291667498919421}
+Epoch: [6/12]  [ 0/36]  eta: 0:00:55  lr: 0.000250  loss: 0.1112 (0.1112)  loss_bbox: 0.0096 (0.0096)  loss_giou: 0.1016 (0.1016)  time: 1.5465  data: 1.2670  max mem: 1511
+Epoch: [6/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1125 (0.1132)  loss_bbox: 0.0099 (0.0099)  loss_giou: 0.1029 (0.1032)  time: 0.2700  data: 0.0233  max mem: 1511
+Epoch: [6/12] Total time: 0:00:11 (0.3197 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1125 (0.1132)  loss_bbox: 0.0099 (0.0099)  loss_giou: 0.1029 (0.1032)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:47    time: 1.3172  data: 0.9083  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4912  data: 0.1027  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4194  data: 0.0238  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3990  data: 0.0232  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3745  data: 0.0230  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4189 s / it)
+Oracle metrics: {'f1': 0.932884831010732, 'precision': 0.9102844638949672, 'recall': 0.9566360052562418, 'iou': 0.7719943849255251, 'TPs': 2912, 'FPs': 287, 'FNs': 132}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.64s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.741
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.956
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.856
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.735
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.806
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.465
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.119
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.686
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.795
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.790
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.848
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.639
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.973
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.892
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.1921121963589014, 1.2628503100370443, 0.973250675049119, 1.3257435570297698], 'mean_edge_mae_px': 1.1884891846187087, 'center_mae_px_xy': [0.7998994935450543, 0.8933507478988811], 'size_mae_px_wh': [1.3654410015694165, 1.5942734164133432], 'mean_iou': 0.8646908415169555}, 'mean_iou_change': 0.0683838131500208, 'iou_improved': 22531, 'iou_degraded': 1007, 'iou_stable': 727}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.0889062327595673, 1.2766067582140255, 0.8715483406924195, 1.2860353519108374], 'mean_edge_mae_px': 1.1307741708942123, 'center_mae_px_xy': [0.7528145704348568, 0.9028617667239263], 'size_mae_px_wh': [1.1489214057403538, 1.4674050229371467], 'mean_iou': 0.8559733337745319}, 'mean_iou_change': 0.07352259796392989, 'iou_improved': 18825, 'iou_degraded': 642, 'iou_stable': 532}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.1838751324152543, 0.8914094075498344, 0.9381297178743981, 1.1598617624691856], 'mean_edge_mae_px': 1.0433190050771681, 'center_mae_px_xy': [0.7042839097555016, 0.6109454552156864], 'size_mae_px_wh': [1.5455163327519064, 1.745576914157366], 'mean_iou': 0.9120733269907727}, 'mean_iou_change': 0.04488203400725909, 'iou_improved': 3532, 'iou_degraded': 351, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.948774521167461, 7.606546243031819, 12.13695529791025, 8.861277812566513], 'mean_edge_mae_px': 10.13838846866901, 'center_mae_px_xy': [7.625040103227664, 5.813663983956362], 'size_mae_px_wh': [19.81204984126947, 11.44701424623147], 'mean_iou': 0.7695489901159899}, 'mean_iou_change': 0.03200014851826416, 'iou_improved': 174, 'iou_degraded': 14, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.320931420090698, 13.548107812361371, 9.869721796243422, 15.243648936250999], 'mean_edge_mae_px': 12.245602491236623, 'center_mae_px_xy': [8.79544142062866, 12.436459742696776], 'size_mae_px_wh': [7.125553385985475, 8.84722211157843], 'mean_iou': 0.37127602167659846}, 'mean_iou_change': 0.05918921913981785, 'iou_improved': 743, 'iou_degraded': 27, 'iou_stable': 222}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.47844945054805, 1.5622561505773482, 1.19082587066879, 1.5835250071518083], 'mean_edge_mae_px': 1.453764119736499, 'center_mae_px_xy': [0.8522994237308994, 0.8971370319733445], 'size_mae_px_wh': [2.1839168215297278, 2.6906435558309107], 'mean_iou': 0.778002905693152}, 'mean_iou_change': 0.1063679807833936, 'iou_improved': 5180, 'iou_degraded': 24, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.6014778697008535, 0.49363424992461585, 0.4159903404104161, 0.47859279934831245], 'mean_edge_mae_px': 0.4974238148460495, 'center_mae_px_xy': [0.3417788565408236, 0.2534058011725358], 'size_mae_px_wh': [0.8024708386411893, 0.8657761996094985], 'mean_iou': 0.9178609716183408}, 'mean_iou_change': 0.057559919635646384, 'iou_improved': 16608, 'iou_degraded': 956, 'iou_stable': 361}}}
+best_stat: {'epoch': 6, 'coco_eval_bbox': 0.7411006718939765}
+Epoch: [7/12]  [ 0/36]  eta: 0:00:43  lr: 0.000250  loss: 0.1216 (0.1216)  loss_bbox: 0.0122 (0.0122)  loss_giou: 0.1094 (0.1094)  time: 1.2125  data: 0.9555  max mem: 1511
+Epoch: [7/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1077 (0.1080)  loss_bbox: 0.0091 (0.0096)  loss_giou: 0.0974 (0.0983)  time: 0.2802  data: 0.0265  max mem: 1511
+Epoch: [7/12] Total time: 0:00:11 (0.3163 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1077 (0.1080)  loss_bbox: 0.0091 (0.0096)  loss_giou: 0.0974 (0.0983)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:41    time: 1.1489  data: 0.7956  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:11    time: 0.4560  data: 0.0905  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4193  data: 0.0465  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.4197  data: 0.0488  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.4047  data: 0.0465  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4268 s / it)
+Oracle metrics: {'f1': 0.9338459074163064, 'precision': 0.9112222569552986, 'recall': 0.9576215505913273, 'iou': 0.7814847343386366, 'TPs': 2915, 'FPs': 284, 'FNs': 129}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.79s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.760
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.959
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.866
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.755
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.815
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.464
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.121
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.701
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.813
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.809
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.856
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.639
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.974
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.899
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.145795300943739, 1.212217939187393, 0.9324437568734509, 1.2569967313646018], 'mean_edge_mae_px': 1.1368634320922961, 'center_mae_px_xy': [0.7492113069924968, 0.8653030682968499], 'size_mae_px_wh': [1.333046918894958, 1.495959338823987], 'mean_iou': 0.8737847817613592}, 'mean_iou_change': 0.07747775339442456, 'iou_improved': 22796, 'iou_degraded': 743, 'iou_stable': 726}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.042701201359268, 1.2209365693227823, 0.8306388874591377, 1.2191994754014788], 'mean_edge_mae_px': 1.0783690333856666, 'center_mae_px_xy': [0.7017031149409033, 0.8739849353329564], 'size_mae_px_wh': [1.118129126888149, 1.3672878668572797], 'mean_iou': 0.8660947922220336}, 'mean_iou_change': 0.08364405641143152, 'iou_improved': 19077, 'iou_degraded': 391, 'iou_stable': 531}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.1389747955265574, 0.8553331078665464, 0.8995801675996099, 1.0797474206269915], 'mean_edge_mae_px': 0.9934088729049264, 'center_mae_px_xy': [0.6572469858829233, 0.5866545425589329], 'size_mae_px_wh': [1.5059328975269877, 1.6380336489029699], 'mean_iou': 0.9165639340268309}, 'mean_iou_change': 0.049372641043317275, 'iou_improved': 3547, 'iou_degraded': 336, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.861411583729279, 7.768701345492632, 12.059537374056303, 8.833864762232853], 'mean_edge_mae_px': 10.130878766377766, 'center_mae_px_xy': [7.541534815079126, 5.792223526881291], 'size_mae_px_wh': [19.76546796162923, 11.72629909026317], 'mean_iou': 0.7693651506035626}, 'mean_iou_change': 0.03181630900583686, 'iou_improved': 172, 'iou_degraded': 16, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.264035292089947, 13.474458963159591, 9.808087302071433, 15.135349623798843], 'mean_edge_mae_px': 12.170482795279954, 'center_mae_px_xy': [8.743814319191921, 12.372789925354864], 'size_mae_px_wh': [7.079237938047417, 8.764800103381276], 'mean_iou': 0.37818030672716757}, 'mean_iou_change': 0.066093504190387, 'iou_improved': 745, 'iou_degraded': 26, 'iou_stable': 221}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.4050133495118606, 1.453358078669414, 1.1283568107288278, 1.4833975795074106], 'mean_edge_mae_px': 1.3675314546043782, 'center_mae_px_xy': [0.7765984899108769, 0.8317232335915562], 'size_mae_px_wh': [2.124961424359833, 2.5472042678939646], 'mean_iou': 0.7913999590085612}, 'mean_iou_change': 0.11976503409880275, 'iou_improved': 5180, 'iou_degraded': 24, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.5638375773755743, 0.461659469913738, 0.3827990478717799, 0.42139741169026373], 'mean_edge_mae_px': 0.457423376712839, 'center_mae_px_xy': [0.29860529068291103, 0.23847785177257436], 'size_mae_px_wh': [0.7787718691752712, 0.7800459263215005], 'mean_iou': 0.9257922390174754}, 'mean_iou_change': 0.065491187034781, 'iou_improved': 16871, 'iou_degraded': 693, 'iou_stable': 361}}}
+best_stat: {'epoch': 7, 'coco_eval_bbox': 0.7599369627184914}
+Epoch: [8/12]  [ 0/36]  eta: 0:00:44  lr: 0.000250  loss: 0.0992 (0.0992)  loss_bbox: 0.0095 (0.0095)  loss_giou: 0.0898 (0.0898)  time: 1.2494  data: 1.0241  max mem: 1511
+Epoch: [8/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.0996 (0.1025)  loss_bbox: 0.0092 (0.0092)  loss_giou: 0.0904 (0.0933)  time: 0.2725  data: 0.0257  max mem: 1511
+Epoch: [8/12] Total time: 0:00:11 (0.3132 s / it)
+Averaged stats: lr: 0.000250  loss: 0.0996 (0.1025)  loss_bbox: 0.0092 (0.0092)  loss_giou: 0.0904 (0.0933)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:58    time: 1.6145  data: 1.2924  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:13    time: 0.5060  data: 0.1332  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.3988  data: 0.0225  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3955  data: 0.0258  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3910  data: 0.0234  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4276 s / it)
+Oracle metrics: {'f1': 0.9348069838218804, 'precision': 0.9121600500156298, 'recall': 0.9586070959264126, 'iou': 0.7853809555132586, 'TPs': 2918, 'FPs': 281, 'FNs': 126}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.62s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.766
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.960
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.870
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.762
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.821
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.470
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.122
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.706
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.818
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.814
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.862
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.643
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.975
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.902
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.1235393190197225, 1.1956261997490156, 0.914997485159059, 1.2271079527651332], 'mean_edge_mae_px': 1.1153177391732325, 'center_mae_px_xy': [0.7283949933296721, 0.8539807774923326], 'size_mae_px_wh': [1.3124141932860272, 1.45413229178331], 'mean_iou': 0.8769431091102005}, 'mean_iou_change': 0.08063608074326578, 'iou_improved': 22851, 'iou_degraded': 688, 'iou_stable': 726}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [1.0224220203312584, 1.2065757920225952, 0.8116712973555229, 1.1909960973673483], 'mean_edge_mae_px': 1.0579163017691813, 'center_mae_px_xy': [0.6814960073403069, 0.8634278922043679], 'size_mae_px_wh': [1.0994744211430847, 1.3282133669482212], 'mean_iou': 0.8694200399943712}, 'mean_iou_change': 0.08696930418376922, 'iou_improved': 19079, 'iou_degraded': 389, 'iou_stable': 531}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.1097137796530352, 0.8351368018023595, 0.8862840832085025, 1.041776988407342], 'mean_edge_mae_px': 0.9682279132678098, 'center_mae_px_xy': [0.6339782655048769, 0.5724703199709408], 'size_mae_px_wh': [1.4722753068909427, 1.5857279081070519], 'mean_iou': 0.9189935141337267}, 'mean_iou_change': 0.05180222115021306, 'iou_improved': 3599, 'iou_degraded': 284, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.782660484313965, 7.598556677500407, 12.11147281451103, 8.799843091231127], 'mean_edge_mae_px': 10.073133266889132, 'center_mae_px_xy': [7.509437658847907, 5.762166548997928], 'size_mae_px_wh': [19.81389065277882, 11.62093651600373], 'mean_iou': 0.7706182906316922}, 'mean_iou_change': 0.03306944903396651, 'iou_improved': 173, 'iou_degraded': 15, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.22945682788568, 13.439625421118352, 9.755302439293553, 15.039626229854841], 'mean_edge_mae_px': 12.116002729538106, 'center_mae_px_xy': [8.718666701367304, 12.342950136160418], 'size_mae_px_wh': [7.029560785740614, 8.643656876238603], 'mean_iou': 0.3836179664304507}, 'mean_iou_change': 0.07153116389367008, 'iou_improved': 747, 'iou_degraded': 24, 'iou_stable': 221}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.365870573768976, 1.4391424439474105, 1.0926552945518102, 1.4162484861258349], 'mean_edge_mae_px': 1.328479199598508, 'center_mae_px_xy': [0.7473304357850561, 0.8178407966912283], 'size_mae_px_wh': [2.0735495925930425, 2.4672097010048986], 'mean_iou': 0.7976198353669608}, 'mean_iou_change': 0.12598491045720242, 'iou_improved': 5180, 'iou_degraded': 24, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.5473017893575725, 0.44536834192076485, 0.3727550037568916, 0.406268806138298], 'mean_edge_mae_px': 0.4429234852933817, 'center_mae_px_xy': [0.28055029148170973, 0.22894418131523717], 'size_mae_px_wh': [0.7689295888113343, 0.7539958135519733], 'mean_iou': 0.9279109980651327}, 'mean_iou_change': 0.06760994608243827, 'iou_improved': 16924, 'iou_degraded': 640, 'iou_stable': 361}}}
+best_stat: {'epoch': 8, 'coco_eval_bbox': 0.7663870445506048}
+Epoch: [9/12]  [ 0/36]  eta: 0:00:42  lr: 0.000250  loss: 0.0974 (0.0974)  loss_bbox: 0.0087 (0.0087)  loss_giou: 0.0886 (0.0886)  time: 1.1904  data: 0.9918  max mem: 1511
+Epoch: [9/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.0960 (0.0979)  loss_bbox: 0.0086 (0.0089)  loss_giou: 0.0870 (0.0890)  time: 0.2735  data: 0.0251  max mem: 1511
+Epoch: [9/12] Total time: 0:00:11 (0.3138 s / it)
+Averaged stats: lr: 0.000250  loss: 0.0960 (0.0979)  loss_bbox: 0.0086 (0.0089)  loss_giou: 0.0870 (0.0890)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:49    time: 1.3679  data: 0.9813  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:12    time: 0.4995  data: 0.1033  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:06    time: 0.3897  data: 0.0178  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3871  data: 0.0223  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3624  data: 0.0219  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4121 s / it)
+Oracle metrics: {'f1': 0.9354477014255966, 'precision': 0.9127852453891842, 'recall': 0.9592641261498029, 'iou': 0.7914731574280951, 'TPs': 2920, 'FPs': 279, 'FNs': 124}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.57s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.779
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.962
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.878
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.776
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.828
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.464
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.716
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.829
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.826
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.867
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.640
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.976
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.907
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.0736132302579993, 1.1520949516398573, 0.9008337085379194, 1.203238088213093], 'mean_edge_mae_px': 1.0824449946622172, 'center_mae_px_xy': [0.6926122794513871, 0.8396126451490836], 'size_mae_px_wh': [1.2716503620835498, 1.3953646336318095], 'mean_iou': 0.8827554708883886}, 'mean_iou_change': 0.08644844252145391, 'iou_improved': 22985, 'iou_degraded': 555, 'iou_stable': 725}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [0.9731267890284506, 1.1609000067417845, 0.8003632753120314, 1.165382337409846], 'mean_edge_mae_px': 1.0249431021230282, 'center_mae_px_xy': [0.6465647678576957, 0.848338335657115], 'size_mae_px_wh': [1.0595002003422773, 1.2663330851456447], 'mean_iou': 0.8758648987998836}, 'mean_iou_change': 0.0934141629892816, 'iou_improved': 19184, 'iou_degraded': 285, 'iou_stable': 530}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.0603787794478605, 0.7918085064533096, 0.8619382982610104, 1.026735770793138], 'mean_edge_mae_px': 0.9352153387388296, 'center_mae_px_xy': [0.5997191268142685, 0.5611555291112358], 'size_mae_px_wh': [1.4269091824705142, 1.5296884181604313], 'mean_iou': 0.9219845394872701}, 'mean_iou_change': 0.054793246503756485, 'iou_improved': 3630, 'iou_degraded': 253, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.655694191272442, 7.770729933029566, 12.016994781983204, 8.770510367858105], 'mean_edge_mae_px': 10.05348231853583, 'center_mae_px_xy': [7.354521042261368, 5.7580425678155365], 'size_mae_px_wh': [19.788226910126514, 11.82444058931791], 'mean_iou': 0.7704632295138965}, 'mean_iou_change': 0.03291438791617076, 'iou_improved': 171, 'iou_degraded': 17, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.163514842729896, 13.36399536339506, 9.707180034789827, 14.958022087511997], 'mean_edge_mae_px': 12.048178082106697, 'center_mae_px_xy': [8.673312157212246, 12.306623184122145], 'size_mae_px_wh': [6.95667629280398, 8.530680699153773], 'mean_iou': 0.39082465162444247}, 'mean_iou_change': 0.07873784908766188, 'iou_improved': 747, 'iou_degraded': 25, 'iou_stable': 220}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.276284510307376, 1.348016853865707, 1.0641703287121425, 1.3637856274241373], 'mean_edge_mae_px': 1.2630643300773408, 'center_mae_px_xy': [0.6809259991794713, 0.789364553714922], 'size_mae_px_wh': [1.999440767935344, 2.33978692417102], 'mean_iou': 0.8084467219614564}, 'mean_iou_change': 0.13681179705169794, 'iou_improved': 5184, 'iou_degraded': 20, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.510094769712605, 0.4178134709388807, 0.36474334310786993, 0.394124896190489], 'mean_edge_mae_px': 0.4216941199874612, 'center_mae_px_xy': [0.2544334202131966, 0.22000050223854628], 'size_mae_px_wh': [0.7398919903251084, 0.7187116937823541], 'mean_iou': 0.9321500908030933}, 'mean_iou_change': 0.07184903882039892, 'iou_improved': 17054, 'iou_degraded': 510, 'iou_stable': 361}}}
+best_stat: {'epoch': 9, 'coco_eval_bbox': 0.7792913336003766}
+Epoch: [10/12]  [ 0/36]  eta: 0:00:43  lr: 0.000250  loss: 0.0889 (0.0889)  loss_bbox: 0.0075 (0.0075)  loss_giou: 0.0814 (0.0814)  time: 1.2190  data: 0.9981  max mem: 1511
+Epoch: [10/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.0973 (0.0967)  loss_bbox: 0.0086 (0.0087)  loss_giou: 0.0880 (0.0879)  time: 0.2643  data: 0.0239  max mem: 1511
+Epoch: [10/12] Total time: 0:00:11 (0.3064 s / it)
+Averaged stats: lr: 0.000250  loss: 0.0973 (0.0967)  loss_bbox: 0.0086 (0.0087)  loss_giou: 0.0880 (0.0879)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:47    time: 1.3269  data: 0.9953  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:14    time: 0.5419  data: 0.1067  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:07    time: 0.4277  data: 0.0206  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3791  data: 0.0217  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3608  data: 0.0195  max mem: 1511
+Oracle Test: Total time: 0:00:15 (0.4241 s / it)
+Oracle metrics: {'f1': 0.9364087778311708, 'precision': 0.9137230384495155, 'recall': 0.9602496714848883, 'iou': 0.7936571764299668, 'TPs': 2923, 'FPs': 276, 'FNs': 121}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.85s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.782
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.962
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.880
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.779
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.830
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.468
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.123
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.718
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.832
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.829
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.868
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.644
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.976
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.909
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.0445723063474632, 1.1421233370528623, 0.9079784846615354, 1.2086440552491982], 'mean_edge_mae_px': 1.0758295458277647, 'center_mae_px_xy': [0.6823424448457031, 0.8321154478000116], 'size_mae_px_wh': [1.2454807370710737, 1.3981291166340324], 'mean_iou': 0.8838923296512853}, 'mean_iou_change': 0.08758530128435056, 'iou_improved': 22837, 'iou_degraded': 703, 'iou_stable': 725}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [0.9451110017640012, 1.150446180877307, 0.8069414646066757, 1.1685851904337237], 'mean_edge_mae_px': 1.0177709594204267, 'center_mae_px_xy': [0.6345085049755628, 0.840861842910244], 'size_mae_px_wh': [1.0372828957414477, 1.2660574672061078], 'mean_iou': 0.8771516807626204}, 'mean_iou_change': 0.09470094495201839, 'iou_improved': 19109, 'iou_degraded': 360, 'iou_stable': 530}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.029808406775954, 0.7847567812226909, 0.8761083057781193, 1.0426826144400934], 'mean_edge_mae_px': 0.9333390270542143, 'center_mae_px_xy': [0.5980651449202554, 0.5535751611938702], 'size_mae_px_wh': [1.388422851040099, 1.544877163346585], 'mean_iou': 0.9223888739780923}, 'mean_iou_change': 0.05519758099457876, 'iou_improved': 3558, 'iou_degraded': 325, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.553446488502699, 7.749255106999324, 11.935582906771929, 8.781804378216084], 'mean_edge_mae_px': 10.005022220122509, 'center_mae_px_xy': [7.347592965150491, 5.7501582732567424], 'size_mae_px_wh': [19.613846289805878, 11.879614340953339], 'mean_iou': 0.771516971548621}, 'mean_iou_change': 0.03396812995089526, 'iou_improved': 170, 'iou_degraded': 18, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.105027228653912, 13.307353311008022, 9.6890890439071, 14.945705210669868], 'mean_edge_mae_px': 12.011793698559725, 'center_mae_px_xy': [8.648033985988267, 12.285011361893867], 'size_mae_px_wh': [6.893497878505338, 8.496391228550385], 'mean_iou': 0.3948861790366834}, 'mean_iou_change': 0.08279937649990277, 'iou_improved': 747, 'iou_degraded': 25, 'iou_stable': 220}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.2215013927992548, 1.2999994752450763, 1.048878742048967, 1.368399489177816], 'mean_edge_mae_px': 1.2346947748177786, 'center_mae_px_xy': [0.6454662522252318, 0.7721845185970672], 'size_mae_px_wh': [1.9477848048832493, 2.310097115803942], 'mean_iou': 0.8132459570722103}, 'mean_iou_change': 0.14161103216245183, 'iou_improved': 5185, 'iou_degraded': 19, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.49036376870326914, 0.42177579333093873, 0.3799786937951709, 0.40074800354333767], 'mean_edge_mae_px': 0.42321656484317915, 'center_mae_px_xy': [0.2525096899960995, 0.21617334808432076], 'size_mae_px_wh': [0.723374452052256, 0.7332096815109252], 'mean_iou': 0.932032407863982}, 'mean_iou_change': 0.07173135588128758, 'iou_improved': 16905, 'iou_degraded': 659, 'iou_stable': 361}}}
+best_stat: {'epoch': 10, 'coco_eval_bbox': 0.7823098651493712}
+Epoch: [11/12]  [ 0/36]  eta: 0:00:39  lr: 0.000025  loss: 0.0979 (0.0979)  loss_bbox: 0.0079 (0.0079)  loss_giou: 0.0900 (0.0900)  time: 1.1066  data: 0.9160  max mem: 1511
+Epoch: [11/12]  [35/36]  eta: 0:00:00  lr: 0.000025  loss: 0.0902 (0.0921)  loss_bbox: 0.0083 (0.0084)  loss_giou: 0.0823 (0.0837)  time: 0.2656  data: 0.0245  max mem: 1511
+Epoch: [11/12] Total time: 0:00:11 (0.3061 s / it)
+Averaged stats: lr: 0.000025  loss: 0.0902 (0.0921)  loss_bbox: 0.0083 (0.0084)  loss_giou: 0.0823 (0.0837)
+ORACLE EVALUATION: ground-truth boxes guide refinement; all queries and baseline scores are retained. These are not GT-free detection results.
+Oracle Test:  [ 0/36]  eta: 0:00:47    time: 1.3264  data: 0.9446  max mem: 1511
+Oracle Test:  [10/36]  eta: 0:00:11    time: 0.4602  data: 0.1002  max mem: 1511
+Oracle Test:  [20/36]  eta: 0:00:06    time: 0.3924  data: 0.0211  max mem: 1511
+Oracle Test:  [30/36]  eta: 0:00:02    time: 0.3951  data: 0.0232  max mem: 1511
+Oracle Test:  [35/36]  eta: 0:00:00    time: 0.3569  data: 0.0217  max mem: 1511
+Oracle Test: Total time: 0:00:14 (0.4064 s / it)
+Oracle metrics: {'f1': 0.9370494954348871, 'precision': 0.9143482338230697, 'recall': 0.9609067017082786, 'iou': 0.7966176100421053, 'TPs': 2925, 'FPs': 274, 'FNs': 119}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.67s).
+ORACLE COCO results (GT-guided boxes, fixed baseline scores):
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.787
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.962
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.883
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.785
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.833
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.471
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.124
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.722
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.836
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.833
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.872
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.645
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.977
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.911
+Oracle fixed-pair geometry: {'coordinate_system': 'network_input_pixels', 'size_grouping': 'GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2', 'pairing': 'fixed_baseline_hungarian', 'counts': {'matched': 24265, 'refined': 23681, 'ignored_gt': 0, 'total_gt': 24265, 'unmatched_gt': 0, 'unmatched_queries': 993935, 'invalid_gt_samples': 584, 'invalid_baseline_boxes': 0, 'invalid_metric_pairs': 0, 'unrefined_matched': 584}, 'groups': {'all': {'pairs': 24265, 'refined_pairs': 23681, 'baseline': {'edge_mae_px_ltrb': [1.2609730285883882, 1.9771327470814397, 1.4554874143624046, 2.1177324701799893], 'mean_edge_mae_px': 1.7028314150530555, 'center_mae_px_xy': [0.9787961867772843, 1.5027556195409917], 'size_mae_px_wh': [1.7396605573878592, 2.503632206204943], 'mean_iou': 0.7963070283669347}, 'refined': {'edge_mae_px_ltrb': [1.0434624586379482, 1.1312030146545955, 0.8885184222217837, 1.172160330603301], 'mean_edge_mae_px': 1.0588360565294073, 'center_mae_px_xy': [0.6779520816466943, 0.8273705834153999], 'size_mae_px_wh': [1.2361771968279134, 1.3469391291273665], 'mean_iou': 0.8864241018930846}, 'mean_iou_change': 0.09011707352614994, 'iou_improved': 23020, 'iou_degraded': 520, 'iou_stable': 725}, 'small': {'pairs': 19999, 'refined_pairs': 19603, 'baseline': {'edge_mae_px_ltrb': [1.1571814493332107, 1.9814261470271848, 1.3108090557356562, 2.0577993420930114], 'mean_edge_mae_px': 1.6268039985472655, 'center_mae_px_xy': [0.9183928515471317, 1.504022290794079], 'size_mae_px_wh': [1.481830275376455, 2.3587834994353867], 'mean_iou': 0.7824507358106021}, 'refined': {'edge_mae_px_ltrb': [0.9451833439174906, 1.1412021120915836, 0.788889475924187, 1.135938324593408], 'mean_edge_mae_px': 1.0028033141316672, 'center_mae_px_xy': [0.631469063081946, 0.8365143188056758], 'size_mae_px_wh': [1.0288696008250977, 1.2220133139083456], 'mean_iou': 0.8797468899936189}, 'mean_iou_change': 0.09729615418301692, 'iou_improved': 19205, 'iou_degraded': 264, 'iou_stable': 530}, 'medium': {'pairs': 4071, 'refined_pairs': 3890, 'baseline': {'edge_mae_px_ltrb': [1.2368717898727488, 1.6149767160825605, 1.489124178330045, 2.0371013825603272], 'mean_edge_mae_px': 1.5945185167114204, 'center_mae_px_xy': [0.886353684918238, 1.2364011371905843], 'size_mae_px_wh': [2.0130342147005362, 2.7578415650461676], 'mean_iou': 0.8671912929835136}, 'refined': {'edge_mae_px_ltrb': [1.0227332186037128, 0.7683412960195858, 0.8453741175511696, 0.9878518604230775], 'mean_edge_mae_px': 0.9060751231493864, 'center_mae_px_xy': [0.5840769049225847, 0.5469396072768135], 'size_mae_px_wh': [1.375303525240642, 1.4641972778177883], 'mean_iou': 0.9247082407713708}, 'mean_iou_change': 0.057516947787857174, 'iou_improved': 3643, 'iou_degraded': 240, 'iou_stable': 188}, 'large': {'pairs': 195, 'refined_pairs': 188, 'baseline': {'edge_mae_px_ltrb': [12.408890650822567, 9.097509653140337, 15.591319353152544, 9.947741630749825], 'mean_edge_mae_px': 11.761365321966318, 'center_mae_px_xy': [9.103615296192658, 6.933509154197497], 'size_mae_px_wh': [22.4752690241887, 12.05205777975229], 'mean_iou': 0.7375488415977257}, 'refined': {'edge_mae_px_ltrb': [11.555630414913862, 7.681142024504832, 12.00708130078438, 8.734845870580429], 'mean_edge_mae_px': 9.994674902695875, 'center_mae_px_xy': [7.405027634058243, 5.744134377210568], 'size_mae_px_wh': [19.592901963454025, 11.711213258596567], 'mean_iou': 0.7719770834515539}, 'mean_iou_change': 0.03442824185382817, 'iou_improved': 172, 'iou_degraded': 16, 'iou_stable': 7}, 'baseline_iou_lt_0_50': {'pairs': 992, 'refined_pairs': 913, 'baseline': {'edge_mae_px_ltrb': [10.553052611649036, 14.410971859770436, 10.44215073688857, 16.495869050042764], 'mean_edge_mae_px': 12.975511064587701, 'center_mae_px_xy': [9.010929458384071, 13.100973143422555], 'size_mae_px_wh': [7.660107586773172, 10.02985082656866], 'mean_iou': 0.3120868025367806}, 'refined': {'edge_mae_px_ltrb': [10.087936288647112, 13.312473362011294, 9.673306723275493, 14.883506312185238], 'mean_edge_mae_px': 11.989305671529785, 'center_mae_px_xy': [8.643607052884274, 12.269924819439408], 'size_mae_px_wh': [6.8768141977488995, 8.439218248991716], 'mean_iou': 0.39713908786296076}, 'mean_iou_change': 0.08505228532618016, 'iou_improved': 747, 'iou_degraded': 25, 'iou_stable': 220}, 'baseline_iou_0_50_to_0_75': {'pairs': 5348, 'refined_pairs': 5204, 'baseline': {'edge_mae_px_ltrb': [1.6112743602284052, 2.755522391882153, 1.9665056367863802, 2.903042354453118], 'mean_edge_mae_px': 2.309086185837514, 'center_mae_px_xy': [1.089167989840593, 1.8447979123358773], 'size_mae_px_wh': [2.8756707410760662, 4.214663284767361], 'mean_iou': 0.6716349249097584}, 'refined': {'edge_mae_px_ltrb': [1.2224532249777194, 1.3062362841531778, 1.0395765602700107, 1.3084871495782036], 'mean_edge_mae_px': 1.2191883047447778, 'center_mae_px_xy': [0.6586038691277992, 0.7621347187567578], 'size_mae_px_wh': [1.927414696744421, 2.2587645043832825], 'mean_iou': 0.8154279424432365}, 'mean_iou_change': 0.143793017533478, 'iou_improved': 5186, 'iou_degraded': 18, 'iou_stable': 144}, 'baseline_iou_ge_0_75': {'pairs': 17925, 'refined_pairs': 17564, 'baseline': {'edge_mae_px_ltrb': [0.6422196412518766, 1.0567870723153756, 0.8056857145314769, 1.0877213824077963], 'mean_edge_mae_px': 0.8981034526266314, 'center_mae_px_xy': [0.5013543676299198, 0.7588407539589801], 'size_mae_px_wh': [1.0730794742350134, 1.5766250609021473], 'mean_iou': 0.8603010519826944}, 'refined': {'edge_mae_px_ltrb': [0.4895232308692347, 0.4048488662665193, 0.3572844519608523, 0.3726774273058361], 'mean_edge_mae_px': 0.4060834941006106, 'center_mae_px_xy': [0.24289180321340947, 0.21358355982034277], 'size_mae_px_wh': [0.7177810989496931, 0.682393355416121], 'mean_iou': 0.9346839732825225}, 'mean_iou_change': 0.07438292129982807, 'iou_improved': 17087, 'iou_degraded': 477, 'iou_stable': 361}}}
+best_stat: {'epoch': 11, 'coco_eval_bbox': 0.7874315298825478}
+Training time 0:06:54

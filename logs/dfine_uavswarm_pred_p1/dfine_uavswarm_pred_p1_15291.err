@@ -1,0 +1,195 @@
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
++ PROJECT_DIR=/home/zzy/projects/occ_study/D-FINE_mine/D-FINE
++ CONDA_ENV=dfine
++ CONFIG_FILE=configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_pred_p1.yml
++ EXPERIMENT_ROOT=/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923
++ BASELINE_CHECKPOINT=/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg1.pth
++ OUTPUT_DIR=/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/p1
++ cd /home/zzy/projects/occ_study/D-FINE_mine/D-FINE
++ [[ ! -f /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg1.pth ]]
++ [[ -e /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/p1 ]]
++ module load gcc/8.3.0
++ local _mlredir=0
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 0 -eq 0 ']'
++ _module_raw load gcc/8.3.0
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load gcc/8.3.0
++ eval 'LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LD_LIBRARY_PATH;
+LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LIBRARY_PATH;
+LOADEDMODULES=gcc/8.3.0; export LOADEDMODULES;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0; export _LMFILES_;
+CXX=g++; export CXX;
+F90=gfortran; export F90;
+FC=gfortran; export FC;
+__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest; export __MODULES_LMALTNAME;
+C_INCLUDE_PATH=/soft/gcc/8.3.0/include; export C_INCLUDE_PATH;
+F77=gfortran; export F77;
+PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin; export PATH;
+CC=gcc; export CC;
+test 0;'
+++ LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LD_LIBRARY_PATH
+++ LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LIBRARY_PATH
+++ LOADEDMODULES=gcc/8.3.0
+++ export LOADEDMODULES
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0
+++ export _LMFILES_
+++ CXX=g++
+++ export CXX
+++ F90=gfortran
+++ export F90
+++ FC=gfortran
+++ export FC
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest'
+++ export __MODULES_LMALTNAME
+++ C_INCLUDE_PATH=/soft/gcc/8.3.0/include
+++ export C_INCLUDE_PATH
+++ F77=gfortran
+++ export F77
+++ PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin
+++ export PATH
+++ CC=gcc
+++ export CC
+++ test 0
++ _mlstatus=0
++ return 0
++ module load cuda/cuda12.4
++ local _mlredir=0
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 0 -eq 0 ']'
++ _module_raw load cuda/cuda12.4
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load cuda/cuda12.4
++ eval '__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest:cuda/cuda12.4\&as\|cuda/default\&as\|cuda/latest; export __MODULES_LMALTNAME;
+MANPATH=/soft/cuda12.4/lib64; export MANPATH;
+PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin; export PATH;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4; export _LMFILES_;
+LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4; export LOADEDMODULES;
+MODULESHOME=/soft/cuda12.4; export MODULESHOME;
+test 0;'
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest:cuda/cuda12.4&as|cuda/default&as|cuda/latest'
+++ export __MODULES_LMALTNAME
+++ MANPATH=/soft/cuda12.4/lib64
+++ export MANPATH
+++ PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin
+++ export PATH
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4
+++ export _LMFILES_
+++ LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4
+++ export LOADEDMODULES
+++ MODULESHOME=/soft/cuda12.4
+++ export MODULESHOME
+++ test 0
++ _mlstatus=0
++ return 0
++ source /soft/anaconda3/bin/activate dfine
+++ _CONDA_ROOT=/soft/anaconda3
+++ . /soft/anaconda3/etc/profile.d/conda.sh
++++ export CONDA_EXE=/soft/anaconda3/bin/conda
++++ CONDA_EXE=/soft/anaconda3/bin/conda
++++ export _CE_M=
++++ _CE_M=
++++ export _CE_CONDA=
++++ _CE_CONDA=
++++ export CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ '[' -z x ']'
+++ conda activate dfine
+++ local cmd=activate
+++ case "$cmd" in
+++ __conda_activate activate dfine
+++ '[' -n '' ']'
+++ local ask_conda
++++ PS1=
++++ __conda_exe shell.posix activate dfine
++++ '[' -n '' ']'
++++ /soft/anaconda3/bin/conda shell.posix activate dfine
+++ ask_conda='. "/soft/anaconda3/etc/conda/deactivate.d/qt-main_deactivate.sh"
+. "/soft/anaconda3/etc/conda/deactivate.d/libglib_deactivate.sh"
+unset _CE_M
+unset _CE_CONDA
+PS1='\''(dfine) '\''
+export PATH='\''/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin'\''
+export CONDA_PREFIX='\''/home/zzy/.conda/envs/dfine'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''dfine'\''
+export CONDA_PROMPT_MODIFIER='\''(dfine) '\''
+export CONDA_PREFIX_1='\''/soft/anaconda3'\''
+export CONDA_EXE='\''/soft/anaconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/soft/anaconda3/bin/python'\''
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh"'
+++ eval '. "/soft/anaconda3/etc/conda/deactivate.d/qt-main_deactivate.sh"
+. "/soft/anaconda3/etc/conda/deactivate.d/libglib_deactivate.sh"
+unset _CE_M
+unset _CE_CONDA
+PS1='\''(dfine) '\''
+export PATH='\''/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin'\''
+export CONDA_PREFIX='\''/home/zzy/.conda/envs/dfine'\''
+export CONDA_SHLVL='\''2'\''
+export CONDA_DEFAULT_ENV='\''dfine'\''
+export CONDA_PROMPT_MODIFIER='\''(dfine) '\''
+export CONDA_PREFIX_1='\''/soft/anaconda3'\''
+export CONDA_EXE='\''/soft/anaconda3/bin/conda'\''
+export CONDA_PYTHON_EXE='\''/soft/anaconda3/bin/python'\''
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh"
+. "/home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh"'
++++ . /soft/anaconda3/etc/conda/deactivate.d/qt-main_deactivate.sh
+++++ '[' '' ']'
+++++ unset QT_XCB_GL_INTEGRATION
+++++ unset CONDA_BACKUP_QT_XCB_GL_INTEGRATION
++++ . /soft/anaconda3/etc/conda/deactivate.d/libglib_deactivate.sh
+++++ export GSETTINGS_SCHEMA_DIR=
+++++ GSETTINGS_SCHEMA_DIR=
+++++ unset GSETTINGS_SCHEMA_DIR_CONDA_BACKUP
+++++ '[' -z ']'
+++++ unset GSETTINGS_SCHEMA_DIR
++++ unset _CE_M
++++ unset _CE_CONDA
++++ PS1='(dfine) '
++++ export PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin
++++ PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.codex/tmp/arg0/codex-arg0f0Eudt:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/home/zzy/.conda/envs/dfine/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/openai.chatgpt-26.908.40401-linux-x64/bin/linux-x86_64:/home/zzy/.local/bin:/home/zzy/bin
++++ export CONDA_PREFIX=/home/zzy/.conda/envs/dfine
++++ CONDA_PREFIX=/home/zzy/.conda/envs/dfine
++++ export CONDA_SHLVL=2
++++ CONDA_SHLVL=2
++++ export CONDA_DEFAULT_ENV=dfine
++++ CONDA_DEFAULT_ENV=dfine
++++ export 'CONDA_PROMPT_MODIFIER=(dfine) '
++++ CONDA_PROMPT_MODIFIER='(dfine) '
++++ export CONDA_PREFIX_1=/soft/anaconda3
++++ CONDA_PREFIX_1=/soft/anaconda3
++++ export CONDA_EXE=/soft/anaconda3/bin/conda
++++ CONDA_EXE=/soft/anaconda3/bin/conda
++++ export CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ CONDA_PYTHON_EXE=/soft/anaconda3/bin/python
++++ . /home/zzy/.conda/envs/dfine/etc/conda/activate.d/libglib_activate.sh
+++++ export GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+++++ GSETTINGS_SCHEMA_DIR_CONDA_BACKUP=
+++++ export GSETTINGS_SCHEMA_DIR=/home/zzy/.conda/envs/dfine/share/glib-2.0/schemas
+++++ GSETTINGS_SCHEMA_DIR=/home/zzy/.conda/envs/dfine/share/glib-2.0/schemas
++++ . /home/zzy/.conda/envs/dfine/etc/conda/activate.d/tesseract_activate.sh
+++++ export TESSDATA_PREFIX=/home/zzy/.conda/envs/dfine/share/tessdata/
+++++ TESSDATA_PREFIX=/home/zzy/.conda/envs/dfine/share/tessdata/
+++ __conda_hashr
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ hash -r
++ test -f configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_pred_p1.yml
++ test -f /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json
++ test -f /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json
++ THREADS_PER_RANK=4
++ export OMP_NUM_THREADS=4
++ OMP_NUM_THREADS=4
++ export MKL_NUM_THREADS=4
++ MKL_NUM_THREADS=4
++ export PYTHONUNBUFFERED=1
++ PYTHONUNBUFFERED=1
++ JOB_NUMBER=15291
++ MASTER_PORT=35291
+++ hostname
++ echo 'Job: 15291 | Model: l P1 | Dataset: UAVSwarm | Node: gpu12 | Port: 35291'
++ echo CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
++ torchrun --nnodes=1 --nproc_per_node=8 --master_port=35291 train.py -c configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_pred_p1.yml -u DFINEPredRefiner.baseline_checkpoint=/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg1.pth --output-dir /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/p1 --use-amp --seed=0
