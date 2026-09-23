@@ -2,7 +2,7 @@
 
 日期：2026-09-22
 
-状态：当前集群的 B0 → G1 → P1 已完成，并已用 B0 最佳 `best_stg2.pth` 完成 G1/P1 复验和 P1 全验证集定位诊断。强基线上 P1 尚无有效增益；下一步重点验证完整分布候选采样，依据及结果见第 12 节。P2/P3 尚未实现或训练。
+状态：当前集群的 B0 → G1 → P1 已完成，并已用 B0 最佳 `best_stg2.pth` 完成 G1/P1 复验和 P1 全验证集定位诊断。强基线上 P1 尚无有效增益。P2 完整候选采样已实现，局部测试及真实 GPU 单 batch 接入检查通过，详见第 13 节；尚未启动完整 P2 训练，P3 尚未实现。
 
 本文承接 [GT 引导阶段方案](distribution_guided_strip_head_with_gt_oracle.md)，细化其中第 6 节的后续方向。原文关于“当前实施 GT 阶段”的表述保留为历史背景，下一阶段以本文为准。
 
@@ -152,7 +152,7 @@ P2 增加了可观察的位置，但概率加权仍可能压低真实边界附�
 
 ### 5.1 冻结范围与初始化
 
-本轮在当前集群重新训练 B0：沿用 HGNetv2 骨干预训练初始化，Encoder、Decoder 和检测头按原基线流程重新训练，不加载旧检测器 checkpoint。B0 完成后固定其 `best_stg1.pth`，新的 G1、P1 以及后续 P2 都使用该文件，加载其中 EMA 检测器权重（存在时）。
+本轮在当前集群重新训练 B0：沿用 HGNetv2 骨干预训练初始化，Encoder、Decoder 和检测头按原基线流程重新训练，不加载旧检测器 checkpoint。初轮 G1/P1 使用 `best_stg1.pth`；依据第 12 节的强基线复验，后续 P2 与新 G1/P1 统一使用 B0 `best_stg2.pth`，加载其中 EMA 检测器权重（存在时）。
 
 G1/P1/P2 的骨干、Encoder、Decoder 和原预测头冻结，并保持 eval；只训练 strip 特征投影、编码器和框残差头。读取的框、query、特征及边界分布均 detach。
 
@@ -227,7 +227,7 @@ P3 同时改变输出方式与监督设计，必须与 P2 单独比较，不能�
 
 ## 8. 实现位置与执行顺序
 
-以下列出各阶段实施入口；P1 的实际状态见下方清单及第 10 节，P2 入口仍属计划。保留现有 GT 实验路径，避免把不同阶段混为同一模型。
+以下列出各阶段实施入口；P1 的实际状态见下方清单及第 10–12 节，P2 实施记录见第 13 节。保留现有 GT 实验路径，避免把不同阶段混为同一模型。
 
 | 文件 | 计划职责 |
 | --- | --- |
@@ -254,10 +254,10 @@ P3 同时改变输出方式与监督设计，必须与 P2 单独比较，不能�
 
 ### 任务 B：完成 P2 候选取证
 
-- [ ] 在 decoder 增加默认关闭的分布返回接口，验证导出的状态可还原原预测框。
-- [ ] 按原解码公式建立完整候选网格，沿边跨度使用原预测框。
-- [ ] 共享 strip 编码参数，完成有效候选归一化、概率融合与无有效候选回退。
-- [ ] 完成 P2 配置和候选几何/融合局部检查，必要时使用分块采样。
+- [x] 在 decoder 增加默认关闭的分布返回接口，验证导出的状态可还原原预测框。
+- [x] 按原解码公式建立完整候选网格，沿边跨度使用原预测框。
+- [x] 共享 strip 编码参数，完成有效候选归一化、概率融合与无有效候选回退。
+- [x] 完成 P2 配置和候选几何/融合局部检查，并使用分块采样。
 - [ ] 在与 P1 一致的训练条件下运行 P2，汇总正常指标、覆盖诊断和增量计算成本。
 
 ### 任务 C：根据结果决定扩展
@@ -300,7 +300,7 @@ python -m unittest discover -s tests -p 'test_pred_refinement_criterion.py' -v
 
 ## 10. P1 实施记录与 Slurm 入口
 
-已新增预测模型、strip 适配层、独立 criterion、P1 配置和三组局部测试。GT 采样实现、decoder、训练器和普通后处理保持原有行为。P1 暂只接受 `sampling_mode=box`，不将尚未实现的分布模式静默回退为单框模式。
+P1 阶段新增预测模型、strip 适配层、独立 criterion、P1 配置和三组局部测试。GT 采样实现、decoder、训练器和普通后处理保持原有行为。P1 使用 `sampling_mode=box`；后续新增的 `distribution` 模式属于 P2，详见第 13 节。
 
 集群入口为 [run_train_dfine_uavswarm_pred_p1.slurm](../../slurm_files/run_train_dfine_uavswarm_pred_p1.slurm)，依据本地 `master` 分支的 UAVSwarm 脚本建立：1 节点、8 GPU、32 CPU、`gpu` 分区，加载 `gcc/8.3.0` 和 `cuda/cuda12.4`，使用 `dfine` conda 环境。总 batch 96，对应每卡 12；训练数据根目录改为 `/cluster/home/zzy/dataset/UAVSwarm-dataset-master`，其余训练设置沿用第 5 节。
 
@@ -425,3 +425,43 @@ epoch 使用日志的零起始编号。新 G1/P1 的冻结检测器权重已与 
 3. 继续报告正常 AP/AP75、固定匹配 IoU 和边界误差。若候选覆盖改善但定位仍不改善，再按第 7.3 节判断概率融合或直接分布修正的必要性；本次诊断不支持提前宣称 P2 有效。
 
 本次交付仅新增诊断入口、统计模块、Slurm 脚本及相关测试，更新本文。6 项局部测试、真实数据 CPU 单 batch 检查和单 GPU 全验证集诊断通过；未重新训练，未提交 commit。
+
+## 13. P2 实施记录
+
+用户已授权先归档当前工作再推进 P2。P1、集群实验及诊断已提交为 `5054ae8`，中文提交信息为“完成预测框引导细化实验并归档强基线诊断结果”；提交前 22 项相关局部测试通过。
+
+P2 继续使用本分支开发，范围限定为完整候选采样与接入：
+
+- `dfine_decoder.py` 增加默认关闭的分布导出，保持普通检测器和 P1 行为。
+- `pred_strip_head.py` 增加 `distribution` 模式，全部 33 个候选分别编码后按有效候选概率融合；投影特征图按图共享，以 32 个 query 分块处理。
+- `pred_refinement.py` 仅在 P2 请求分布，GT 不进入预测；附带候选坐标、有效性、原概率和排除概率质量供外部诊断。
+- `src/solver/distribution_coverage.py` 统计固定匹配对的候选覆盖、最近距离及 GT 附近概率质量；`tools/analysis/check_pred_distribution.py` 提供真实数据接入检查。
+- P2 配置继承 P1，保留 12 epochs、总 batch 96、学习率、损失与增强，仅改变采样模式和实验输出路径。
+
+强基线固定为 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth`，P2 从新头开始；默认输出目录为 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/p2`。不加载 P1/G1 的头权重。
+
+局部接入检查入口 `slurm_files/run_check_dfine_uavswarm_pred_p2.slurm` 申请单 GPU，使用一个真实 batch（12 张图像），验证零初始化、期望解码、候选统计及两次 AMP 反向/优化器更新；不保存模型权重。该检查不能视为已完成 P2 训练或证明其检测收益。
+
+正式训练入口已提供，采用与强基线 P1 相同的 8 GPU 设置。需要运行时在仓库根目录执行：
+
+```bash
+mkdir -p logs/dfine_uavswarm_pred_p2
+unset OUTPUT_DIR CONFIG_FILE
+export BASELINE_CHECKPOINT=/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth
+export EXPERIMENT_ROOT=/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923
+sbatch slurm_files/run_train_dfine_uavswarm_pred_p2.slurm
+```
+
+覆盖检查默认只处理一个 batch；如需完整验证集候选统计，可显式运行 `check_pred_distribution.py --max-batches 0` 并提供 baseline 与新的输出文件路径。该统计不需要训练 P2，也不改变预测输出。
+
+### 接入验证结果
+
+最终单 GPU 作业 `15357` 已 `COMPLETED`，退出码 `0:0`；[检查结果](results/p2_integration_check_beststg2.json)已归档。检查采用真实 B0 最佳权重、12 张 640×640 验证图像、204 个匹配目标：
+
+- 每条边使用全部 33 个候选，query 分块大小 32，零初始化输出与 baseline 完全一致。
+- 候选位置按原概率取期望，可还原原预测框，最大绝对误差 `5.3644e-7`，满足 `atol=1e-6, rtol=1e-5`。
+- 两次临时 AMP 前向/反向/优化器更新通过，新增参数梯度有限，冻结检测器无梯度；这些更新不保存权重，也不构成正式训练。
+- 峰值 CUDA allocated 显存 6.374 GiB。这是该单 batch 的运行检查，不是完整训练显存上界或稳定性能 benchmark。
+- 在相同的 204 个匹配目标上，四边都有 ±1 像素邻近候选的比例为 94.12%，单预测框对应比例为 41.67%。该 batch 的样本与此前全验证集不同，不能直接将 94.12% 与全验证集 P1 的 23.68% 作对照，也不能据此推断 AP 提升。
+
+相关局部测试共 57 项通过：原有 P1/诊断 22 项、decoder 导出 4 项、P2 采样头 7 项、P2 集成 3 项、候选覆盖 4 项，以及受影响的 GT 集成 17 项。验证涵盖同层导出、候选几何/融合/回退、分块输出和梯度等价、GT 独立性、冻结状态及配置接入；单有效候选时非零 P2 头与同权重 P1 输出一致。Slurm 脚本语法检查通过。本阶段 P2 修改留在工作区，尚未提交新 commit，也未启动完整训练。

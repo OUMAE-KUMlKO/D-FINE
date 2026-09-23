@@ -31,6 +31,7 @@ class DFINEPredRefiner(DFINE):
         max_log_scale=2.0,
         sampling_mode="box",
         baseline_checkpoint=None,
+        query_chunk_size=32,
     ):
         super().__init__(backbone, encoder, decoder)
         if feature_level < 0:
@@ -45,6 +46,7 @@ class DFINEPredRefiner(DFINE):
             offset_pixels=offset_pixels,
             max_log_scale=max_log_scale,
             sampling_mode=sampling_mode,
+            query_chunk_size=query_chunk_size,
         )
         self._baseline_loaded = False
         for module in (self.backbone, self.encoder, self.decoder):
@@ -108,26 +110,47 @@ class DFINEPredRefiner(DFINE):
             features = self.encoder(self.backbone(images))
             if self.feature_level >= len(features):
                 raise ValueError("feature_level is outside the Encoder output list")
-            baseline = self.decoder(features, return_query=True)
+            distribution_mode = self.refiner.sampling_mode == "distribution"
+            decoder_kwargs = {"return_distribution": True} if distribution_mode else {}
+            baseline = self.decoder(features, return_query=True, **decoder_kwargs)
             boxes = baseline["pred_boxes"].detach().float()
             logits = baseline["pred_logits"].detach()
             queries = baseline["pred_queries"].detach()
 
         batch_size, num_queries = boxes.shape[:2]
         batch_ids = torch.arange(batch_size, device=boxes.device).repeat_interleave(num_queries)
-        refined, valid = self.refiner(
+        refiner_kwargs = {}
+        if distribution_mode:
+            refiner_kwargs = {
+                "distribution": {
+                    "pred_corners": baseline["pred_corners"].detach().reshape(batch_size * num_queries, -1),
+                    "ref_points": baseline["ref_points"].detach().reshape(-1, 4),
+                    "up": baseline["up"].detach(),
+                    "reg_scale": baseline["reg_scale"].detach(),
+                },
+                "return_diagnostics": True,
+            }
+        refinement = self.refiner(
             features[self.feature_level].detach(),
             queries.reshape(-1, queries.shape[-1]),
             boxes.reshape(-1, 4),
             batch_ids,
             images.shape[-2:],
+            **refiner_kwargs,
         )
+        refined, valid = refinement[:2]
         valid = valid.reshape(batch_size, num_queries) & torch.isfinite(logits).all(-1)
         refined = torch.where(valid[..., None], refined.reshape_as(boxes), boxes)
-        return {
+        outputs = {
             "pred_logits": logits,
             "pred_boxes": refined,
             "baseline_boxes": boxes,
             "refinement_mask": valid,
             "refinement_zero_loss": self.refiner.zero_loss(),
         }
+        if distribution_mode:
+            outputs["sampling_diagnostics"] = {
+                name: value.detach().reshape(batch_size, num_queries, *value.shape[1:])
+                for name, value in refinement[2].items()
+            }
+        return outputs

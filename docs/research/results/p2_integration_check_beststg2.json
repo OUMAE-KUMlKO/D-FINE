@@ -1,0 +1,190 @@
+{
+  "config": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_pred_p2.yml",
+  "baseline_checkpoint": "/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth",
+  "images": 12,
+  "full_validation": false,
+  "ignored_targets": 0,
+  "inference_uses_gt": false,
+  "zero_initialization_preserves_boxes": true,
+  "max_distribution_decode_error": 5.364418029785156e-07,
+  "disposable_train_step_losses": [
+    0.3130630850791931,
+    0.30996957421302795
+  ],
+  "batch_size": 12,
+  "query_chunk_size": 32,
+  "candidate_count_per_edge": 33,
+  "elapsed_seconds": 3.6269282498396933,
+  "peak_cuda_memory_allocated_gib": 6.373913764953613,
+  "coverage": {
+    "coordinate_system": "network_input_pixels",
+    "pairing": "fixed_baseline_hungarian",
+    "coverage_note": "Normal-coordinate coverage only; not feature receptive field or tangent coverage.",
+    "offset_pixels": 1.0,
+    "matched_pairs": 204,
+    "valid_metric_pairs": 204,
+    "invalid_metric_pairs": 0,
+    "candidate_coverage": {
+      "nearest_distance_px": {
+        "left": {
+          "count": 204,
+          "mean": 0.07546658609427657,
+          "p50": 0.06551265716552734,
+          "p90": 0.1455402374267579,
+          "p95": 0.1649763584136963
+        },
+        "top": {
+          "count": 204,
+          "mean": 0.19410054619405784,
+          "p50": 0.14520049095153809,
+          "p90": 0.2923173904418948,
+          "p95": 0.368167519569397
+        },
+        "right": {
+          "count": 204,
+          "mean": 0.08583648532044653,
+          "p50": 0.08404254913330078,
+          "p90": 0.1452798843383789,
+          "p95": 0.15987968444824216
+        },
+        "bottom": {
+          "count": 204,
+          "mean": 0.16995386750090355,
+          "p50": 0.16123294830322266,
+          "p90": 0.2852475643157959,
+          "p95": 0.31086158752441395
+        }
+      },
+      "nearest_distance_gt_fraction": {
+        "left": {
+          "count": 204,
+          "mean": 0.005137132239010716,
+          "p50": 0.004448976068064816,
+          "p90": 0.009420429655803718,
+          "p95": 0.011153973357132602
+        },
+        "top": {
+          "count": 204,
+          "mean": 0.007701493675202162,
+          "p50": 0.0050993078527125455,
+          "p90": 0.00995785051815234,
+          "p95": 0.013623630067139111
+        },
+        "right": {
+          "count": 204,
+          "mean": 0.0058398681835807546,
+          "p50": 0.005583793097064871,
+          "p90": 0.009587035520833754,
+          "p95": 0.011390319014644794
+        },
+        "bottom": {
+          "count": 204,
+          "mean": 0.006553147806683864,
+          "p50": 0.005634163643629821,
+          "p90": 0.010251918582334124,
+          "p95": 0.011897270794853662
+        }
+      },
+      "inside_band_fraction": {
+        "left": 1.0,
+        "top": 0.9607843137254902,
+        "right": 1.0,
+        "bottom": 0.9803921568627451
+      },
+      "all_edges_inside_band_fraction": 0.9411764705882353,
+      "range_contains_gt_fraction": {
+        "left": 1.0,
+        "top": 0.9607843137254902,
+        "right": 1.0,
+        "bottom": 0.9803921568627451
+      },
+      "all_edges_range_contains_gt_fraction": 0.9411764705882353,
+      "no_valid_candidate_count": {
+        "left": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0
+      }
+    },
+    "baseline_coverage": {
+      "edge_distance_px": {
+        "left": {
+          "count": 204,
+          "mean": 0.5399579160353717,
+          "p50": 0.4105854034423828,
+          "p90": 1.217722892761231,
+          "p95": 1.6622684001922603
+        },
+        "top": {
+          "count": 204,
+          "mean": 1.1244743273538702,
+          "p50": 0.8327150344848633,
+          "p90": 2.4685548543930063,
+          "p95": 3.1914056539535522
+        },
+        "right": {
+          "count": 204,
+          "mean": 0.6777664259368298,
+          "p50": 0.41951656341552734,
+          "p90": 1.4785113334655786,
+          "p95": 2.1204347610473633
+        },
+        "bottom": {
+          "count": 204,
+          "mean": 1.0310444323455585,
+          "p50": 0.7509231567382812,
+          "p90": 2.63348197937012,
+          "p95": 3.415391087532042
+        }
+      },
+      "inside_band_fraction": {
+        "left": 0.8382352941176471,
+        "top": 0.5882352941176471,
+        "right": 0.7598039215686274,
+        "bottom": 0.6323529411764706
+      },
+      "all_edges_inside_band_fraction": 0.4166666666666667,
+      "mean_tangent_coverage": 0.9562422047831705
+    },
+    "probability_mass": {
+      "near_gt_original_mean": {
+        "left": 0.7284619094935967,
+        "top": 0.45698711850153967,
+        "right": 0.6837504619259419,
+        "bottom": 0.44478438589651564
+      },
+      "near_gt_retained_normalized_mean": {
+        "left": 0.7284619051779859,
+        "top": 0.4569871199813666,
+        "right": 0.6837504574944947,
+        "bottom": 0.4447843942527722
+      },
+      "excluded_mean": {
+        "left": 0.0,
+        "top": 0.03899637039969952,
+        "right": 0.0,
+        "bottom": 0.01640815476279616
+      },
+      "sample_counts": {
+        "original": {
+          "left": 204,
+          "top": 204,
+          "right": 204,
+          "bottom": 204
+        },
+        "normalized": {
+          "left": 204,
+          "top": 204,
+          "right": 204,
+          "bottom": 204
+        },
+        "excluded": {
+          "left": 204,
+          "top": 204,
+          "right": 204,
+          "bottom": 204
+        }
+      }
+    }
+  }
+}

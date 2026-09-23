@@ -1,0 +1,10 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_pred_p1.yml']
+
+# P2: complete D-FINE edge candidates, encoded before probability pooling.
+# Start from the same strongest B0 checkpoint as the strong-baseline P1 run.
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/p2
+exp_name: dfine_l_uavswarm_pred_p2
+
+DFINEPredRefiner:
+  sampling_mode: distribution
+  query_chunk_size: 32

@@ -839,10 +839,12 @@ class DFINETransformer(nn.Module):
 
         return topk_memory, topk_logits, topk_anchors
 
-    def forward(self, feats, targets=None, return_query=False):
-        # The GT-only diagnostic reads an eval query, never denoising queries.
+    def forward(self, feats, targets=None, return_query=False, return_distribution=False):
+        # Refinement reads eval queries/distributions, never denoising queries.
         if return_query and self.training:
             raise ValueError("return_query is only supported with the decoder in eval mode")
+        if return_distribution and self.training:
+            raise ValueError("return_distribution is only supported with the decoder in eval mode")
         # input projection and embedding
         memory, spatial_shapes = self._get_encoder_input(feats)
 
@@ -894,7 +896,7 @@ class DFINETransformer(nn.Module):
             dn_out_corners, out_corners = torch.split(out_corners, dn_meta["dn_num_split"], dim=2)
             dn_out_refs, out_refs = torch.split(out_refs, dn_meta["dn_num_split"], dim=2)
 
-        if self.training:
+        if self.training or return_distribution:
             out = {
                 "pred_logits": out_logits[-1],
                 "pred_boxes": out_bboxes[-1],

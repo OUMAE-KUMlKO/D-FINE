@@ -96,12 +96,13 @@ class PredictionStripHeadTests(unittest.TestCase):
         sampled[0].sum().backward()
         self.assertIsNone(boxes.grad, "Sampling coordinates must be detached from predictions.")
 
-    def test_p1_accepts_only_box_sampling_with_real_features(self):
+    def test_sampling_modes_use_real_features_and_reject_unknown_values(self):
         head = PredictionStripHead(2, 3, sampling_mode="box")
         self.assertEqual(head.feature_mode, "real")
-        for mode in ("distribution", "unknown"):
-            with self.subTest(mode=mode), self.assertRaisesRegex(ValueError, "box"):
-                PredictionStripHead(2, 3, sampling_mode=mode)
+        distribution = PredictionStripHead(2, 3, sampling_mode="distribution")
+        self.assertEqual(distribution.feature_mode, "real")
+        with self.assertRaisesRegex(ValueError, "sampling_mode"):
+            PredictionStripHead(2, 3, sampling_mode="unknown")
 
 
 if __name__ == "__main__":
