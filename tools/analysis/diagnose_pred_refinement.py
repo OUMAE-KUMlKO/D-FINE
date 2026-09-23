@@ -1,4 +1,4 @@
-"""Evaluate P1 geometry and a GT-selected diagnostic using one prediction pass."""
+"""Evaluate P1/P2 geometry, candidate coverage, and GT-selected diagnostics."""
 
 import argparse
 import json
@@ -11,7 +11,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 
-def build_diagnostic_variants(outputs, indices):
+def build_diagnostic_variants(outputs, indices, refinement_name="p1"):
     """Keep scores fixed; only the oracle variant uses GT-derived selection."""
     baseline, refined = outputs["baseline_boxes"], outputs["pred_boxes"]
     matched = torch.zeros(baseline.shape[:2], dtype=torch.bool, device=baseline.device)
@@ -21,7 +21,7 @@ def build_diagnostic_variants(outputs, indices):
         name: {"pred_boxes": boxes, "pred_logits": outputs["pred_logits"]}
         for name, boxes in (
             ("baseline", baseline),
-            ("p1", refined),
+            (refinement_name, refined),
             ("matched_only_oracle", torch.where(matched[..., None], refined, baseline)),
         )
     }
@@ -31,6 +31,7 @@ def build_diagnostic_variants(outputs, indices):
 def run(args):
     from src.core import YAMLConfig
     from src.data import CocoEvaluator, get_coco_api_from_dataset
+    from src.solver.distribution_coverage import DistributionCoverageMetrics
     from src.solver.pred_refinement_diagnostics import PredRefinementDiagnostics
     from src.zoo.dfine.gt_refinement import DFINEGTRefiner
 
@@ -45,20 +46,25 @@ def run(args):
         val_dataloader={"total_batch_size": args.batch_size, "num_workers": args.workers},
     )
     if config.yaml_cfg["model"] != "DFINEPredRefiner" or not config.yaml_cfg["use_focal_loss"]:
-        raise ValueError("This diagnostic expects the P1 refiner with sigmoid classification scores")
+        raise ValueError("This diagnostic expects a prediction refiner with sigmoid classification scores")
     checkpoint = torch.load(args.checkpoint, map_location="cpu")
     model = config.model
     model.load_state_dict(checkpoint["model"])
     checkpoint_epoch = checkpoint.get("last_epoch")
     del checkpoint
     model.to(args.device).eval()
+    refinement_name = "p2" if model.refiner.sampling_mode == "distribution" else "p1"
+    coverage = (
+        DistributionCoverageMetrics(offset_pixels=model.refiner.offset_pixels)
+        if refinement_name == "p2" else None
+    )
     criterion = config.criterion.to(args.device).eval()
     postprocessor = config.postprocessor.to(args.device).eval()
     loader = config.val_dataloader
     coco_gt = get_coco_api_from_dataset(loader.dataset)
     evaluators = {
         name: CocoEvaluator(coco_gt=coco_gt, iou_types=["bbox"])
-        for name in ("baseline", "p1", "matched_only_oracle")
+        for name in ("baseline", refinement_name, "matched_only_oracle")
     }
     diagnostics = PredRefinementDiagnostics(offset_pixels=model.refiner.offset_pixels)
     images_seen = 0
@@ -78,9 +84,14 @@ def run(args):
             outputs["baseline_boxes"], outputs["pred_logits"], canonical_targets
         )
         diagnostics.update(outputs, canonical_targets, indices, images.shape[-2:])
+        if coverage is not None:
+            coverage.update(
+                outputs["sampling_diagnostics"], outputs["baseline_boxes"],
+                canonical_targets, indices, images.shape[-2:],
+            )
         ignored_targets += sum(ignored)
         sizes = torch.stack([target["orig_size"] for target in targets]).to(images.device)
-        for name, variant in build_diagnostic_variants(outputs, indices).items():
+        for name, variant in build_diagnostic_variants(outputs, indices, refinement_name).items():
             predictions = postprocessor(variant, sizes)
             evaluators[name].update({
                 int(target["image_id"].item()): prediction
@@ -109,6 +120,7 @@ def run(args):
         "ignored_targets": ignored_targets,
         "elapsed_seconds": time.monotonic() - started,
         "inference_uses_gt": False,
+        "sampling_mode": model.refiner.sampling_mode,
         "diagnostic_notes": [
             "All three COCO variants reuse the same model outputs and unchanged scores.",
             "matched_only_oracle uses baseline Hungarian GT matches to select refinements; it is not a deployment result.",
@@ -122,6 +134,8 @@ def run(args):
         "coco_eval_bbox": coco_metrics,
         "diagnostics": diagnostics.compute(),
     }
+    if coverage is not None:
+        summary["distribution_coverage"] = coverage.compute()
     output_file.parent.mkdir(parents=True, exist_ok=True)
     output_file.write_text(json.dumps(summary, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     print(f"Saved diagnostic: {output_file}", flush=True)

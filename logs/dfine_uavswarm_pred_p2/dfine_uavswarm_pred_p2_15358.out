@@ -1,0 +1,669 @@
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load gcc/8.3.0
++ eval 'LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LD_LIBRARY_PATH;
+LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib; export LIBRARY_PATH;
+LOADEDMODULES=gcc/8.3.0; export LOADEDMODULES;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0; export _LMFILES_;
+CXX=g++; export CXX;
+F90=gfortran; export F90;
+FC=gfortran; export FC;
+__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest; export __MODULES_LMALTNAME;
+C_INCLUDE_PATH=/soft/gcc/8.3.0/include; export C_INCLUDE_PATH;
+F77=gfortran; export F77;
+PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts; export PATH;
+CC=gcc; export CC;
+test 0;'
+++ LD_LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LD_LIBRARY_PATH
+++ LIBRARY_PATH=/soft/gcc/8.3.0/lib64:/soft/gcc/8.3.0/lib
+++ export LIBRARY_PATH
+++ LOADEDMODULES=gcc/8.3.0
+++ export LOADEDMODULES
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0
+++ export _LMFILES_
+++ CXX=g++
+++ export CXX
+++ F90=gfortran
+++ export F90
+++ FC=gfortran
+++ export FC
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest'
+++ export __MODULES_LMALTNAME
+++ C_INCLUDE_PATH=/soft/gcc/8.3.0/include
+++ export C_INCLUDE_PATH
+++ F77=gfortran
+++ export F77
+++ PATH=/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts
+++ export PATH
+++ CC=gcc
+++ export CC
+++ test 0
++ _mlstatus=0
++ return 0
+++ /usr/bin/tclsh /soft/module/libexec/modulecmd.tcl bash load cuda/cuda12.4
++ eval '__MODULES_LMALTNAME=gcc/8.3.0\&as\|gcc/default\&as\|gcc/latest:cuda/cuda12.4\&as\|cuda/default\&as\|cuda/latest; export __MODULES_LMALTNAME;
+MANPATH=/soft/cuda12.4/lib64; export MANPATH;
+PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts; export PATH;
+_LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4; export _LMFILES_;
+LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4; export LOADEDMODULES;
+MODULESHOME=/soft/cuda12.4; export MODULESHOME;
+test 0;'
+++ __MODULES_LMALTNAME='gcc/8.3.0&as|gcc/default&as|gcc/latest:cuda/cuda12.4&as|cuda/default&as|cuda/latest'
+++ export __MODULES_LMALTNAME
+++ MANPATH=/soft/cuda12.4/lib64
+++ export MANPATH
+++ PATH=/soft/cuda12.4/bin:/soft/gcc/8.3.0/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/debugCommand:/home/zzy/.vscode-server/data/User/globalStorage/github.copilot-chat/copilotCli:/home/zzy/.vscode-server/bin/a44adf7f53e00964ab890f9f8758a334f1fc15bc/bin/remote-cli:/soft/git/2.50/bin:/home/zzy/.local/bin:/opt/simplehpc/miniconda3/scm/bin:/soft/git/2.50/bin:/home/zzy/.local/bin:/home/zzy/.nvm/versions/node/v20.20.2/bin:/soft/anaconda3/bin:/soft/anaconda3/condabin:/opt/simplehpc/miniconda3/scm/bin:/usr/lib64/qt-3.3/bin:/home/zzy/perl5/bin:/soft/module/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/zzy/.local/bin:/home/zzy/bin:/home/zzy/.vscode-server/extensions/ms-python.debugpy-2026.6.0-linux-x64/bundled/scripts/noConfigScripts
+++ export PATH
+++ _LMFILES_=/soft/module/modulefiles/gcc/8.3.0:/soft/module/modulefiles/cuda/cuda12.4
+++ export _LMFILES_
+++ LOADEDMODULES=gcc/8.3.0:cuda/cuda12.4
+++ export LOADEDMODULES
+++ MODULESHOME=/soft/cuda12.4
+++ export MODULESHOME
+++ test 0
++ _mlstatus=0
++ return 0
+Job: 15358 | Model: l P2 | Baseline: /cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth | Port: 35358
+Initialized distributed mode...
+cfg: 
+{'_collate_fn': None,
+ '_criterion': None,
+ '_ema': None,
+ '_evaluator': None,
+ '_lr_scheduler': None,
+ '_lr_warmup_scheduler': None,
+ '_model': None,
+ '_optimizer': None,
+ '_postprocessor': None,
+ '_scaler': None,
+ '_train_batch_size': None,
+ '_train_dataloader': None,
+ '_train_dataset': None,
+ '_train_shuffle': None,
+ '_val_batch_size': None,
+ '_val_dataloader': None,
+ '_val_dataset': None,
+ '_val_shuffle': None,
+ '_writer': None,
+ 'batch_size': None,
+ 'checkpoint_freq': 1,
+ 'clip_max_norm': 0.1,
+ 'device': '',
+ 'ema_decay': 0.9999,
+ 'ema_warmups': 2000,
+ 'epochs': 12,
+ 'find_unused_parameters': False,
+ 'last_epoch': -1,
+ 'num_workers': 0,
+ 'output_dir': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/p2',
+ 'print_freq': 100,
+ 'resume': None,
+ 'seed': 0,
+ 'summary_dir': None,
+ 'sync_bn': False,
+ 'task': 'detection',
+ 'tuning': None,
+ 'use_amp': True,
+ 'use_ema': False,
+ 'yaml_cfg': {'DFINE': {'backbone': 'HGNetv2',
+                        'decoder': 'DFINETransformer',
+                        'encoder': 'HybridEncoder'},
+              'DFINECriterion': {'alpha': 0.75,
+                                 'gamma': 2.0,
+                                 'losses': ['vfl', 'boxes', 'local'],
+                                 'matcher': {'alpha': 0.25,
+                                             'gamma': 2.0,
+                                             'type': 'HungarianMatcher',
+                                             'weight_dict': {'cost_bbox': 5,
+                                                             'cost_class': 2,
+                                                             'cost_giou': 2}},
+                                 'reg_max': 32,
+                                 'weight_dict': {'loss_bbox': 5,
+                                                 'loss_ddf': 1.5,
+                                                 'loss_fgl': 0.15,
+                                                 'loss_giou': 2,
+                                                 'loss_vfl': 1}},
+              'DFINEPostProcessor': {'num_top_queries': 300},
+              'DFINEPredRefiner': {'backbone': 'HGNetv2',
+                                   'baseline_checkpoint': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth',
+                                   'decoder': 'DFINETransformer',
+                                   'encoder': 'HybridEncoder',
+                                   'feature_level': 0,
+                                   'hidden_dim': 64,
+                                   'kernel_size': 3,
+                                   'max_log_scale': 2.0,
+                                   'num_points': 5,
+                                   'offset_pixels': 1.0,
+                                   'query_chunk_size': 32,
+                                   'sampling_mode': 'distribution'},
+              'DFINETransformer': {'box_noise_scale': 1.0,
+                                   'cross_attn_method': 'default',
+                                   'eval_idx': -1,
+                                   'feat_channels': [256, 256, 256],
+                                   'feat_strides': [8, 16, 32],
+                                   'hidden_dim': 256,
+                                   'label_noise_ratio': 0.5,
+                                   'layer_scale': 1,
+                                   'num_denoising': 100,
+                                   'num_layers': 6,
+                                   'num_levels': 3,
+                                   'num_points': [3, 6, 3],
+                                   'num_queries': 300,
+                                   'query_select_method': 'default',
+                                   'reg_max': 32,
+                                   'reg_scale': 4},
+              'HGNetv2': {'freeze_at': 0,
+                          'freeze_norm': True,
+                          'freeze_stem_only': True,
+                          'local_model_dir': 'weight/hgnetv2/',
+                          'name': 'B4',
+                          'pretrained': False,
+                          'return_idx': [1, 2, 3]},
+              'HybridEncoder': {'act': 'silu',
+                                'depth_mult': 1,
+                                'dim_feedforward': 1024,
+                                'dropout': 0.0,
+                                'enc_act': 'gelu',
+                                'expansion': 1.0,
+                                'feat_strides': [8, 16, 32],
+                                'hidden_dim': 256,
+                                'in_channels': [512, 1024, 2048],
+                                'nhead': 8,
+                                'num_encoder_layers': 1,
+                                'use_encoder_idx': [2]},
+              'PredRefinementCriterion': {'matcher': {'alpha': 0.25,
+                                                      'gamma': 2.0,
+                                                      'type': 'HungarianMatcher',
+                                                      'weight_dict': {'cost_bbox': 5,
+                                                                      'cost_class': 2,
+                                                                      'cost_giou': 2}},
+                                          'weight_dict': {'loss_bbox': 5,
+                                                          'loss_giou': 2}},
+              '__include__': ['./dfine_hgnetv2_l_uavswarm_pred_p1.yml'],
+              'checkpoint_freq': 1,
+              'clip_max_norm': 0.1,
+              'config': 'configs/dfine/pred_refinement/dfine_hgnetv2_l_uavswarm_pred_p2.yml',
+              'criterion': 'PredRefinementCriterion',
+              'ema': {'decay': 0.9999,
+                      'start': 0,
+                      'type': 'ModelEMA',
+                      'warmups': 1000},
+              'epochs': 12,
+              'eval_spatial_size': [640, 640],
+              'evaluator': {'iou_types': ['bbox'], 'type': 'CocoEvaluator'},
+              'exp_name': 'dfine_l_uavswarm_pred_p2',
+              'find_unused_parameters': False,
+              'lr_scheduler': {'gamma': 0.1,
+                               'milestones': [10],
+                               'type': 'MultiStepLR'},
+              'lr_warmup_scheduler': {'type': 'LinearWarmup',
+                                      'warmup_duration': 50},
+              'model': 'DFINEPredRefiner',
+              'num_classes': 1,
+              'optimizer': {'betas': [0.9, 0.999],
+                            'lr': 0.00025,
+                            'params': [{'lr': 0.00025,
+                                        'params': '^refiner\\.'}],
+                            'type': 'AdamW',
+                            'weight_decay': 0.000125},
+              'output_dir': '/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/p2',
+              'postprocessor': 'DFINEPostProcessor',
+              'print_freq': 100,
+              'print_method': 'builtin',
+              'print_rank': 0,
+              'project_name': 'D-FINE',
+              'remap_mscoco_category': True,
+              'scaler': {'enabled': True, 'type': 'GradScaler'},
+              'seed': 0,
+              'sync_bn': False,
+              'task': 'detection',
+              'test_only': False,
+              'train_dataloader': {'collate_fn': {'base_size': 640,
+                                                  'base_size_repeat': None,
+                                                  'ema_restart_decay': 0.9999,
+                                                  'stop_epoch': 1000000,
+                                                  'type': 'BatchImageCollateFunction'},
+                                   'dataset': {'ann_file': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json',
+                                               'img_folder': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/train',
+                                               'return_masks': False,
+                                               'transforms': {'ops': [{'size': [640,
+                                                                                640],
+                                                                       'type': 'Resize'},
+                                                                      {'dtype': 'float32',
+                                                                       'scale': True,
+                                                                       'type': 'ConvertPILImage'},
+                                                                      {'fmt': 'cxcywh',
+                                                                       'normalize': True,
+                                                                       'type': 'ConvertBoxes'}],
+                                                              'policy': {'epoch': 72,
+                                                                         'name': 'stop_epoch',
+                                                                         'ops': ['RandomPhotometricDistort',
+                                                                                 'RandomZoomOut',
+                                                                                 'RandomIoUCrop']},
+                                                              'type': 'Compose'},
+                                               'type': 'CocoDetection'},
+                                   'drop_last': True,
+                                   'num_workers': 4,
+                                   'shuffle': True,
+                                   'total_batch_size': 96,
+                                   'type': 'DataLoader'},
+              'use_amp': True,
+              'use_ema': False,
+              'use_focal_loss': True,
+              'use_wandb': False,
+              'val_dataloader': {'collate_fn': {'type': 'BatchImageCollateFunction'},
+                                 'dataset': {'ann_file': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json',
+                                             'img_folder': '/cluster/home/zzy/dataset/UAVSwarm-dataset-master/train',
+                                             'return_masks': False,
+                                             'transforms': {'ops': [{'size': [640,
+                                                                              640],
+                                                                     'type': 'Resize'},
+                                                                    {'dtype': 'float32',
+                                                                     'scale': True,
+                                                                     'type': 'ConvertPILImage'}],
+                                                            'type': 'Compose'},
+                                             'type': 'CocoDetection'},
+                                 'drop_last': False,
+                                 'num_workers': 4,
+                                 'shuffle': False,
+                                 'total_batch_size': 96,
+                                 'type': 'DataLoader'}}}
+Initial lr: [0.00025]
+building train_dataloader with batch_size=12...
+loading annotations into memory...
+Done (t=0.12s)
+creating index...
+index created!
+building val_dataloader with batch_size=12...
+loading annotations into memory...
+Done (t=0.26s)
+creating index...
+index created!
+
+------------------------------------- Calculate Flops Results -------------------------------------
+Notations:
+number of parameters (Params), number of multiply-accumulate operations(MACs),
+number of floating-point operations (FLOPs), floating-point operations per second (FLOPS),
+fwd FLOPs (model forward propagation FLOPs), bwd FLOPs (model backward propagation FLOPs),
+default model backpropagation takes 2.00 times as much computation as forward propagation.
+
+Total Training Params:                                                  7.3 M   
+fwd MACs:                                                               48.4259 GMACs
+fwd FLOPs:                                                              97.1395 GFLOPS
+fwd+bwd MACs:                                                           145.278 GMACs
+fwd+bwd FLOPs:                                                          291.419 GFLOPS
+---------------------------------------------------------------------------------------------------
+{'Model FLOPs:97.1395 GFLOPS   MACs:48.4259 GMACs   Params:30738249'}
+------------------------------------------Start training-------------------------------------------
+Epoch: [0/12]  [ 0/36]  eta: 0:02:03  lr: 0.000010  loss: 0.1825 (0.1825)  loss_bbox: 0.0151 (0.0151)  loss_giou: 0.1674 (0.1674)  time: 3.4417  data: 1.3557  max mem: 6636
+Epoch: [0/12]  [35/36]  eta: 0:00:00  lr: 0.000185  loss: 0.1825 (0.1837)  loss_bbox: 0.0158 (0.0159)  loss_giou: 0.1663 (0.1678)  time: 0.6340  data: 0.0257  max mem: 6650
+Epoch: [0/12] Total time: 0:00:25 (0.7213 s / it)
+Averaged stats: lr: 0.000185  loss: 0.1825 (0.1837)  loss_bbox: 0.0158 (0.0159)  loss_giou: 0.1663 (0.1678)
+Test:  [ 0/36]  eta: 0:01:04    time: 1.7978  data: 0.7897  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5577  data: 0.0912  max mem: 6650
+Test:  [20/36]  eta: 0:00:08    time: 0.4521  data: 0.0218  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4485  data: 0.0235  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4239  data: 0.0223  max mem: 6650
+Test: Total time: 0:00:17 (0.4763 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6974110953677732, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.67s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.943
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.661
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.708
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.414
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.687
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.793
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.619
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.796
+best_stat: {'epoch': 0, 'coco_eval_bbox': 0.5983241921411355}
+Epoch: [1/12]  [ 0/36]  eta: 0:01:08  lr: 0.000190  loss: 0.1898 (0.1898)  loss_bbox: 0.0157 (0.0157)  loss_giou: 0.1741 (0.1741)  time: 1.9014  data: 1.3337  max mem: 6650
+Epoch: [1/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1807 (0.1819)  loss_bbox: 0.0153 (0.0155)  loss_giou: 0.1653 (0.1664)  time: 0.6358  data: 0.0227  max mem: 6650
+Epoch: [1/12] Total time: 0:00:24 (0.6881 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1807 (0.1819)  loss_bbox: 0.0153 (0.0155)  loss_giou: 0.1653 (0.1664)
+Test:  [ 0/36]  eta: 0:00:50    time: 1.4007  data: 1.0190  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5545  data: 0.1078  max mem: 6650
+Test:  [20/36]  eta: 0:00:08    time: 0.4606  data: 0.0204  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4451  data: 0.0247  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4324  data: 0.0391  max mem: 6650
+Test: Total time: 0:00:17 (0.4795 s / it)
+Metrics: {'f1': 0.9207111965401249, 'precision': 0.8984057517974366, 'recall': 0.9441524310118266, 'iou': 0.6986019666557958, 'TPs': 2874, 'FPs': 325, 'FNs': 170}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.64s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.943
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.662
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.587
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.708
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.422
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.687
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.792
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.632
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.796
+best_stat: {'epoch': 1, 'coco_eval_bbox': 0.5984903961422785}
+Epoch: [2/12]  [ 0/36]  eta: 0:01:03  lr: 0.000250  loss: 0.1736 (0.1736)  loss_bbox: 0.0154 (0.0154)  loss_giou: 0.1582 (0.1582)  time: 1.7665  data: 1.2264  max mem: 6650
+Epoch: [2/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1827 (0.1809)  loss_bbox: 0.0152 (0.0153)  loss_giou: 0.1673 (0.1656)  time: 0.6543  data: 0.0245  max mem: 6650
+Epoch: [2/12] Total time: 0:00:24 (0.6843 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1827 (0.1809)  loss_bbox: 0.0152 (0.0153)  loss_giou: 0.1673 (0.1656)
+Test:  [ 0/36]  eta: 0:00:48    time: 1.3495  data: 0.9689  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5630  data: 0.1057  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4519  data: 0.0196  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4207  data: 0.0202  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4102  data: 0.0197  max mem: 6650
+Test: Total time: 0:00:16 (0.4594 s / it)
+Metrics: {'f1': 0.9200704789364087, 'precision': 0.8977805564238824, 'recall': 0.9434954007884363, 'iou': 0.6979844498195835, 'TPs': 2872, 'FPs': 327, 'FNs': 172}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.83s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.943
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.661
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.709
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.424
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.686
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.793
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.795
+best_stat: {'epoch': 1, 'coco_eval_bbox': 0.5984903961422785}
+Epoch: [3/12]  [ 0/36]  eta: 0:01:17  lr: 0.000250  loss: 0.1966 (0.1966)  loss_bbox: 0.0178 (0.0178)  loss_giou: 0.1788 (0.1788)  time: 2.1399  data: 1.4376  max mem: 6650
+Epoch: [3/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1761 (0.1800)  loss_bbox: 0.0151 (0.0152)  loss_giou: 0.1616 (0.1648)  time: 0.6138  data: 0.0276  max mem: 6650
+Epoch: [3/12] Total time: 0:00:24 (0.6684 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1761 (0.1800)  loss_bbox: 0.0151 (0.0152)  loss_giou: 0.1616 (0.1648)
+Test:  [ 0/36]  eta: 0:00:37    time: 1.0390  data: 0.6499  max mem: 6650
+Test:  [10/36]  eta: 0:00:13    time: 0.5136  data: 0.0809  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4714  data: 0.0252  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4440  data: 0.0239  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4282  data: 0.0299  max mem: 6650
+Test: Total time: 0:00:16 (0.4582 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6976845222895397, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.93s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.599
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.660
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.587
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.423
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.581
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.687
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.792
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.633
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.795
+best_stat: {'epoch': 3, 'coco_eval_bbox': 0.5986914163194484}
+Epoch: [4/12]  [ 0/36]  eta: 0:00:49  lr: 0.000250  loss: 0.1729 (0.1729)  loss_bbox: 0.0135 (0.0135)  loss_giou: 0.1594 (0.1594)  time: 1.3780  data: 0.8290  max mem: 6650
+Epoch: [4/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1799 (0.1794)  loss_bbox: 0.0152 (0.0151)  loss_giou: 0.1639 (0.1643)  time: 0.6067  data: 0.0242  max mem: 6650
+Epoch: [4/12] Total time: 0:00:23 (0.6401 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1799 (0.1794)  loss_bbox: 0.0152 (0.0151)  loss_giou: 0.1639 (0.1643)
+Test:  [ 0/36]  eta: 0:00:49    time: 1.3688  data: 0.9775  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5491  data: 0.1066  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4525  data: 0.0222  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4357  data: 0.0225  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4028  data: 0.0210  max mem: 6650
+Test: Total time: 0:00:16 (0.4601 s / it)
+Metrics: {'f1': 0.9194297613326926, 'precision': 0.8971553610503282, 'recall': 0.942838370565046, 'iou': 0.6972021464420786, 'TPs': 2870, 'FPs': 329, 'FNs': 174}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.71s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.657
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.425
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.581
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.687
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.792
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.636
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.794
+best_stat: {'epoch': 3, 'coco_eval_bbox': 0.5986914163194484}
+Epoch: [5/12]  [ 0/36]  eta: 0:01:17  lr: 0.000250  loss: 0.1856 (0.1856)  loss_bbox: 0.0169 (0.0169)  loss_giou: 0.1687 (0.1687)  time: 2.1454  data: 1.4940  max mem: 6650
+Epoch: [5/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1774 (0.1789)  loss_bbox: 0.0150 (0.0151)  loss_giou: 0.1627 (0.1639)  time: 0.6301  data: 0.0291  max mem: 6650
+Epoch: [5/12] Total time: 0:00:24 (0.6848 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1774 (0.1789)  loss_bbox: 0.0150 (0.0151)  loss_giou: 0.1627 (0.1639)
+Test:  [ 0/36]  eta: 0:00:51    time: 1.4253  data: 1.0015  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5536  data: 0.1102  max mem: 6650
+Test:  [20/36]  eta: 0:00:08    time: 0.4748  data: 0.0246  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4602  data: 0.0264  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4194  data: 0.0249  max mem: 6650
+Test: Total time: 0:00:17 (0.4736 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6977679355076624, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.75s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.599
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.658
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.587
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.427
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.581
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.686
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.792
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.636
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.794
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [6/12]  [ 0/36]  eta: 0:01:19  lr: 0.000250  loss: 0.1680 (0.1680)  loss_bbox: 0.0141 (0.0141)  loss_giou: 0.1539 (0.1539)  time: 2.1980  data: 1.3456  max mem: 6650
+Epoch: [6/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1797 (0.1786)  loss_bbox: 0.0148 (0.0150)  loss_giou: 0.1646 (0.1637)  time: 0.6372  data: 0.0243  max mem: 6650
+Epoch: [6/12] Total time: 0:00:24 (0.6836 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1797 (0.1786)  loss_bbox: 0.0148 (0.0150)  loss_giou: 0.1646 (0.1637)
+Test:  [ 0/36]  eta: 0:00:48    time: 1.3463  data: 0.9387  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5393  data: 0.1015  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4543  data: 0.0213  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4462  data: 0.0234  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4061  data: 0.0219  max mem: 6650
+Test: Total time: 0:00:16 (0.4611 s / it)
+Metrics: {'f1': 0.9194297613326926, 'precision': 0.8971553610503282, 'recall': 0.942838370565046, 'iou': 0.6971002028315703, 'TPs': 2870, 'FPs': 329, 'FNs': 174}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.82s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.659
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.425
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.581
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.698
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.687
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.792
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.639
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.795
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [7/12]  [ 0/36]  eta: 0:01:23  lr: 0.000250  loss: 0.1918 (0.1918)  loss_bbox: 0.0172 (0.0172)  loss_giou: 0.1746 (0.1746)  time: 2.3282  data: 1.5384  max mem: 6650
+Epoch: [7/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1797 (0.1779)  loss_bbox: 0.0147 (0.0149)  loss_giou: 0.1655 (0.1630)  time: 0.6463  data: 0.0216  max mem: 6650
+Epoch: [7/12] Total time: 0:00:25 (0.6958 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1797 (0.1779)  loss_bbox: 0.0147 (0.0149)  loss_giou: 0.1655 (0.1630)
+Test:  [ 0/36]  eta: 0:00:48    time: 1.3371  data: 0.9554  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5457  data: 0.1019  max mem: 6650
+Test:  [20/36]  eta: 0:00:08    time: 0.4617  data: 0.0194  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4348  data: 0.0214  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4031  data: 0.0208  max mem: 6650
+Test: Total time: 0:00:16 (0.4613 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6974949880038009, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.67s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.943
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.658
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.425
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.685
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.791
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.635
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.792
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [8/12]  [ 0/36]  eta: 0:01:27  lr: 0.000250  loss: 0.1737 (0.1737)  loss_bbox: 0.0157 (0.0157)  loss_giou: 0.1580 (0.1580)  time: 2.4395  data: 1.4263  max mem: 6650
+Epoch: [8/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1769 (0.1774)  loss_bbox: 0.0148 (0.0149)  loss_giou: 0.1629 (0.1626)  time: 0.6116  data: 0.0244  max mem: 6650
+Epoch: [8/12] Total time: 0:00:24 (0.6825 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1769 (0.1774)  loss_bbox: 0.0148 (0.0149)  loss_giou: 0.1629 (0.1626)
+Test:  [ 0/36]  eta: 0:00:46    time: 1.2779  data: 0.8955  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5571  data: 0.1025  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4591  data: 0.0223  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4297  data: 0.0219  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4245  data: 0.0232  max mem: 6650
+Test: Total time: 0:00:16 (0.4667 s / it)
+Metrics: {'f1': 0.9191094025308344, 'precision': 0.8968427633635511, 'recall': 0.9425098554533509, 'iou': 0.6966147405301316, 'TPs': 2869, 'FPs': 330, 'FNs': 175}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.73s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.658
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.425
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.697
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.686
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.790
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.634
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.967
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.794
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [9/12]  [ 0/36]  eta: 0:01:23  lr: 0.000250  loss: 0.1715 (0.1715)  loss_bbox: 0.0143 (0.0143)  loss_giou: 0.1571 (0.1571)  time: 2.3138  data: 1.2562  max mem: 6650
+Epoch: [9/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1785 (0.1771)  loss_bbox: 0.0147 (0.0148)  loss_giou: 0.1633 (0.1622)  time: 0.6191  data: 0.0240  max mem: 6650
+Epoch: [9/12] Total time: 0:00:24 (0.6895 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1785 (0.1771)  loss_bbox: 0.0147 (0.0148)  loss_giou: 0.1633 (0.1622)
+Test:  [ 0/36]  eta: 0:00:47    time: 1.3263  data: 0.9140  max mem: 6650
+Test:  [10/36]  eta: 0:00:13    time: 0.5355  data: 0.1012  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4402  data: 0.0211  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4274  data: 0.0217  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.3949  data: 0.0206  max mem: 6650
+Test: Total time: 0:00:16 (0.4489 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6974831043719397, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.73s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.658
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.426
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.696
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.685
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.789
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.629
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.966
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.792
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [10/12]  [ 0/36]  eta: 0:01:24  lr: 0.000250  loss: 0.1594 (0.1594)  loss_bbox: 0.0129 (0.0129)  loss_giou: 0.1465 (0.1465)  time: 2.3593  data: 1.2882  max mem: 6650
+Epoch: [10/12]  [35/36]  eta: 0:00:00  lr: 0.000250  loss: 0.1746 (0.1766)  loss_bbox: 0.0147 (0.0147)  loss_giou: 0.1607 (0.1618)  time: 0.6149  data: 0.0247  max mem: 6650
+Epoch: [10/12] Total time: 0:00:24 (0.6731 s / it)
+Averaged stats: lr: 0.000250  loss: 0.1746 (0.1766)  loss_bbox: 0.0147 (0.0147)  loss_giou: 0.1607 (0.1618)
+Test:  [ 0/36]  eta: 0:00:49    time: 1.3677  data: 0.9663  max mem: 6650
+Test:  [10/36]  eta: 0:00:14    time: 0.5618  data: 0.1044  max mem: 6650
+Test:  [20/36]  eta: 0:00:07    time: 0.4463  data: 0.0289  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4150  data: 0.0312  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4059  data: 0.0306  max mem: 6650
+Test: Total time: 0:00:16 (0.4546 s / it)
+Metrics: {'f1': 0.9197501201345507, 'precision': 0.8974679587371054, 'recall': 0.9431668856767411, 'iou': 0.6976515230935947, 'TPs': 2871, 'FPs': 328, 'FNs': 173}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.66s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.659
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.430
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.695
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.684
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.788
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.631
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.966
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.791
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Epoch: [11/12]  [ 0/36]  eta: 0:01:24  lr: 0.000025  loss: 0.1705 (0.1705)  loss_bbox: 0.0133 (0.0133)  loss_giou: 0.1572 (0.1572)  time: 2.3548  data: 1.4836  max mem: 6650
+Epoch: [11/12]  [35/36]  eta: 0:00:00  lr: 0.000025  loss: 0.1762 (0.1760)  loss_bbox: 0.0146 (0.0147)  loss_giou: 0.1614 (0.1613)  time: 0.6187  data: 0.0233  max mem: 6650
+Epoch: [11/12] Total time: 0:00:24 (0.6794 s / it)
+Averaged stats: lr: 0.000025  loss: 0.1762 (0.1760)  loss_bbox: 0.0146 (0.0147)  loss_giou: 0.1614 (0.1613)
+Test:  [ 0/36]  eta: 0:01:03    time: 1.7593  data: 1.0581  max mem: 6650
+Test:  [10/36]  eta: 0:00:15    time: 0.5883  data: 0.1127  max mem: 6650
+Test:  [20/36]  eta: 0:00:08    time: 0.4634  data: 0.0227  max mem: 6650
+Test:  [30/36]  eta: 0:00:02    time: 0.4267  data: 0.0244  max mem: 6650
+Test:  [35/36]  eta: 0:00:00    time: 0.4048  data: 0.0225  max mem: 6650
+Test: Total time: 0:00:16 (0.4692 s / it)
+Metrics: {'f1': 0.9194297613326926, 'precision': 0.8971553610503282, 'recall': 0.942838370565046, 'iou': 0.696990000982508, 'TPs': 2870, 'FPs': 329, 'FNs': 174}
+Averaged stats: 
+Accumulating evaluation results...
+COCOeval_opt.accumulate() finished...
+DONE (t=0.65s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.598
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.942
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.658
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.586
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.707
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.428
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.102
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.695
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.684
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.788
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.628
+ Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.966
+ Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.790
+best_stat: {'epoch': 5, 'coco_eval_bbox': 0.5987492940826711}
+Training time 0:09:32

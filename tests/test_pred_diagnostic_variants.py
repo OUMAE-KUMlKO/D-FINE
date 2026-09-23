@@ -8,6 +8,20 @@ from tools.analysis.diagnose_pred_refinement import build_diagnostic_variants
 
 
 class DiagnosticVariantsTests(unittest.TestCase):
+    def test_p2_name_preserves_refined_boxes_and_gt_selection(self):
+        before = torch.zeros(1, 2, 4)
+        after = torch.ones_like(before)
+        logits = torch.zeros(1, 2, 1)
+        outputs = {"baseline_boxes": before, "pred_boxes": after, "pred_logits": logits}
+        variants = build_diagnostic_variants(
+            outputs, [(torch.tensor([0]), torch.tensor([0]))], refinement_name="p2"
+        )
+        self.assertEqual(set(variants), {"baseline", "p2", "matched_only_oracle"})
+        self.assertIs(variants["p2"]["pred_boxes"], after)
+        self.assertIs(variants["p2"]["pred_logits"], logits)
+        torch.testing.assert_close(variants["matched_only_oracle"]["pred_boxes"][0, 0], after[0, 0])
+        torch.testing.assert_close(variants["matched_only_oracle"]["pred_boxes"][0, 1], before[0, 1])
+
     def test_only_matched_variant_changes_the_selected_query(self):
         before = torch.tensor([[[0.2, 0.2, 0.1, 0.1], [0.5, 0.5, 0.2, 0.2],
                                 [0.8, 0.8, 0.1, 0.1]]])
