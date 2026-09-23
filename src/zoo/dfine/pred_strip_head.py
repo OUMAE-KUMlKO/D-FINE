@@ -134,7 +134,8 @@ class PredictionStripHead(GTStripHead):
         return coords * 2 - 1, point_valid, candidate_valid
 
     def _distribution_forward(self, feature_map, queries, pred_boxes, batch_indices,
-                              image_size, distribution, return_diagnostics):
+                              image_size, distribution, return_diagnostics,
+                              candidate_indices=None):
         n = len(pred_boxes)
         if queries.shape != (n, self.query_dim) or pred_boxes.shape != (n, 4) or batch_indices.shape != (n,):
             raise ValueError("queries, boxes, and batch_indices must describe the same N queries.")
@@ -153,6 +154,21 @@ class PredictionStripHead(GTStripHead):
                 positions, pred_boxes, distribution_valid, image_size
             )
             weights, probabilities, excluded = self._masked_candidate_weights(logits, candidate_valid)
+            selected_edges = None
+            if candidate_indices is not None:
+                candidate_indices = candidate_indices.to(
+                    device=feature_map.device, dtype=torch.long
+                )
+                if candidate_indices.shape != (n, 4):
+                    raise ValueError("candidate_indices must have shape [N, 4].")
+                in_range = (candidate_indices >= 0) & (candidate_indices < positions.shape[-1])
+                safe_indices = candidate_indices.clamp(0, positions.shape[-1] - 1)
+                selected_edges = in_range & candidate_valid.gather(
+                    -1, safe_indices[..., None]
+                ).squeeze(-1)
+                weights = torch.zeros_like(weights).scatter(
+                    -1, safe_indices[..., None], selected_edges[..., None].to(weights.dtype)
+                )
             k = positions.shape[-1]
             if not n:
                 result = pred_boxes.float() + self.zero_loss()
@@ -196,6 +212,8 @@ class PredictionStripHead(GTStripHead):
                 & torch.isfinite(original).all(-1) & (original[:, 2:] > 0).all(-1)
                 & torch.isfinite(queries).all(-1)
             )
+            if selected_edges is not None:
+                valid &= selected_edges.all(-1)
             safe_boxes = torch.where(valid[:, None], original, torch.zeros_like(original))
             safe_queries = torch.where(valid[:, None], queries.float(), torch.zeros_like(queries, dtype=torch.float32))
             inputs = torch.cat((safe_queries, self.box_embedding(safe_boxes), edge_features.reshape(n, -1)), -1)

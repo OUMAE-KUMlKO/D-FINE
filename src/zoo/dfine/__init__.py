@@ -11,6 +11,7 @@ from .matcher import HungarianMatcher
 from .postprocessor import DFINEPostProcessor
 
 from .gt_refinement import DFINEGTRefiner
+from .gt_candidate_refinement import DFINEGTCandidateRefiner
 from .gt_refinement_criterion import GTRefinementCriterion
 from .pred_refinement import DFINEPredRefiner
 from .pred_refinement_criterion import PredRefinementCriterion

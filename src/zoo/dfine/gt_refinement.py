@@ -22,6 +22,7 @@ class DFINEGTRefiner(DFINE):
     __inject__ = ["backbone", "encoder", "decoder", "matcher"]
     requires_gt = True
     oracle_evaluation = True
+    strip_head_cls = GTStripHead
 
     def __init__(
         self,
@@ -51,7 +52,7 @@ class DFINEGTRefiner(DFINE):
         self.feature_mode = feature_mode
         self.train_target_format = train_target_format
         self.eval_target_format = eval_target_format
-        self.refiner = GTStripHead(
+        self.refiner = self.strip_head_cls(
             in_channels=encoder.hidden_dim,
             query_dim=decoder.hidden_dim,
             hidden_dim=hidden_dim,
@@ -173,6 +174,12 @@ class DFINEGTRefiner(DFINE):
             indices.append((query_ids[src], dst))
         return indices, (~valid_boxes).sum(1)
 
+    def _decode_baseline(self, features):
+        return self.decoder(features, return_query=True)
+
+    def _refiner_kwargs(self, baseline, batch_ids, query_ids):
+        return {}
+
     def forward(self, images, targets=None, target_format=None):
         if targets is None:
             raise ValueError("DFINEGTRefiner requires GT targets, including during oracle evaluation")
@@ -190,7 +197,7 @@ class DFINEGTRefiner(DFINE):
             features = self.encoder(self.backbone(images))
             if self.feature_level >= len(features):
                 raise ValueError("feature_level is outside the Encoder output list")
-            baseline = self.decoder(features, return_query=True)
+            baseline = self._decode_baseline(features)
             boxes = baseline["pred_boxes"].detach().float()
             logits = baseline["pred_logits"].detach()
             queries = baseline["pred_queries"].detach()
@@ -229,6 +236,7 @@ class DFINEGTRefiner(DFINE):
                 batch_ids,
                 image_size,
                 image_ids=image_ids,
+                **self._refiner_kwargs(baseline, batch_ids, query_ids),
             )
             refined[batch_ids, query_ids] = new_boxes
             refined_mask[batch_ids[valid], query_ids[valid]] = True
