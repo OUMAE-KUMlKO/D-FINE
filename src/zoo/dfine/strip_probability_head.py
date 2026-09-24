@@ -16,15 +16,19 @@ class StripProbabilityHead(nn.Module):
     def __init__(
         self, in_channels, query_dim, hidden_dim=64, num_points=5,
         kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
-        detach_inputs=True,
+        detach_inputs=True, normal_points=3, normal_kernel_size=1,
     ):
         super().__init__()
         if min(in_channels, query_dim, hidden_dim) < 1:
             raise ValueError("Feature dimensions must be positive.")
         if num_points < 2:
             raise ValueError("num_points must be at least 2.")
+        if type(normal_points) is not int or normal_points < 3 or normal_points % 2 != 1:
+            raise ValueError("normal_points must be an odd integer of at least 3.")
         if kernel_size < 1 or kernel_size % 2 != 1:
             raise ValueError("kernel_size must be a positive odd integer.")
+        if type(normal_kernel_size) is not int or normal_kernel_size < 1 or normal_kernel_size % 2 != 1:
+            raise ValueError("normal_kernel_size must be a positive odd integer.")
         if not math.isfinite(offset_pixels) or offset_pixels <= 0:
             raise ValueError("offset_pixels must be finite and positive.")
         if not isinstance(query_chunk_size, int) or query_chunk_size < 1:
@@ -35,16 +39,19 @@ class StripProbabilityHead(nn.Module):
         self.query_dim = query_dim
         self.hidden_dim = hidden_dim
         self.num_points = num_points
+        self.normal_points = normal_points
+        self.normal_kernel_size = normal_kernel_size
+        # Half-width of the boundary band, measured in network input pixels.
         self.offset_pixels = float(offset_pixels)
         self.query_chunk_size = query_chunk_size
         self.detach_inputs = detach_inputs
         self.projection = nn.Conv2d(in_channels, hidden_dim, 1)
         self.strip_encoder = nn.Sequential(
-            nn.Conv2d(hidden_dim, hidden_dim, (kernel_size, 1),
-                      padding=(kernel_size // 2, 0), groups=hidden_dim),
+            nn.Conv2d(hidden_dim, hidden_dim, (kernel_size, normal_kernel_size),
+                      padding=(kernel_size // 2, normal_kernel_size // 2), groups=hidden_dim),
             nn.ReLU(), nn.Conv2d(hidden_dim, hidden_dim, 1), nn.ReLU(),
         )
-        self.edge_fusion = nn.Sequential(nn.Linear(3 * hidden_dim, hidden_dim), nn.ReLU())
+        self.edge_fusion = nn.Sequential(nn.Linear(normal_points * hidden_dim, hidden_dim), nn.ReLU())
         self.query_projection = nn.Linear(query_dim, hidden_dim)
         self.edge_embedding = nn.Embedding(4, 8)
         self.score_head = nn.Sequential(

@@ -111,7 +111,10 @@ class DistributionStripQueryAdapterTests(unittest.TestCase):
     def test_queries_from_different_images_use_only_their_own_feature_map(self):
         adapter = self.make_adapter()
         with torch.no_grad():
-            adapter.query_projection.weight.normal_(std=0.2)
+            # Keep the visual path active: random ReLU weights can make both
+            # constant feature maps produce the same output by chance.
+            for parameter in adapter.parameters():
+                parameter.fill_(0.1)
         features, queries, boxes, distribution = make_inputs(batch=2, queries=1)
         features[0].fill_(0.0)
         features[1].fill_(2.0)

@@ -13,6 +13,7 @@ def encode_distribution_candidates(
 ):
     """Encode [N, 4, K] strip candidates without replicating feature maps."""
     n, _, k = grid.shape[:3]
+    normal_points = grid.shape[-2]
     edge_features = projected.new_zeros((n, 4, k, hidden_dim))
     for image_index in range(len(projected)):
         image_rows = torch.where(batch_indices == image_index)[0]
@@ -22,16 +23,16 @@ def encode_distribution_candidates(
                 continue
             sampled = F.grid_sample(
                 projected[image_index:image_index + 1],
-                grid[rows].reshape(1, -1, 3, 2), mode="bilinear",
+                grid[rows].reshape(1, -1, normal_points, 2), mode="bilinear",
                 padding_mode="border", align_corners=False,
-            ).reshape(hidden_dim, len(rows), 4, k, num_points, 3)
+            ).reshape(hidden_dim, len(rows), 4, k, num_points, normal_points)
             sampled = sampled.permute(1, 2, 3, 0, 4, 5)
             sampled = sampled * point_valid[rows, :, :, None].to(sampled.dtype)
             encoded = strip_encoder(sampled.reshape(
-                len(rows) * 4 * k, hidden_dim, num_points, 3
+                len(rows) * 4 * k, hidden_dim, num_points, normal_points
             ))
             mask = point_valid[rows].reshape(
-                len(rows) * 4 * k, 1, num_points, 3
+                len(rows) * 4 * k, 1, num_points, normal_points
             ).to(encoded.dtype)
             pooled = (encoded * mask).sum(2) / mask.sum(2).clamp_min(1)
             fused = edge_fusion(
@@ -137,10 +138,11 @@ class PredictionStripHead(GTStripHead):
         left, top, right, bottom = x - w / 2, y - h / 2, x + w / 2, y + h / 2
         t = torch.linspace(0, 1, self.num_points, device=boxes.device)
         along_x, along_y = left[:, None] + w[:, None] * t, top[:, None] + h[:, None] * t
-        offsets = boxes.new_tensor([1.0, 0.0, -1.0])
+        normal_points = getattr(self, "normal_points", 3)
+        offsets = torch.linspace(1, -1, normal_points, device=boxes.device, dtype=boxes.dtype)
         dx, dy = offsets * self.offset_pixels / image_w, offsets * self.offset_pixels / image_h
         n, _, k = positions.shape
-        span = (n, k, self.num_points, 3)
+        span = (n, k, self.num_points, normal_points)
 
         def vertical(edge, delta):
             return torch.stack((

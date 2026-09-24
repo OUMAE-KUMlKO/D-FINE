@@ -17,7 +17,7 @@ from test_gt_refinement import ToyBackbone, ToyEncoder, normalized_targets
 torch.set_num_threads(1)
 
 
-def make_model(frozen=False, checkpoint_strips=True):
+def make_model(frozen=False, checkpoint_strips=True, **head_kwargs):
     decoder = DFINETransformer(
         num_classes=2, hidden_dim=8, num_queries=3,
         feat_channels=[8], feat_strides=[1], num_levels=1,
@@ -31,6 +31,7 @@ def make_model(frozen=False, checkpoint_strips=True):
     model = cls(
         ToyBackbone(), ToyEncoder(), decoder, hidden_dim=8,
         query_chunk_size=2, checkpoint_strips=checkpoint_strips,
+        **head_kwargs,
     )
     if frozen:
         detector = {k: v for k, v in model.state_dict().items()

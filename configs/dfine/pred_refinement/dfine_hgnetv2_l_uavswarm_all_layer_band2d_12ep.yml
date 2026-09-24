@@ -1,0 +1,12 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_all_layer_strip_12ep.yml']
+
+# Keep the six-layer logit correction and MLP inputs; change only local encoding.
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/all_layer_band2d_12ep
+exp_name: dfine_l_uavswarm_all_layer_band2d_12ep
+
+DFINEAllLayerStripRefiner:
+  num_points: 5
+  normal_points: 7
+  kernel_size: 3
+  normal_kernel_size: 3
+  offset_pixels: 8.0  # Half-width in input-image pixels, not feature-grid cells.
