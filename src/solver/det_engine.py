@@ -129,6 +129,8 @@ def train_one_epoch(
             sys.exit(1)
 
         metric_logger.update(loss=loss_value, **loss_dict_reduced)
+        # Candidate coverage statistics are detached metrics, not optimization losses.
+        metric_logger.update(**getattr(criterion, "last_candidate_stats", {}))
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
 
         if writer and dist_utils.is_main_process() and global_step % 10 == 0:

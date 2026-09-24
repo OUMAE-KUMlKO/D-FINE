@@ -1,0 +1,238 @@
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1028, in load
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1028, in load
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1246, in _legacy_load
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    magic_number = pickle_module.load(f, **pickle_load_args)
+EOFError: Ran out of input
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1246, in _legacy_load
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 993, in load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+EOFError: Ran out of input
+    with _open_zipfile_reader(opened_file) as opened_zipfile:
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 447, in __init__
+    super().__init__(torch._C.PyTorchFileReader(name_or_buffer))
+RuntimeError: PytorchStreamReader failed reading zip archive: not a ZIP archive
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1014, in load
+    return _load(opened_zipfile,
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1422, in _load
+    result = unpickler.load()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1392, in persistent_load
+    typed_storage = load_tensor(dtype, nbytes, key, _maybe_decode_ascii(location))
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1357, in load_tensor
+    storage = zip_file.get_storage_from_record(name, numel, torch.UntypedStorage)._typed_storage()._untyped_storage
+RuntimeError: PytorchStreamReader failed reading file data/183: file read failed
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1028, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1246, in _legacy_load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+EOFError: Ran out of input
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1028, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1246, in _legacy_load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+EOFError: Ran out of input
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 113, in <module>
+    main(args)
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/train.py", line 75, in main
+    solver.fit()
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/det_solver.py", line 71, in fit
+    self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/solver/_solver.py", line 244, in load_resume_state
+    state = torch.load(path, map_location="cpu")
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1028, in load
+    return _legacy_load(opened_file, map_location, pickle_module, **pickle_load_args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/serialization.py", line 1246, in _legacy_load
+    magic_number = pickle_module.load(f, **pickle_load_args)
+EOFError: Ran out of input
+Exception ignored in atexit callback: <function cleanup at 0x7f9423d712d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/pair.cc:534] Connection closed by peer [192.168.2.18]:63715
+Exception ignored in atexit callback: <function cleanup at 0x7f1980cf52d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:81] Timed out waiting 1800000ms for recv operation to complete
+Exception ignored in atexit callback: <function cleanup at 0x7fc1c9d612d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:81] Timed out waiting 1800000ms for recv operation to complete
+Exception ignored in atexit callback: <function cleanup at 0x7fb6c94692d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/pair.cc:534] Connection closed by peer [192.168.2.18]:61155
+Exception ignored in atexit callback: <function cleanup at 0x7fc85e97d2d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:133] Timed out waiting 1800000ms for send operation to complete
+Exception ignored in atexit callback: <function cleanup at 0x7f72c3e452d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:81] Timed out waiting 1800000ms for recv operation to complete
+Exception ignored in atexit callback: <function cleanup at 0x7f69e9f712d0>
+Traceback (most recent call last):
+  File "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/src/misc/dist_utils.py", line 103, in cleanup
+    torch.distributed.barrier()
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/c10d_logger.py", line 47, in wrapper
+    return func(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/distributed_c10d.py", line 3703, in barrier
+    work.wait()
+RuntimeError: [/opt/conda/conda-bld/pytorch_1702400410390/work/third_party/gloo/gloo/transport/tcp/unbound_buffer.cc:133] Timed out waiting 1800000ms for send operation to complete
+[2026-09-24 03:31:53,414] torch.distributed.elastic.multiprocessing.api: [WARNING] Sending process 156850 closing signal SIGTERM
+[2026-09-24 03:31:53,578] torch.distributed.elastic.multiprocessing.api: [ERROR] failed (exitcode: 1) local_rank: 1 (pid: 156851) of binary: /home/zzy/.conda/envs/dfine/bin/python
+Traceback (most recent call last):
+  File "/home/zzy/.conda/envs/dfine/bin/torchrun", line 33, in <module>
+    sys.exit(load_entry_point('torch==2.1.2', 'console_scripts', 'torchrun')())
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 346, in wrapper
+    return f(*args, **kwargs)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/run.py", line 806, in main
+    run(args)
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/run.py", line 797, in run
+    elastic_launch(
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 134, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/zzy/.conda/envs/dfine/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+train.py FAILED
+------------------------------------------------------------
+Failures:
+[1]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 156852)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[2]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 156853)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[3]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 4 (local_rank: 4)
+  exitcode  : 1 (pid: 156854)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[4]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 5 (local_rank: 5)
+  exitcode  : 1 (pid: 156855)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[5]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 6 (local_rank: 6)
+  exitcode  : 1 (pid: 156856)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+[6]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 7 (local_rank: 7)
+  exitcode  : 1 (pid: 156857)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-09-24_03:31:53
+  host      : gpu16
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 156851)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

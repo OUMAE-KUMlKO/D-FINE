@@ -16,3 +16,6 @@ from .gt_refinement_criterion import GTRefinementCriterion
 from .pred_refinement import DFINEPredRefiner
 from .decoder_strip_refinement import DFINEDecoderStripRefiner
 from .pred_refinement_criterion import PredRefinementCriterion
+from .probability_refinement import DFINEProbabilityRefiner
+from .probability_refinement_criterion import ProbabilityRefinementCriterion
+from .all_layer_strip import DFINEAllLayerStrip, DFINEAllLayerStripRefiner

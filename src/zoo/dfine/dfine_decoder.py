@@ -387,7 +387,10 @@ class TransformerDecoder(nn.Module):
         dn_meta=None,
         return_query=False,
         query_refiner=None,
+        distribution_refiner=None,
     ):
+        if query_refiner is not None and distribution_refiner is not None:
+            raise ValueError("query_refiner and distribution_refiner cannot be used together")
         if query_refiner is not None and self.training:
             raise ValueError("query_refiner is only supported with the decoder in eval mode")
         output = target
@@ -441,6 +444,18 @@ class TransformerDecoder(nn.Module):
             inter_ref_bbox = distance2bbox(
                 ref_points_initial, integral(pred_corners, project), reg_scale
             )
+
+            if distribution_refiner is not None:
+                pred_corners = distribution_refiner(i, output, inter_ref_bbox, {
+                    "pred_corners": pred_corners,
+                    "ref_points": ref_points_initial,
+                    "up": up,
+                    "reg_scale": reg_scale,
+                    "num_denoising": dn_meta["dn_num_split"][0] if dn_meta else 0,
+                })
+                inter_ref_bbox = distance2bbox(
+                    ref_points_initial, integral(pred_corners, project), reg_scale
+                )
 
             if self.training or i == self.eval_idx:
                 scores = score_head[i](output)
@@ -852,9 +867,11 @@ class DFINETransformer(nn.Module):
 
     def forward(
         self, feats, targets=None, return_query=False, return_distribution=False,
-        query_refiner=None,
+        query_refiner=None, distribution_refiner=None,
     ):
-        # Refinement reads eval queries/distributions, never denoising queries.
+        if query_refiner is not None and distribution_refiner is not None:
+            raise ValueError("query_refiner and distribution_refiner cannot be used together")
+        # Optional state exports remain eval-only; distribution feedback also trains.
         if return_query and self.training:
             raise ValueError("return_query is only supported with the decoder in eval mode")
         if return_distribution and self.training:
@@ -901,6 +918,7 @@ class DFINETransformer(nn.Module):
             dn_meta=dn_meta,
             return_query=return_query,
             query_refiner=query_refiner,
+            distribution_refiner=distribution_refiner,
         )
         out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = decoder_outputs[:6]
 

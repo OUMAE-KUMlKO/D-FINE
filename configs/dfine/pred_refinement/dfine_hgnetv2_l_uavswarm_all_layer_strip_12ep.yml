@@ -1,0 +1,26 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_pred_p1.yml']
+
+# Freeze the trained B0 and train independent strip heads at every decoder layer.
+model: DFINEAllLayerStripRefiner
+criterion: PredRefinementCriterion
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/all_layer_strip_12ep
+exp_name: dfine_l_uavswarm_all_layer_strip_12ep
+
+DFINEAllLayerStripRefiner:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  baseline_checkpoint: null
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  kernel_size: 3
+  offset_pixels: 1.0
+  query_chunk_size: 32
+  checkpoint_strips: True
+
+epochs: 12
+train_dataloader:
+  total_batch_size: 96  # 8 GPU processes x 12 images.
+val_dataloader:
+  total_batch_size: 96
