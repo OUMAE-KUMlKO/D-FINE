@@ -68,6 +68,8 @@ class DetSolver(BaseSolver):
                 self.train_dataloader.sampler.set_epoch(epoch)
 
             if epoch == self.train_dataloader.collate_fn.stop_epoch:
+                if dist_utils.is_dist_available_and_initialized():
+                    torch.distributed.barrier()
                 self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
                 if self.ema:
                     self.ema.decay = self.train_dataloader.collate_fn.ema_restart_decay
