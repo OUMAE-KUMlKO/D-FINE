@@ -1,0 +1,8 @@
+__include__: ['./dfine_hgnetv2_l_uavswarm_all_layer_band2d_no_logprior_full.yml']
+
+# Query modulates candidate channels; the score MLP receives no query concatenation.
+output_dir: /cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/all_layer_band2d_query_gate_full
+exp_name: dfine_l_uavswarm_all_layer_band2d_query_gate_full
+
+DFINEAllLayerStrip:
+  query_fusion: channel_gate
