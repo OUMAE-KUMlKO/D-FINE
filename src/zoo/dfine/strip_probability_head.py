@@ -17,6 +17,7 @@ class StripProbabilityHead(nn.Module):
         self, in_channels, query_dim, hidden_dim=64, num_points=5,
         kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
         detach_inputs=True, normal_points=3, normal_kernel_size=1,
+        use_log_prior=True,
     ):
         super().__init__()
         if min(in_channels, query_dim, hidden_dim) < 1:
@@ -35,6 +36,8 @@ class StripProbabilityHead(nn.Module):
             raise ValueError("query_chunk_size must be a positive integer.")
         if not isinstance(detach_inputs, bool):
             raise ValueError("detach_inputs must be a boolean.")
+        if not isinstance(use_log_prior, bool):
+            raise ValueError("use_log_prior must be a boolean.")
         self.in_channels = in_channels
         self.query_dim = query_dim
         self.hidden_dim = hidden_dim
@@ -45,6 +48,7 @@ class StripProbabilityHead(nn.Module):
         self.offset_pixels = float(offset_pixels)
         self.query_chunk_size = query_chunk_size
         self.detach_inputs = detach_inputs
+        self.use_log_prior = use_log_prior
         self.projection = nn.Conv2d(in_channels, hidden_dim, 1)
         self.strip_encoder = nn.Sequential(
             nn.Conv2d(hidden_dim, hidden_dim, (kernel_size, normal_kernel_size),
@@ -55,7 +59,7 @@ class StripProbabilityHead(nn.Module):
         self.query_projection = nn.Linear(query_dim, hidden_dim)
         self.edge_embedding = nn.Embedding(4, 8)
         self.score_head = nn.Sequential(
-            nn.Linear(2 * hidden_dim + 8 + 2, hidden_dim), nn.ReLU(),
+            nn.Linear(2 * hidden_dim + 8 + 1 + int(use_log_prior), hidden_dim), nn.ReLU(),
             nn.Linear(hidden_dim, 1),
         )
         nn.init.zeros_(self.score_head[-1].weight)
@@ -149,11 +153,14 @@ class StripProbabilityHead(nn.Module):
             offsets = ((positions - edges[..., None]) / normal_scale[..., None]).nan_to_num(
                 nan=0.0, posinf=0.0, neginf=0.0
             )
-            log_prior = prior.log_softmax(-1).nan_to_num(nan=0.0, posinf=0.0, neginf=0.0)
-            inputs = torch.cat((
+            input_features = (
                 candidate_features, query_features, edge_features,
-                offsets[..., None], log_prior[..., None],
-            ), -1)
+                offsets[..., None],
+            )
+            if self.use_log_prior:
+                log_prior = prior.log_softmax(-1).nan_to_num(nan=0.0, posinf=0.0, neginf=0.0)
+                input_features += (log_prior[..., None],)
+            inputs = torch.cat(input_features, -1)
             delta = self.score_head(inputs).squeeze(-1)
             correction_valid = candidate_valid & input_valid[:, None, None]
             calibrated = prior + torch.where(correction_valid, delta, torch.zeros_like(delta)) + zero

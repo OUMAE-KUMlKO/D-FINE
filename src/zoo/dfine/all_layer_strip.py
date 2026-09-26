@@ -65,6 +65,7 @@ class DFINEAllLayerStrip(DFINE):
         self, backbone, encoder, decoder, feature_level=0, hidden_dim=64,
         num_points=5, kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
         checkpoint_strips=True, normal_points=3, normal_kernel_size=1,
+        use_log_prior=True,
     ):
         super().__init__(backbone, encoder, decoder)
         if feature_level < 0:
@@ -77,6 +78,7 @@ class DFINEAllLayerStrip(DFINE):
             num_points=num_points, kernel_size=kernel_size,
             offset_pixels=offset_pixels, query_chunk_size=query_chunk_size,
             normal_points=normal_points, normal_kernel_size=normal_kernel_size,
+            use_log_prior=use_log_prior,
         )
 
     def forward(self, images, targets=None):
@@ -104,11 +106,12 @@ class DFINEAllLayerStripRefiner(DFINEPredRefiner):
         self, backbone, encoder, decoder, feature_level=0, hidden_dim=64,
         num_points=5, kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
         checkpoint_strips=True, baseline_checkpoint=None,
-        normal_points=3, normal_kernel_size=1,
+        normal_points=3, normal_kernel_size=1, use_log_prior=True,
     ):
         # The base constructor invokes _build_refiner before loading B0.
         self.normal_points = normal_points
         self.normal_kernel_size = normal_kernel_size
+        self.use_log_prior = use_log_prior
         super().__init__(
             backbone, encoder, decoder, feature_level=feature_level,
             hidden_dim=hidden_dim, num_points=num_points, kernel_size=kernel_size,
@@ -122,7 +125,8 @@ class DFINEAllLayerStripRefiner(DFINEPredRefiner):
         kwargs.pop('sampling_mode')
         return LayerStripHeads(
             self.decoder.num_layers, normal_points=self.normal_points,
-            normal_kernel_size=self.normal_kernel_size, **kwargs,
+            normal_kernel_size=self.normal_kernel_size,
+            use_log_prior=self.use_log_prior, **kwargs,
         )
 
     def forward(self, images, targets=None):
