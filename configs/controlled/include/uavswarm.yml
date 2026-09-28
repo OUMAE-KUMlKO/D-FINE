@@ -1,0 +1,10 @@
+num_classes: 1
+remap_mscoco_category: True
+train_dataloader:
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/train_half.json
+val_dataloader:
+  dataset:
+    img_folder: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/train
+    ann_file: /cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json

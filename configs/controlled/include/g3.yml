@@ -1,0 +1,3 @@
+__include__: ['./g2.yml']
+DFINEAllLayerStrip:
+  normal_kernel_size: 3

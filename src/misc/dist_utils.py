@@ -170,6 +170,8 @@ def warp_loader(loader, shuffle=False):
             collate_fn=loader.collate_fn,
             pin_memory=loader.pin_memory,
             num_workers=loader.num_workers,
+            generator=loader.generator,
+            worker_init_fn=loader.worker_init_fn,
         )
     return loader
 

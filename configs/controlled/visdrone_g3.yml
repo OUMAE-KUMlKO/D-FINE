@@ -1,0 +1,4 @@
+__include__: ['./include/common.yml', './include/visdrone.yml', './include/g3.yml']
+
+output_dir: ./output/controlled/visdrone/g3
+exp_name: controlled_visdrone_g3_seed0

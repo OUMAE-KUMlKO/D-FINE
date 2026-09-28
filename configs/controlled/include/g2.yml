@@ -1,0 +1,4 @@
+__include__: ['./g1.yml']
+DFINEAllLayerStrip:
+  normal_points: 7
+  offset_pixels: 8.0

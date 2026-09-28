@@ -1,0 +1,14 @@
+__include__: ['../../dfine/dfine_hgnetv2_l_coco.yml']
+
+# Shared 80-epoch protocol; launch with 8 GPUs (8 images per GPU).
+seed: 0
+controlled_seed: 0
+epochs: 80
+HGNetv2:
+  pretrained: True
+  local_model_dir: weight/hgnetv2/
+
+train_dataloader:
+  total_batch_size: 64
+val_dataloader:
+  total_batch_size: 64

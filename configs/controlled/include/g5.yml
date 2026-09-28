@@ -1,0 +1,3 @@
+__include__: ['./g4.yml']
+DFINEAllLayerStrip:
+  query_fusion: channel_gate

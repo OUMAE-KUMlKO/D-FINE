@@ -1,0 +1,16 @@
+model: DFINEAllLayerStrip
+DFINEAllLayerStrip:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  normal_points: 3
+  kernel_size: 3
+  normal_kernel_size: 1
+  offset_pixels: 1.0
+  use_log_prior: True
+  query_fusion: concat
+  query_chunk_size: 32
+  checkpoint_strips: True

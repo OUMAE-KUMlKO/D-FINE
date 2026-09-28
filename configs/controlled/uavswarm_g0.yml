@@ -1,0 +1,4 @@
+__include__: ['./include/common.yml', './include/uavswarm.yml', './include/g0.yml']
+
+output_dir: ./output/controlled/uavswarm/g0
+exp_name: controlled_uavswarm_g0_seed0

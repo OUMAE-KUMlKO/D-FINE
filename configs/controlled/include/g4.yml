@@ -1,0 +1,3 @@
+__include__: ['./g3.yml']
+DFINEAllLayerStrip:
+  use_log_prior: False

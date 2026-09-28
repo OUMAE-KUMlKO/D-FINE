@@ -36,7 +36,15 @@ class YAMLConfig(BaseConfig):
     @property
     def model(self) -> torch.nn.Module:
         if self._model is None and "model" in self.yaml_cfg:
-            self._model = create(self.yaml_cfg["model"], self.global_cfg)
+            seed = self.yaml_cfg.get("controlled_seed")
+            if seed is None:
+                self._model = create(self.yaml_cfg["model"], self.global_cfg)
+            else:
+                # Build common detector components from the same CPU RNG state;
+                # extra ablation heads must not advance the training RNG stream.
+                with torch.random.fork_rng(devices=[]):
+                    torch.random.default_generator.manual_seed(seed)
+                    self._model = create(self.yaml_cfg["model"], self.global_cfg)
         return super().model
 
     @property
@@ -182,6 +190,17 @@ class YAMLConfig(BaseConfig):
             # pop unexpected key for dataloader init
             _ = global_cfg[name].pop("total_batch_size")
         print(f"building {name} with batch_size={bs}...")
-        loader = create(name, global_cfg, batch_size=bs)
+        loader_kwargs = {"batch_size": bs}
+        seed = self.yaml_cfg.get("controlled_seed")
+        if seed is not None:
+            from ..misc import dist_utils
+
+            # Independent worker seeds keep augmentation and multiscale draws
+            # paired across model variants, including after DDP wraps the loader.
+            offset = 0 if name == "train_dataloader" else 100000
+            loader_kwargs["generator"] = torch.Generator().manual_seed(
+                seed + offset + dist_utils.get_rank()
+            )
+        loader = create(name, global_cfg, **loader_kwargs)
         loader.shuffle = self.yaml_cfg[name].get("shuffle", False)
         return loader

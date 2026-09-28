@@ -1,0 +1,14 @@
+# Prepared COCO annotations: scored classes 0-9; ignored regions are crowd.
+num_classes: 10
+remap_mscoco_category: False
+train_dataloader:
+  # Dense images reach 902 GT boxes: batch 8/GPU OOMs on a 24 GiB GPU.
+  total_batch_size: 32
+  dataset:
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-train/images
+    ann_file: ./output/visdrone_controlled/instances_train.json
+val_dataloader:
+  total_batch_size: 32
+  dataset:
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-val/images
+    ann_file: ./output/visdrone_controlled/instances_val.json

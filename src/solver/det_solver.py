@@ -96,15 +96,8 @@ class DetSolver(BaseSolver):
             if self.lr_warmup_scheduler is None or self.lr_warmup_scheduler.finished():
                 self.lr_scheduler.step()
 
-            self.last_epoch += 1
-
-            if self.output_dir and epoch < self.train_dataloader.collate_fn.stop_epoch:
-                checkpoint_paths = [self.output_dir / "last.pth"]
-                # extra checkpoint before LR drop and every 100 epochs
-                if (epoch + 1) % args.checkpoint_freq == 0:
-                    checkpoint_paths.append(self.output_dir / f"checkpoint{epoch:04}.pth")
-                for checkpoint_path in checkpoint_paths:
-                    dist_utils.save_on_master(self.state_dict(), checkpoint_path)
+            # Loading the stage1 best restores its epoch too; the loop owns progress.
+            self.last_epoch = epoch
 
             module = self.ema.module if self.ema else self.model
             test_stats, coco_evaluator = evaluate(
@@ -118,6 +111,17 @@ class DetSolver(BaseSolver):
                 self.use_wandb,
                 output_dir=self.output_dir,
             )
+
+            if self.output_dir:
+                # Save the evaluated weights before validation can roll them back.
+                checkpoint_paths = [self.output_dir / "last.pth"]
+                if (
+                    epoch < self.train_dataloader.collate_fn.stop_epoch
+                    and (epoch + 1) % args.checkpoint_freq == 0
+                ):
+                    checkpoint_paths.append(self.output_dir / f"checkpoint{epoch:04}.pth")
+                for checkpoint_path in checkpoint_paths:
+                    dist_utils.save_on_master(self.state_dict(), checkpoint_path)
 
             # Oracle evaluations also contain metadata and geometry dictionaries;
             # only the COCO performance arrays participate in checkpoint selection.
@@ -172,6 +176,7 @@ class DetSolver(BaseSolver):
                     if self.ema:
                         self.ema.decay -= 0.0001
                         self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+                        self.last_epoch = epoch
                         print(f"Refresh EMA at epoch {epoch} with decay {self.ema.decay}")
 
             log_stats = {
