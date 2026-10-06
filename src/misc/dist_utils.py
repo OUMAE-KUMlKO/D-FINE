@@ -161,7 +161,10 @@ def de_model(model):
 
 def warp_loader(loader, shuffle=False):
     if is_dist_available_and_initialized():
-        sampler = DistributedSampler(loader.dataset, shuffle=shuffle)
+        sampler = DistributedSampler(
+            loader.dataset, shuffle=shuffle,
+            seed=getattr(loader, 'controlled_sampler_seed', 0),
+        )
         loader = DataLoader(
             loader.dataset,
             loader.batch_size,

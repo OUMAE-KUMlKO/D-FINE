@@ -1,0 +1,26 @@
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.08s)
+creating index...
+index created!
+Geometry: 8/3394 images; 2.8s
+Geometry: 208/3394 images; 30.1s
+Geometry: 408/3394 images; 57.5s
+Geometry: 608/3394 images; 84.6s
+Geometry: 808/3394 images; 112.0s
+Geometry: 1008/3394 images; 139.6s
+Geometry: 1208/3394 images; 167.1s
+Geometry: 1408/3394 images; 194.5s
+Geometry: 1608/3394 images; 222.2s
+Geometry: 1808/3394 images; 249.9s
+Geometry: 2008/3394 images; 277.0s
+Geometry: 2208/3394 images; 304.7s
+Geometry: 2408/3394 images; 332.4s
+Geometry: 2608/3394 images; 359.6s
+Geometry: 2808/3394 images; 386.8s
+Geometry: 3008/3394 images; 414.5s
+Geometry: 3208/3394 images; 442.2s
+Geometry: 3394/3394 images; 468.1s
+baseline: {"pairs": 24265, "edge_mae_px_ltrb": [1.2609655157747943, 1.9771301278914712, 1.4554814788058643, 2.1177291868520527], "mean_edge_mae_px": 1.7028265773310456, "mean_iou": 0.7963074676833348}
+model: {"pairs": 24265, "edge_mae_px_ltrb": [1.1831968111670585, 1.849269917373335, 1.3599920185379164, 2.0043196219919444], "mean_edge_mae_px": 1.5991945922675637, "mean_iou": 0.8017787816355176}
+Saved geometry: output/g5_geometry_15526_20260929/summary.json

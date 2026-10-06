@@ -56,6 +56,56 @@ class ControlledSubmissionTests(unittest.TestCase):
             saved = json.loads((root / 'jobs.json').read_text())
             self.assertEqual([job['job_id'] for job in saved], ['101'])
 
+    def test_uav_main_comparisons_use_three_real_seeds_in_one_chain(self):
+        module = self.load()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            commands = []
+
+            def sbatch(command, **kwargs):
+                commands.append(command)
+                return subprocess.CompletedProcess(command, 0, f'{201 + len(commands)}\n', '')
+
+            with mock.patch.object(module.subprocess, 'run', side_effect=sbatch):
+                jobs = module.submit_chain(root / 'source', root,
+                                           datasets=['uavswarm'], groups=['g0', 'g5'],
+                                           seeds=[1, 2, 3])
+            self.assertEqual([(j['dataset'], j['group'], j['seed']) for j in jobs],
+                             [('uavswarm', g, s) for s in (1, 2, 3) for g in ('g0', 'g5')])
+            self.assertEqual(len({j['output_dir'] for j in jobs}), 6)
+            self.assertFalse(any(x.startswith('--dependency=') for x in commands[0]))
+            for i, (job, command) in enumerate(zip(jobs, commands)):
+                self.assertEqual(command[-1], str(job['seed']))
+                self.assertIn(f'seed{job["seed"]}', job['output_dir'])
+                self.assertIn(f'_s{job["seed"]}', job['stdout'])
+                if i:
+                    self.assertIn(f'--dependency=afterok:{jobs[i-1]["job_id"]}', command)
+
+    def test_uav_only_snapshot_does_not_require_visdrone_annotations(self):
+        module = self.load()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / 'project'
+            (project / 'src').mkdir(parents=True)
+            files = ['weight/hgnetv2/PPHGNetV2_B4_stage1.pth', 'train.py',
+                     'configs/controlled/uavswarm_g0.yml', 'configs/controlled/uavswarm_g5.yml',
+                     'slurm_files/run_train_dfine_controlled.slurm',
+                     'tools/submit_controlled_experiments.py',
+                     'tools/dataset/prepare_visdrone_controlled.py',
+                     'docs/research/uavswarm_visdrone_controlled_experiments_plan.md',
+                     'docs/research/controlled_experiments_execution.md']
+            for name in files:
+                path = project / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('test fixture\n')
+            with mock.patch.object(module.subprocess, 'run',
+                                   return_value=subprocess.CompletedProcess([], 0, 'test\n', '')):
+                snapshot = module.freeze_source(project, root / 'batch',
+                                                datasets=['uavswarm'], groups=['g0', 'g5'])
+            self.assertTrue((snapshot / 'configs/controlled/uavswarm_g5.yml').is_file())
+            self.assertTrue((snapshot / 'weight/hgnetv2/PPHGNetV2_B4_stage1.pth').is_file())
+            self.assertFalse((snapshot / 'output/visdrone_controlled').exists())
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -202,5 +202,8 @@ class YAMLConfig(BaseConfig):
                 seed + offset + dist_utils.get_rank()
             )
         loader = create(name, global_cfg, **loader_kwargs)
+        if seed is not None:
+            # Distributed ranks share the sampler seed, unlike worker seeds.
+            loader.controlled_sampler_seed = seed
         loader.shuffle = self.yaml_cfg[name].get("shuffle", False)
         return loader

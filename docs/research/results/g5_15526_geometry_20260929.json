@@ -1,0 +1,282 @@
+{
+  "baseline": {
+    "checkpoint": "/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth",
+    "checkpoint_last_epoch": 70,
+    "weights": "ema.module",
+    "model_class": "DFINE",
+    "config": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/configs/dfine/dfine_hgnetv2_l_uavswarm.yml"
+  },
+  "model": {
+    "checkpoint": "/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/all_layer_band2d_query_gate_full/best_stg2.pth",
+    "checkpoint_last_epoch": 76,
+    "weights": "ema.module",
+    "model_class": "DFINEAllLayerStrip",
+    "config": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/configs/dfine/dfine_hgnetv2_l_uavswarm_all_layer_band2d_query_gate_full.yml"
+  },
+  "dataset": {
+    "type": "CocoDetection",
+    "img_folder": "/cluster/home/zzy/dataset/UAVSwarm-dataset-master/train/",
+    "ann_file": "/cluster/home/zzy/dataset/UAVSwarm-dataset-master/annotations/val_half.json",
+    "return_masks": false,
+    "transforms": {
+      "type": "Compose",
+      "ops": [
+        {
+          "type": "Resize",
+          "size": [
+            640,
+            640
+          ]
+        },
+        {
+          "type": "ConvertPILImage",
+          "dtype": "float32",
+          "scale": true
+        }
+      ]
+    }
+  },
+  "images": 3394,
+  "full_validation": true,
+  "input_sizes_hw": [
+    [
+      640,
+      640
+    ]
+  ],
+  "ignored_targets": 0,
+  "elapsed_seconds": 468.20986016932875,
+  "inference_uses_gt": false,
+  "inference_precision": "float32",
+  "matching": {
+    "weight_dict": {
+      "cost_class": 2,
+      "cost_bbox": 5,
+      "cost_giou": 2
+    },
+    "use_focal_loss": true,
+    "alpha": 0.25,
+    "gamma": 2.0
+  },
+  "score_threshold": null,
+  "iou_threshold": null,
+  "clip_boxes": false,
+  "geometry": {
+    "coordinate_system": "network_input_pixels",
+    "size_grouping": "GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2",
+    "pairing": "independent_hungarian_matches_aligned_by_canonical_gt_id",
+    "counts": {
+      "total_gt": 24265,
+      "baseline_matched": 24265,
+      "model_matched": 24265,
+      "common_gt": 24265,
+      "baseline_only": 0,
+      "model_only": 0,
+      "neither": 0
+    },
+    "models": {
+      "baseline": {
+        "pairing": "own_hungarian_matches",
+        "invalid_metric_pairs": 0,
+        "groups": {
+          "all": {
+            "pairs": 24265,
+            "edge_mae_px_ltrb": [
+              1.2609655157747943,
+              1.9771301278914712,
+              1.4554814788058643,
+              2.1177291868520527
+            ],
+            "mean_edge_mae_px": 1.7028265773310456,
+            "mean_iou": 0.7963074676833348
+          },
+          "small": {
+            "pairs": 19999,
+            "edge_mae_px_ltrb": [
+              1.1571811574346704,
+              1.9814255263627878,
+              1.3108038071054382,
+              2.057788150701781
+            ],
+            "mean_edge_mae_px": 1.6267996604011694,
+            "mean_iou": 0.7824512026562644
+          },
+          "medium": {
+            "pairs": 4071,
+            "edge_mae_px_ltrb": [
+              1.2368176188992506,
+              1.61496623849084,
+              1.489137234543735,
+              2.037127229394915
+            ],
+            "mean_edge_mae_px": 1.5945120803321853,
+            "mean_iou": 0.8671917291227735
+          },
+          "large": {
+            "pairs": 195,
+            "edge_mae_px_ltrb": [
+              12.409116647182367,
+              9.09746612646641,
+              15.590846477410732,
+              9.947941242120205
+            ],
+            "mean_edge_mae_px": 11.76134262329493,
+            "mean_iou": 0.7375465238702906
+          }
+        }
+      },
+      "model": {
+        "pairing": "own_hungarian_matches",
+        "invalid_metric_pairs": 0,
+        "groups": {
+          "all": {
+            "pairs": 24265,
+            "edge_mae_px_ltrb": [
+              1.1831968111670585,
+              1.849269917373335,
+              1.3599920185379164,
+              2.0043196219919444
+            ],
+            "mean_edge_mae_px": 1.5991945922675637,
+            "mean_iou": 0.8017787816355176
+          },
+          "small": {
+            "pairs": 19999,
+            "edge_mae_px_ltrb": [
+              1.0899399209394474,
+              1.8181955433170809,
+              1.2250254708288002,
+              1.9178466121311981
+            ],
+            "mean_edge_mae_px": 1.5127518868041316,
+            "mean_iou": 0.7888761684670201
+          },
+          "medium": {
+            "pairs": 4071,
+            "edge_mae_px_ltrb": [
+              1.1807947908007697,
+              1.7313240421283922,
+              1.4511494559961757,
+              2.0598967509901045
+            ],
+            "mean_edge_mae_px": 1.6057912599788606,
+            "mean_iou": 0.8666346644920242
+          },
+          "large": {
+            "pairs": 195,
+            "edge_mae_px_ltrb": [
+              10.797674619234526,
+              7.498572814158904,
+              13.298935914650942,
+              9.712623376112719
+            ],
+            "mean_edge_mae_px": 10.326951681039272,
+            "mean_iou": 0.7710662772662502
+          }
+        }
+      }
+    },
+    "common_gt_comparison": {
+      "pairing": "intersection_of_matched_gt_ids_per_image",
+      "invalid_metric_pairs": 0,
+      "groups": {
+        "all": {
+          "pairs": 24265,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              1.2609655157747943,
+              1.9771301278914712,
+              1.4554814788058643,
+              2.1177291868520527
+            ],
+            "mean_edge_mae_px": 1.7028265773310456,
+            "mean_iou": 0.7963074676833348
+          },
+          "model": {
+            "edge_mae_px_ltrb": [
+              1.1831968111670585,
+              1.849269917373335,
+              1.3599920185379164,
+              2.0043196219919444
+            ],
+            "mean_edge_mae_px": 1.5991945922675637,
+            "mean_iou": 0.8017787816355175
+          },
+          "mean_iou_change": 0.005471313952182677
+        },
+        "small": {
+          "pairs": 19999,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              1.1571811574346704,
+              1.9814255263627878,
+              1.3108038071054382,
+              2.057788150701781
+            ],
+            "mean_edge_mae_px": 1.6267996604011694,
+            "mean_iou": 0.7824512026562643
+          },
+          "model": {
+            "edge_mae_px_ltrb": [
+              1.0899399209394474,
+              1.8181955433170809,
+              1.2250254708288002,
+              1.9178466121311981
+            ],
+            "mean_edge_mae_px": 1.5127518868041316,
+            "mean_iou": 0.78887616846702
+          },
+          "mean_iou_change": 0.006424965810755702
+        },
+        "medium": {
+          "pairs": 4071,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              1.2368176188992506,
+              1.61496623849084,
+              1.489137234543735,
+              2.037127229394915
+            ],
+            "mean_edge_mae_px": 1.5945120803321853,
+            "mean_iou": 0.8671917291227735
+          },
+          "model": {
+            "edge_mae_px_ltrb": [
+              1.1807947908007697,
+              1.7313240421283922,
+              1.4511494559961757,
+              2.0598967509901045
+            ],
+            "mean_edge_mae_px": 1.6057912599788606,
+            "mean_iou": 0.8666346644920242
+          },
+          "mean_iou_change": -0.0005570646307494027
+        },
+        "large": {
+          "pairs": 195,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              12.409116647182367,
+              9.09746612646641,
+              15.590846477410732,
+              9.947941242120205
+            ],
+            "mean_edge_mae_px": 11.76134262329493,
+            "mean_iou": 0.7375465238702906
+          },
+          "model": {
+            "edge_mae_px_ltrb": [
+              10.797674619234526,
+              7.498572814158904,
+              13.298935914650942,
+              9.712623376112719
+            ],
+            "mean_edge_mae_px": 10.326951681039272,
+            "mean_iou": 0.7710662772662502
+          },
+          "mean_iou_change": 0.03351975339595962
+        }
+      }
+    }
+  }
+}
