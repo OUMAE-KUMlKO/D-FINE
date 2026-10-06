@@ -1,0 +1,7 @@
+/bin/bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/tools/analysis/evaluate_density_coco.py:95: UserWarning: Found annotation id 0. Annotation ids are used as match markers during evaluation, where 0 also means 'unmatched' — an annotation with id 0 cannot be distinguished from an unmatched one, silently skewing precision/recall. Consider using 1-indexed annotation ids.
+  coco = COCO(str(cache['dataset']['ann_file']))
+/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/tools/analysis/evaluate_density_coco.py:95: UserWarning: Found annotation id 0. Annotation ids are used as match markers during evaluation, where 0 also means 'unmatched' — an annotation with id 0 cannot be distinguished from an unmatched one, silently skewing precision/recall. Consider using 1-indexed annotation ids.
+  coco = COCO(str(cache['dataset']['ann_file']))
+/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/tools/analysis/evaluate_density_coco.py:95: UserWarning: Found annotation id 0. Annotation ids are used as match markers during evaluation, where 0 also means 'unmatched' — an annotation with id 0 cannot be distinguished from an unmatched one, silently skewing precision/recall. Consider using 1-indexed annotation ids.
+  coco = COCO(str(cache['dataset']['ann_file']))

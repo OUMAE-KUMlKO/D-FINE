@@ -1,0 +1,75 @@
+VisDrone density seed=0
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.36s)
+creating index...
+index created!
+Geometry: 8/548 images; 3.1s
+Geometry: 208/548 images; 53.6s
+Geometry: 408/548 images; 101.5s
+Geometry: 548/548 images; 135.1s
+Saved prediction cache: output/visdrone_density_diagnostics_20261006/predictions_seed0.pth
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.3895599739716236, 3.1870158088137983, 2.4240571064514986, 3.39891951886818], "mean_edge_mae_px": 2.8498881020262754, "mean_iou": 0.6716063766345369}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.4246342950940054, 3.2347446895130534, 2.447827233126888, 3.467920949179715], "mean_edge_mae_px": 2.893781791728416, "mean_iou": 0.6707904381015972}
+Saved geometry: output/visdrone_density_diagnostics_20261006/geometry_seed0.json
+{"output_file": "output/visdrone_density_diagnostics_20261006/density_seed0.json", "counts": {"images": 548, "canonical_gt": 38759, "valid_gt": 38759, "invalid_gt": 0, "baseline_matched_gt": 38725, "model_matched_gt": 38725, "common_matched_gt": 38707, "baseline_only": 18, "model_only": 18, "neither": 16, "common_valid_pairs": 38707, "invalid_common_pairs": 0, "invalid_original_area_pairs": 0}, "overall": {"pairs": 38707, "baseline": {"mean_edge_mae_px": 2.577498876093297, "mean_iou": 0.6843397138208579}, "model": {"mean_edge_mae_px": 2.5957504196864503, "mean_iou": 0.6835734305842242}, "delta_model_minus_baseline": {"mean_edge_mae_px": 0.018251543593153396, "mean_iou": -0.0007662832366337469}}}
+baseline/all: 548 images, 5.0s
+baseline/le30: 99 images, 5.2s
+baseline/31to60: 150 images, 5.4s
+baseline/61to100: 192 images, 5.9s
+baseline/gt100: 107 images, 6.3s
+model/all: 548 images, 9.1s
+model/le30: 99 images, 9.2s
+model/31to60: 150 images, 9.6s
+model/61to100: 192 images, 10.1s
+model/gt100: 107 images, 10.5s
+VisDrone density seed=1
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.41s)
+creating index...
+index created!
+Geometry: 8/548 images; 3.0s
+Geometry: 208/548 images; 51.4s
+Geometry: 408/548 images; 101.3s
+Geometry: 548/548 images; 137.0s
+Saved prediction cache: output/visdrone_density_diagnostics_20261006/predictions_seed1.pth
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.483687022584265, 3.431592421646346, 2.5252815776713207, 3.6590328224671893], "mean_edge_mae_px": 3.02489846109228, "mean_iou": 0.6680654093782713}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.5338112045250223, 3.458305888309873, 2.5448310012698867, 3.6833621800292144], "mean_edge_mae_px": 3.055077568533499, "mean_iou": 0.6681067964019022}
+Saved geometry: output/visdrone_density_diagnostics_20261006/geometry_seed1.json
+{"output_file": "output/visdrone_density_diagnostics_20261006/density_seed1.json", "counts": {"images": 548, "canonical_gt": 38759, "valid_gt": 38759, "invalid_gt": 0, "baseline_matched_gt": 38725, "model_matched_gt": 38725, "common_matched_gt": 38714, "baseline_only": 11, "model_only": 11, "neither": 23, "common_valid_pairs": 38714, "invalid_common_pairs": 0, "invalid_original_area_pairs": 0}, "overall": {"pairs": 38714, "baseline": {"mean_edge_mae_px": 2.7287513628130906, "mean_iou": 0.6815145263941276}, "model": {"mean_edge_mae_px": 2.747105582224477, "mean_iou": 0.6817279636399232}, "delta_model_minus_baseline": {"mean_edge_mae_px": 0.018354219411386374, "mean_iou": 0.0002134372457955891}}}
+baseline/all: 548 images, 4.7s
+baseline/le30: 99 images, 4.9s
+baseline/31to60: 150 images, 5.3s
+baseline/61to100: 192 images, 5.9s
+baseline/gt100: 107 images, 6.3s
+model/all: 548 images, 9.6s
+model/le30: 99 images, 9.8s
+model/31to60: 150 images, 10.1s
+model/61to100: 192 images, 10.7s
+model/gt100: 107 images, 11.1s
+VisDrone density seed=2
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.44s)
+creating index...
+index created!
+Geometry: 8/548 images; 3.1s
+Geometry: 208/548 images; 58.0s
+Geometry: 408/548 images; 113.5s
+Geometry: 548/548 images; 148.7s
+Saved prediction cache: output/visdrone_density_diagnostics_20261006/predictions_seed2.pth
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.407223352256939, 3.2533104036607, 2.425892114443037, 3.4743814269060316], "mean_edge_mae_px": 2.890201824316677, "mean_iou": 0.671467724883866}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.4706949260905913, 3.19003339421372, 2.4831760084844543, 3.4006646039448993], "mean_edge_mae_px": 2.886142233183416, "mean_iou": 0.6705263060007264}
+Saved geometry: output/visdrone_density_diagnostics_20261006/geometry_seed2.json
+{"output_file": "output/visdrone_density_diagnostics_20261006/density_seed2.json", "counts": {"images": 548, "canonical_gt": 38759, "valid_gt": 38759, "invalid_gt": 0, "baseline_matched_gt": 38725, "model_matched_gt": 38725, "common_matched_gt": 38714, "baseline_only": 11, "model_only": 11, "neither": 23, "common_valid_pairs": 38714, "invalid_common_pairs": 0, "invalid_original_area_pairs": 0}, "overall": {"pairs": 38714, "baseline": {"mean_edge_mae_px": 2.609498677163748, "mean_iou": 0.684435466726088}, "model": {"mean_edge_mae_px": 2.598443473471066, "mean_iou": 0.6834946986649981}, "delta_model_minus_baseline": {"mean_edge_mae_px": -0.011055203692682092, "mean_iou": -0.0009407680610898916}}}
+baseline/all: 548 images, 4.9s
+baseline/le30: 99 images, 5.1s
+baseline/31to60: 150 images, 5.4s
+baseline/61to100: 192 images, 5.8s
+baseline/gt100: 107 images, 6.2s
+model/all: 548 images, 8.9s
+model/le30: 99 images, 9.1s
+model/31to60: 150 images, 9.4s
+model/61to100: 192 images, 9.9s
+model/gt100: 107 images, 10.2s

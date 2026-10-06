@@ -1,0 +1,39 @@
+VisDrone geometry seed=0 | checkpoints=output/controlled_20260926_212304/results/visdrone
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.52s)
+creating index...
+index created!
+Geometry: 8/548 images; 4.2s
+Geometry: 208/548 images; 51.5s
+Geometry: 408/548 images; 102.6s
+Geometry: 548/548 images; 140.4s
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.3895599739716236, 3.1870158088137983, 2.4240571064514986, 3.39891951886818], "mean_edge_mae_px": 2.8498881020262754, "mean_iou": 0.6716063766345369}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.4246342950940054, 3.2347446895130534, 2.447827233126888, 3.467920949179715], "mean_edge_mae_px": 2.893781791728416, "mean_iou": 0.6707904381015972}
+Saved geometry: output/visdrone_diagnostics_20261006/geometry_seed0.json
+VisDrone geometry seed=1 | checkpoints=output/controlled_visdrone_20260929_seed12/results/visdrone/seed1
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.52s)
+creating index...
+index created!
+Geometry: 8/548 images; 3.0s
+Geometry: 208/548 images; 52.2s
+Geometry: 408/548 images; 100.6s
+Geometry: 548/548 images; 134.4s
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.483687022584265, 3.431592421646346, 2.5252815776713207, 3.6590328224671893], "mean_edge_mae_px": 3.02489846109228, "mean_iou": 0.6680654093782713}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.5338112045250223, 3.458305888309873, 2.5448310012698867, 3.6833621800292144], "mean_edge_mae_px": 3.055077568533499, "mean_iou": 0.6681067964019022}
+Saved geometry: output/visdrone_diagnostics_20261006/geometry_seed1.json
+VisDrone geometry seed=2 | checkpoints=output/controlled_visdrone_20260929_seed12/results/visdrone/seed2
+building val_dataloader with batch_size=8...
+loading annotations into memory...
+Done (t=0.36s)
+creating index...
+index created!
+Geometry: 8/548 images; 3.4s
+Geometry: 208/548 images; 58.7s
+Geometry: 408/548 images; 115.0s
+Geometry: 548/548 images; 151.8s
+baseline: {"pairs": 38725, "edge_mae_px_ltrb": [2.407223352256939, 3.2533104036607, 2.425892114443037, 3.4743814269060316], "mean_edge_mae_px": 2.890201824316677, "mean_iou": 0.671467724883866}
+model: {"pairs": 38725, "edge_mae_px_ltrb": [2.4706949260905913, 3.19003339421372, 2.4831760084844543, 3.4006646039448993], "mean_edge_mae_px": 2.886142233183416, "mean_iou": 0.6705263060007264}
+Saved geometry: output/visdrone_diagnostics_20261006/geometry_seed2.json
