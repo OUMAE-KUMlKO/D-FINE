@@ -10,10 +10,11 @@ from pathlib import Path
 
 DEFAULT_DATASETS = ('uavswarm', 'visdrone')
 DEFAULT_GROUPS = ('g0', 'g5', 'g1', 'g2', 'g3', 'g4')
+EXTRA_GROUPS = ('g5_adaptive_band',)
 
 
 def experiment_order(datasets=DEFAULT_DATASETS, groups=DEFAULT_GROUPS):
-    for block in (('g0', 'g5'), ('g1', 'g2', 'g3', 'g4')):
+    for block in (('g0', 'g5'), ('g1', 'g2', 'g3', 'g4'), EXTRA_GROUPS):
         for dataset in datasets:
             for group in block:
                 if group in groups:
@@ -112,7 +113,7 @@ def main():
     parser.add_argument('--submit', action='store_true', help='freeze source and submit jobs')
     parser.add_argument('--run-root', type=Path, help='new directory for this entire batch')
     parser.add_argument('--datasets', nargs='+', choices=DEFAULT_DATASETS, default=DEFAULT_DATASETS)
-    parser.add_argument('--groups', nargs='+', choices=DEFAULT_GROUPS, default=DEFAULT_GROUPS)
+    parser.add_argument('--groups', nargs='+', choices=DEFAULT_GROUPS + EXTRA_GROUPS, default=DEFAULT_GROUPS)
     parser.add_argument('--seeds', nargs='+', type=int, default=[0])
     args = parser.parse_args()
     for name in ('datasets', 'groups', 'seeds'):

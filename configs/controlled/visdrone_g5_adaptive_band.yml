@@ -1,0 +1,10 @@
+__include__: ['./visdrone_g5.yml']
+
+DFINEAllLayerStrip:
+  bandwidth_mode: box_relative
+  bandwidth_ratio: 0.25
+  min_offset_pixels: 2.0
+  # In box_relative mode, the inherited offset_pixels=8 is the maximum half-width.
+
+output_dir: ./output/controlled/visdrone/g5_adaptive_band
+exp_name: controlled_visdrone_g5_adaptive_band_seed0

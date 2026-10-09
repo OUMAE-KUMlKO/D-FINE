@@ -140,7 +140,19 @@ class PredictionStripHead(GTStripHead):
         along_x, along_y = left[:, None] + w[:, None] * t, top[:, None] + h[:, None] * t
         normal_points = getattr(self, "normal_points", 3)
         offsets = torch.linspace(1, -1, normal_points, device=boxes.device, dtype=boxes.dtype)
-        dx, dy = offsets * self.offset_pixels / image_w, offsets * self.offset_pixels / image_h
+        if getattr(self, "bandwidth_mode", "fixed") == "box_relative":
+            # Current pre-correction boxes set only the sampling band width;
+            # distribution candidates stay at their original support positions.
+            half_width = (w * image_w * self.bandwidth_ratio).clamp(
+                min=self.min_offset_pixels, max=self.offset_pixels,
+            )
+            half_height = (h * image_h * self.bandwidth_ratio).clamp(
+                min=self.min_offset_pixels, max=self.offset_pixels,
+            )
+            dx = half_width[:, None, None, None] * offsets / image_w
+            dy = half_height[:, None, None, None] * offsets / image_h
+        else:
+            dx, dy = offsets * self.offset_pixels / image_w, offsets * self.offset_pixels / image_h
         n, _, k = positions.shape
         span = (n, k, self.num_points, normal_points)
 

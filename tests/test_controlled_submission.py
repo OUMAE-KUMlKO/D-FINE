@@ -106,6 +106,23 @@ class ControlledSubmissionTests(unittest.TestCase):
             self.assertTrue((snapshot / 'weight/hgnetv2/PPHGNetV2_B4_stage1.pth').is_file())
             self.assertFalse((snapshot / 'output/visdrone_controlled').exists())
 
+    def test_adaptive_band_selection_submits_only_requested_visdrone_job(self):
+        module = self.load()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with mock.patch.object(module.subprocess, 'run',
+                                   return_value=subprocess.CompletedProcess([], 0, '301\n', '')) as run:
+                jobs = module.submit_chain(root / 'source', root,
+                                           datasets=['visdrone'], groups=['g5_adaptive_band'],
+                                           seeds=[0])
+            self.assertEqual(len(jobs), 1)
+            self.assertEqual(jobs[0]['config'], 'configs/controlled/visdrone_g5_adaptive_band.yml')
+            self.assertEqual(jobs[0]['group'], 'g5_adaptive_band')
+            self.assertEqual(jobs[0]['seed'], 0)
+            self.assertNotIn('--resume', run.call_args.args[0])
+            self.assertIsNone(jobs[0]['afterok'])
+        self.assertEqual(len(list(module.experiment_order())), 12)
+
 
 if __name__ == '__main__':
     unittest.main()

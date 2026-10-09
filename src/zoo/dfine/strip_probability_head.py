@@ -18,6 +18,7 @@ class StripProbabilityHead(nn.Module):
         kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
         detach_inputs=True, normal_points=3, normal_kernel_size=1,
         use_log_prior=True, query_fusion="concat",
+        bandwidth_mode="fixed", bandwidth_ratio=0.25, min_offset_pixels=2.0,
     ):
         super().__init__()
         if min(in_channels, query_dim, hidden_dim) < 1:
@@ -32,6 +33,14 @@ class StripProbabilityHead(nn.Module):
             raise ValueError("normal_kernel_size must be a positive odd integer.")
         if not math.isfinite(offset_pixels) or offset_pixels <= 0:
             raise ValueError("offset_pixels must be finite and positive.")
+        if bandwidth_mode not in {"fixed", "box_relative"}:
+            raise ValueError("bandwidth_mode must be 'fixed' or 'box_relative'.")
+        if not math.isfinite(bandwidth_ratio) or bandwidth_ratio <= 0:
+            raise ValueError("bandwidth_ratio must be finite and positive.")
+        if not math.isfinite(min_offset_pixels) or min_offset_pixels <= 0:
+            raise ValueError("min_offset_pixels must be finite and positive.")
+        if bandwidth_mode == "box_relative" and min_offset_pixels > offset_pixels:
+            raise ValueError("min_offset_pixels must not exceed offset_pixels in box_relative mode.")
         if not isinstance(query_chunk_size, int) or query_chunk_size < 1:
             raise ValueError("query_chunk_size must be a positive integer.")
         if not isinstance(detach_inputs, bool):
@@ -48,6 +57,9 @@ class StripProbabilityHead(nn.Module):
         self.normal_kernel_size = normal_kernel_size
         # Half-width of the boundary band, measured in network input pixels.
         self.offset_pixels = float(offset_pixels)
+        self.bandwidth_mode = bandwidth_mode
+        self.bandwidth_ratio = float(bandwidth_ratio)
+        self.min_offset_pixels = float(min_offset_pixels)
         self.query_chunk_size = query_chunk_size
         self.detach_inputs = detach_inputs
         self.use_log_prior = use_log_prior
