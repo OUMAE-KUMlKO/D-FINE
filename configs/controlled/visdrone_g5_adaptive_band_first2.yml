@@ -1,0 +1,7 @@
+__include__: ['./visdrone_g5_adaptive_band.yml']
+
+DFINEAllLayerStrip:
+  num_refine_layers: 2
+
+output_dir: ./output/controlled/visdrone/g5_adaptive_band_first2
+exp_name: controlled_visdrone_g5_adaptive_band_first2_seed0

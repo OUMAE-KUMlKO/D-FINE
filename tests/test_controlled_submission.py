@@ -123,6 +123,32 @@ class ControlledSubmissionTests(unittest.TestCase):
             self.assertIsNone(jobs[0]['afterok'])
         self.assertEqual(len(list(module.experiment_order())), 12)
 
+    def test_adaptive_band_first2_selection_submits_only_requested_visdrone_job(self):
+        module = self.load()
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with mock.patch.object(module.subprocess, 'run',
+                                   return_value=subprocess.CompletedProcess([], 0, '302\n', '')) as run:
+                jobs = module.submit_chain(root / 'source', root,
+                                           datasets=['visdrone'], groups=['g5_adaptive_band_first2'],
+                                           seeds=[0])
+            self.assertEqual(len(jobs), 1)
+            job = jobs[0]
+            self.assertEqual(job['config'], 'configs/controlled/visdrone_g5_adaptive_band_first2.yml')
+            self.assertEqual(job['group'], 'g5_adaptive_band_first2')
+            self.assertEqual(job['seed'], 0)
+            self.assertEqual(job['output_dir'],
+                             str(root / 'results/visdrone/seed0/g5_adaptive_band_first2'))
+            self.assertTrue(job['stdout'].endswith(
+                'controlled_visdrone_g5_adaptive_band_first2_s0_302.out'))
+            command = run.call_args.args[0]
+            self.assertNotIn('--resume', command)
+            self.assertNotIn('--tuning', command)
+            self.assertEqual(command[-1], '0')
+            self.assertIsNone(job['afterok'])
+        self.assertNotIn('g5_adaptive_band_first2', module.DEFAULT_GROUPS)
+        self.assertEqual(len(list(module.experiment_order())), 12)
+
 
 if __name__ == '__main__':
     unittest.main()

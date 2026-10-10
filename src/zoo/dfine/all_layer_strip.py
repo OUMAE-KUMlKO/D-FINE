@@ -55,7 +55,7 @@ class LayerStripHeads(nn.Module):
 
 @register()
 class DFINEAllLayerStrip(DFINE):
-    """Jointly train D-FINE and strip heads with native per-layer/DN losses."""
+    """Jointly train D-FINE with strip heads on all or the first decoder layers."""
 
     __inject__ = ['backbone', 'encoder', 'decoder']
     requires_gt = False
@@ -67,14 +67,20 @@ class DFINEAllLayerStrip(DFINE):
         checkpoint_strips=True, normal_points=3, normal_kernel_size=1,
         use_log_prior=True, query_fusion="concat",
         bandwidth_mode="fixed", bandwidth_ratio=0.25, min_offset_pixels=2.0,
+        num_refine_layers=None,
     ):
         super().__init__(backbone, encoder, decoder)
         if feature_level < 0:
             raise ValueError('feature_level must be nonnegative')
         self.feature_level = feature_level
         self.checkpoint_strips = checkpoint_strips
+        if num_refine_layers is None:
+            num_refine_layers = decoder.num_layers
+        if type(num_refine_layers) is not int or not 1 <= num_refine_layers <= decoder.num_layers:
+            raise ValueError('num_refine_layers must be an integer from 1 to decoder.num_layers')
+        self.num_refine_layers = num_refine_layers
         self.refiner = LayerStripHeads(
-            decoder.num_layers, in_channels=encoder.hidden_dim,
+            self.num_refine_layers, in_channels=encoder.hidden_dim,
             query_dim=decoder.hidden_dim, hidden_dim=hidden_dim,
             num_points=num_points, kernel_size=kernel_size,
             offset_pixels=offset_pixels, query_chunk_size=query_chunk_size,
@@ -90,6 +96,8 @@ class DFINEAllLayerStrip(DFINE):
             raise ValueError('feature_level is outside the Encoder output list')
 
         def refine(layer_index, queries, boxes, distribution):
+            if layer_index >= self.num_refine_layers:
+                return distribution['pred_corners']
             return self.refiner(
                 layer_index, features[self.feature_level], queries, boxes,
                 images.shape[-2:], distribution, self.checkpoint_strips,

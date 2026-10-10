@@ -10,7 +10,7 @@ from pathlib import Path
 
 DEFAULT_DATASETS = ('uavswarm', 'visdrone')
 DEFAULT_GROUPS = ('g0', 'g5', 'g1', 'g2', 'g3', 'g4')
-EXTRA_GROUPS = ('g5_adaptive_band',)
+EXTRA_GROUPS = ('g5_adaptive_band', 'g5_adaptive_band_first2')
 
 
 def experiment_order(datasets=DEFAULT_DATASETS, groups=DEFAULT_GROUPS):
