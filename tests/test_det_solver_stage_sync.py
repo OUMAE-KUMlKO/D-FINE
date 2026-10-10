@@ -81,10 +81,12 @@ class DetSolverStageSyncTests(unittest.TestCase):
             "load", str(solver.output_dir / "best_stg1.pth")
         )])
 
-    def run_stage_rollbacks(self):
+    def run_stage_rollbacks(self, stage2_rollback=None):
         directory = tempfile.TemporaryDirectory()
         self.addCleanup(directory.cleanup)
         solver = self.make_solver([])
+        if stage2_rollback is not None:
+            solver.cfg.yaml_cfg["stage2_rollback"] = stage2_rollback
         del solver.load_resume_state  # Exercise actual checkpoint loading, including epoch restore.
         solver.output_dir = Path(directory.name)
         solver.cfg.epochs = 5
@@ -145,6 +147,26 @@ class DetSolverStageSyncTests(unittest.TestCase):
         self.assertEqual(solver.model.weight.item(), 1.0)
         self.assertEqual(solver.ema.module.weight.item(), 1.5)
         self.assertAlmostEqual(solver.optimizer.param_groups[0]["lr"], 0.01)
+        self.assertEqual(solver.lr_scheduler.last_epoch, 1)
+
+    def test_stage2_rollback_false_keeps_continuous_training_and_best_checkpoint(self):
+        solver, evaluated_weights = self.run_stage_rollbacks(stage2_rollback=False)
+        self.assertEqual(solver.last_epoch, 4)
+        self.assertEqual(solver.model.weight.item(), 5.0)
+        torch.testing.assert_close(solver.ema.module.weight, evaluated_weights[4])
+        # Stage transition still restores epoch0; later validation drops do not.
+        self.assertEqual(solver.lr_scheduler.last_epoch, 4)
+        self.assertAlmostEqual(solver.optimizer.param_groups[0]["lr"], 1e-5)
+        best = torch.load(solver.output_dir / "best_stg2.pth", weights_only=False)
+        self.assertEqual(best["last_epoch"], 3)
+        last = torch.load(solver.output_dir / "last.pth", weights_only=False)
+        self.assertEqual(last["last_epoch"], 4)
+        self.assertEqual(last["model"]["weight"].item(), 5.0)
+
+    def test_stage2_rollback_true_retains_original_rollback(self):
+        solver, _ = self.run_stage_rollbacks(stage2_rollback=True)
+        self.assertEqual(solver.last_epoch, 4)
+        self.assertEqual(solver.model.weight.item(), 1.0)
         self.assertEqual(solver.lr_scheduler.last_epoch, 1)
 
 

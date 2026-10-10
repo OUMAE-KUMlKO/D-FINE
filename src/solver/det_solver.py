@@ -9,6 +9,7 @@ Copyright (c) 2023 lyuwenyu. All Rights Reserved.
 import datetime
 import json
 import time
+from collections import Counter
 
 import torch
 
@@ -18,9 +19,38 @@ from .det_engine import evaluate, train_one_epoch
 
 
 class DetSolver(BaseSolver):
+    def _resume_lr_schedule(self):
+        """Apply the configured MultiStepLR after restoring all checkpoint state."""
+        if not self.cfg.resume or self.last_epoch < 0:
+            raise ValueError("resume_lr_schedule requires a resumed training checkpoint")
+        if self.lr_warmup_scheduler is not None and not self.lr_warmup_scheduler.finished():
+            raise ValueError("resume_lr_schedule requires completed warmup")
+        schedule = self.cfg.yaml_cfg["lr_scheduler"]
+        scheduler = self.lr_scheduler
+        if schedule.get("type") != "MultiStepLR" or not isinstance(
+            scheduler, torch.optim.lr_scheduler.MultiStepLR
+        ):
+            raise ValueError("resume_lr_schedule requires MultiStepLR")
+
+        # Keep the scheduler object referenced by warmup and the restored optimizer.
+        scheduler.milestones = Counter(schedule["milestones"])
+        scheduler.gamma = schedule["gamma"]
+        scheduler.last_epoch = self.last_epoch + 1
+        decay_count = sum(
+            count for milestone, count in scheduler.milestones.items()
+            if milestone <= scheduler.last_epoch
+        )
+        lrs = [base_lr * scheduler.gamma ** decay_count for base_lr in scheduler.base_lrs]
+        for group, lr in zip(self.optimizer.param_groups, lrs):
+            group["lr"] = lr
+        scheduler._last_lr = lrs
+        print(f"Resume LR schedule at epoch {scheduler.last_epoch}: {lrs}")
+
     def fit(self):
         self.train()
         args = self.cfg
+        if args.yaml_cfg.get("resume_lr_schedule", False):
+            self._resume_lr_schedule()
         metric_names = ["AP50:95", "AP50", "AP75", "APsmall", "APmedium", "APlarge"]
 
         if self.use_wandb:
@@ -169,7 +199,10 @@ class DetSolver(BaseSolver):
                             self.state_dict(), self.output_dir / "best_stg1.pth"
                         )
 
-                elif epoch >= self.train_dataloader.collate_fn.stop_epoch:
+                elif (
+                    epoch >= self.train_dataloader.collate_fn.stop_epoch
+                    and args.yaml_cfg.get("stage2_rollback", True)
+                ):
                     best_stat = {
                         "epoch": -1,
                     }

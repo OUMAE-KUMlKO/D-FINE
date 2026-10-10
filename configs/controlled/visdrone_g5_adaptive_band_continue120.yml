@@ -1,0 +1,5 @@
+__include__: ['./visdrone_g5_adaptive_band.yml', './include/continue120.yml']
+
+output_dir: ./output/controlled/visdrone/g5_adaptive_band_continue120
+exp_name: controlled_visdrone_g5_adaptive_band_continue120_seed0
+
