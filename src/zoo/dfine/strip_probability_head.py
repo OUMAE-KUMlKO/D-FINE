@@ -19,6 +19,7 @@ class StripProbabilityHead(nn.Module):
         detach_inputs=True, normal_points=3, normal_kernel_size=1,
         use_log_prior=True, query_fusion="concat",
         bandwidth_mode="fixed", bandwidth_ratio=0.25, min_offset_pixels=2.0,
+        adaptive_correction_gate=False,
     ):
         super().__init__()
         if min(in_channels, query_dim, hidden_dim) < 1:
@@ -49,6 +50,8 @@ class StripProbabilityHead(nn.Module):
             raise ValueError("use_log_prior must be a boolean.")
         if query_fusion not in {"concat", "channel_gate"}:
             raise ValueError("query_fusion must be 'concat' or 'channel_gate'.")
+        if not isinstance(adaptive_correction_gate, bool):
+            raise ValueError("adaptive_correction_gate must be a boolean.")
         self.in_channels = in_channels
         self.query_dim = query_dim
         self.hidden_dim = hidden_dim
@@ -64,6 +67,7 @@ class StripProbabilityHead(nn.Module):
         self.detach_inputs = detach_inputs
         self.use_log_prior = use_log_prior
         self.query_fusion = query_fusion
+        self.adaptive_correction_gate = adaptive_correction_gate
         self.projection = nn.Conv2d(in_channels, hidden_dim, 1)
         self.strip_encoder = nn.Sequential(
             nn.Conv2d(hidden_dim, hidden_dim, (kernel_size, normal_kernel_size),
@@ -83,6 +87,15 @@ class StripProbabilityHead(nn.Module):
         )
         nn.init.zeros_(self.score_head[-1].weight)
         nn.init.zeros_(self.score_head[-1].bias)
+        if adaptive_correction_gate:
+            # New parameters must not perturb legacy heads or the caller's RNG.
+            with torch.random.fork_rng(devices=[]):
+                self.correction_gate = nn.Sequential(
+                    nn.Linear(2 * hidden_dim + 8 + 2, hidden_dim), nn.ReLU(),
+                    nn.Linear(hidden_dim, 1),
+                )
+            nn.init.zeros_(self.correction_gate[-1].weight)
+            nn.init.zeros_(self.correction_gate[-1].bias)
 
     def zero_loss(self):
         return sum(parameter.reshape(-1)[0] * 0.0 for parameter in self.parameters())
@@ -161,9 +174,11 @@ class StripProbabilityHead(nn.Module):
                 self.strip_encoder, self.edge_fusion, self.hidden_dim,
                 self.num_points, self.query_chunk_size,
             )
-            query_features = self.query_projection(safe_query)[:, None, None].expand(n, 4, k, -1)
-            edge_features = self.edge_embedding(torch.arange(4, device=feature_map.device))
-            edge_features = edge_features[None, :, None].expand(n, 4, k, -1)
+            encoded_candidate_features = candidate_features
+            query_summary = self.query_projection(safe_query)
+            query_features = query_summary[:, None, None].expand(n, 4, k, -1)
+            edge_summary = self.edge_embedding(torch.arange(4, device=feature_map.device))
+            edge_features = edge_summary[None, :, None].expand(n, 4, k, -1)
             edges = torch.cat((
                 safe_boxes[:, :2] - safe_boxes[:, 2:] / 2,
                 safe_boxes[:, :2] + safe_boxes[:, 2:] / 2,
@@ -186,6 +201,30 @@ class StripProbabilityHead(nn.Module):
             inputs = torch.cat(input_features, -1)
             delta = self.score_head(inputs).squeeze(-1)
             correction_valid = candidate_valid & input_valid[:, None, None]
+            if self.adaptive_correction_gate:
+                valid_weight = correction_valid[..., None].to(encoded_candidate_features.dtype)
+                valid_count = valid_weight.sum(2).clamp_min(1.0)
+                encoded_mean = (encoded_candidate_features * valid_weight).sum(2) / valid_count
+                delta_mean = (
+                    torch.where(correction_valid, delta, torch.zeros_like(delta)).sum(2, keepdim=True)
+                    / valid_count
+                )
+                delta_mad = (
+                    torch.where(
+                        correction_valid,
+                        (delta - delta_mean).abs(),
+                        torch.zeros_like(delta),
+                    ).sum(2, keepdim=True)
+                    / valid_count
+                )
+                gate_context = torch.cat((
+                    encoded_mean,
+                    query_summary[:, None].expand(n, 4, -1),
+                    edge_summary[None].expand(n, -1, -1),
+                    delta_mean,
+                    delta_mad,
+                ), -1)
+                delta = delta * (1.0 + self.correction_gate(gate_context).tanh())
             calibrated = prior + torch.where(correction_valid, delta, torch.zeros_like(delta)) + zero
 
             # Invalid rows use finite decode inputs. Their original boxes are

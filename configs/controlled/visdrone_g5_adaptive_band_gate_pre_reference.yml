@@ -1,0 +1,8 @@
+__include__: ['./visdrone_g5_adaptive_band.yml']
+
+DFINEAllLayerStrip:
+  adaptive_correction_gate: True
+  next_reference_source: pre_correction
+
+output_dir: ./output/controlled/visdrone/g5_adaptive_band_gate_pre_reference
+exp_name: controlled_visdrone_g5_adaptive_band_gate_pre_reference_seed0

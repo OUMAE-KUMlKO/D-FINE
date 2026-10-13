@@ -1,0 +1,17 @@
+__include__: [
+  './dfine_hgnetv2_l_uavswarm_gt_stage1_cluster.yml',
+  '../../controlled/include/visdrone.yml',
+]
+
+# Reuse the completed UAVSwarm G1 oracle architecture and 12-epoch recipe.
+# The launcher supplies the VisDrone G0 best EMA as the frozen baseline.
+output_dir: ./output/visdrone_gt_strip_oracle/oracle
+exp_name: visdrone_gt_strip_oracle_seed0
+
+train_dataloader:
+  total_batch_size: 96  # 8 GPUs x 12 images; baseline remains in eval mode.
+val_dataloader:
+  total_batch_size: 96
+  dataset:
+    # Prepared inside the frozen run only; original annotations stay unchanged.
+    ann_file: ./output/visdrone_oracle/instances_val_positive_ids.json

@@ -1,0 +1,388 @@
+{
+  "date": "2026-10-13",
+  "metric_units": "AP fields use percent (raw COCO value multiplied by 100); epoch is zero-based",
+  "notes": [
+    "Oracle组使用annotation ID加1的同口径验证副本；E1–E3保留各自原运行评估口径。",
+    "固定配对几何包含所有matched pairs，未修正者保留原框；尺寸分组按网络输入坐标GT面积。",
+    "两种oracle均使用GT，不代表无GT检测性能或严格上界；差异同时涉及候选位置、切向跨度与有效采样。"
+  ],
+  "experiments": [
+    {
+      "id": "G0_oracle_control",
+      "name": "G0 同口径复评",
+      "status": "completed",
+      "best_epoch": 96,
+      "checkpoint": "output/visdrone_continue120_20261009/results/visdrone/seed0/g0/best_stg2.pth",
+      "checkpoint_weights": "EMA",
+      "run_path": "output/visdrone_gt_strip_oracle_20261013",
+      "metric_source": "output/visdrone_gt_strip_oracle_20261013/results/baseline/oracle_eval.json",
+      "metrics_percent": {
+        "AP": 28.623548853974835,
+        "AP50": 48.76380008962488,
+        "AP75": 28.443849556500673,
+        "AP_small": 19.24844765447482,
+        "AP_medium": 40.39243216931085,
+        "AP_large": 59.625250251670316
+      },
+      "geometry": {
+        "pairing": "fixed_baseline_hungarian",
+        "coordinate_system": "network_input_pixels",
+        "size_grouping": "GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2",
+        "counts": {
+          "matched": 38725,
+          "refined": 0,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 0,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 38725
+        },
+        "refined_fraction_of_matched": 0.0,
+        "groups": {
+          "all": {
+            "pairs": 38725,
+            "refined_pairs": 0,
+            "mean_iou": 0.6756755698553906,
+            "mean_edge_mae_px": 2.7922597088530576,
+            "edge_mae_px_ltrb": [
+              2.3554015775701167,
+              3.108001702562157,
+              2.3668026976272936,
+              3.338832857652662
+            ]
+          },
+          "small": {
+            "pairs": 33249,
+            "refined_pairs": 0,
+            "mean_iou": 0.643096578052364,
+            "mean_edge_mae_px": 2.9483938252030613,
+            "edge_mae_px_ltrb": [
+              2.495026739934408,
+              3.277575095421985,
+              2.4957493468574548,
+              3.525224118598397
+            ]
+          },
+          "medium": {
+            "pairs": 5346,
+            "refined_pairs": 0,
+            "mean_iou": 0.8722227696309931,
+            "mean_edge_mae_px": 1.8215217522989708,
+            "edge_mae_px_ltrb": [
+              1.497887095127755,
+              2.0477310999296954,
+              1.564438206133573,
+              2.17603060800486
+            ]
+          },
+          "large": {
+            "pairs": 130,
+            "refined_pairs": 0,
+            "mean_iou": 0.925503019535873,
+            "mean_edge_mae_px": 2.778889564367441,
+            "edge_mae_px_ltrb": [
+              1.9082892674666185,
+              3.3392394139216495,
+              2.3829060151026797,
+              3.485123560978816
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "GT_strip",
+      "name": "GT边界条带oracle",
+      "status": "completed",
+      "best_epoch": 11,
+      "completed_epochs": 12,
+      "last_epoch": 11,
+      "checkpoint": "output/visdrone_gt_strip_oracle_20261013/results/oracle/best_stg1.pth",
+      "epoch_checkpoint": "output/visdrone_gt_strip_oracle_20261013/results/oracle/checkpoint0011.pth",
+      "checkpoint_weights": "model; no EMA",
+      "baseline_checkpoint": "output/visdrone_continue120_20261009/results/visdrone/seed0/g0/best_stg2.pth",
+      "run_path": "output/visdrone_gt_strip_oracle_20261013",
+      "metric_source": "output/visdrone_gt_strip_oracle_20261013/results/oracle/log.txt",
+      "jobs": {
+        "preflight_job_id": "17077",
+        "training_job_id": "17079"
+      },
+      "metrics_percent": {
+        "AP": 36.02786128558954,
+        "AP50": 50.96245879438999,
+        "AP75": 39.293084584829295,
+        "AP_small": 26.791933054874328,
+        "AP_medium": 48.023099393143994,
+        "AP_large": 61.50601953854655
+      },
+      "geometry": {
+        "pairing": "fixed_baseline_hungarian",
+        "coordinate_system": "network_input_pixels",
+        "size_grouping": "GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2",
+        "counts": {
+          "matched": 38725,
+          "refined": 37260,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 1465,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 1465
+        },
+        "refined_fraction_of_matched": 0.9621691413815365,
+        "groups": {
+          "all": {
+            "pairs": 38725,
+            "refined_pairs": 37260,
+            "mean_iou": 0.7496576869658454,
+            "mean_edge_mae_px": 2.292977044909827,
+            "edge_mae_px_ltrb": [
+              2.020051798091695,
+              2.5153855132279355,
+              2.012315936320208,
+              2.624154931999469
+            ]
+          },
+          "small": {
+            "pairs": 33249,
+            "refined_pairs": 32444,
+            "mean_iou": 0.7239375986787813,
+            "mean_edge_mae_px": 2.437691834064698,
+            "edge_mae_px_ltrb": [
+              2.1579498413328033,
+              2.656984735367556,
+              2.141215362593896,
+              2.794617396964536
+            ]
+          },
+          "medium": {
+            "pairs": 5346,
+            "refined_pairs": 4725,
+            "mean_iou": 0.9050866256764094,
+            "mean_edge_mae_px": 1.388770701162297,
+            "edge_mae_px_ltrb": [
+              1.1753073219855181,
+              1.61506352289045,
+              1.2063273946934767,
+              1.558384565079743
+            ]
+          },
+          "large": {
+            "pairs": 130,
+            "refined_pairs": 91,
+            "mean_iou": 0.9361508339652671,
+            "mean_edge_mae_px": 2.4642469607866726,
+            "edge_mae_px_ltrb": [
+              1.4895281791687012,
+              3.3237610780275784,
+              2.189529162186843,
+              2.8541694237635684
+            ]
+          }
+        }
+      },
+      "preflight": {
+        "path": "output/visdrone_gt_strip_oracle_20261013/preflight.json",
+        "status": "passed",
+        "model_class": "DFINEGTRefiner",
+        "batch_size": 12,
+        "successful_updates": 2,
+        "zero_initialization_max_box_error": 0.0,
+        "classification_preserved_after_updates": true,
+        "frozen_parameters_and_buffers_unchanged": true,
+        "only_refiner_has_gradients": true,
+        "peak_cuda_memory_allocated_gib": 1.3994812965393066,
+        "peak_cuda_memory_reserved_gib": 1.564453125
+      }
+    },
+    {
+      "id": "GT_candidate",
+      "name": "GT最近候选oracle",
+      "status": "completed",
+      "best_epoch": 11,
+      "completed_epochs": 12,
+      "last_epoch": 11,
+      "checkpoint": "output/visdrone_gt_candidate_oracle_20261013/results/oracle/best_stg1.pth",
+      "epoch_checkpoint": "output/visdrone_gt_candidate_oracle_20261013/results/oracle/checkpoint0011.pth",
+      "checkpoint_weights": "model; no EMA",
+      "baseline_checkpoint": "output/visdrone_continue120_20261009/results/visdrone/seed0/g0/best_stg2.pth",
+      "run_path": "output/visdrone_gt_candidate_oracle_20261013",
+      "metric_source": "output/visdrone_gt_candidate_oracle_20261013/results/oracle/log.txt",
+      "jobs": {
+        "preflight_job_id": "17103",
+        "training_job_id": "17104"
+      },
+      "metrics_percent": {
+        "AP": 36.90383272084086,
+        "AP50": 51.417777320725286,
+        "AP75": 41.20421286626411,
+        "AP_small": 28.032851176660074,
+        "AP_medium": 48.332615173048076,
+        "AP_large": 60.84902558168871
+      },
+      "geometry": {
+        "pairing": "fixed_baseline_hungarian",
+        "coordinate_system": "network_input_pixels",
+        "size_grouping": "GT input area: small < 32^2, medium [32^2, 96^2), large >= 96^2",
+        "counts": {
+          "matched": 38725,
+          "refined": 38725,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 0,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 0
+        },
+        "refined_fraction_of_matched": 1.0,
+        "groups": {
+          "all": {
+            "pairs": 38725,
+            "refined_pairs": 38725,
+            "mean_iou": 0.7671725151296073,
+            "mean_edge_mae_px": 2.104481881602954,
+            "edge_mae_px_ltrb": [
+              1.867287123516885,
+              2.275158157157775,
+              1.8690346005599372,
+              2.406447645177219
+            ]
+          },
+          "small": {
+            "pairs": 33249,
+            "refined_pairs": 33249,
+            "mean_iou": 0.744539794885665,
+            "mean_edge_mae_px": 2.2203524057074713,
+            "edge_mae_px_ltrb": [
+              1.9794978295437515,
+              2.3865954268731233,
+              1.9754206621474606,
+              2.5398957042655512
+            ]
+          },
+          "medium": {
+            "pairs": 5346,
+            "refined_pairs": 5346,
+            "mean_iou": 0.9039053211880947,
+            "mean_edge_mae_px": 1.3723946206084896,
+            "edge_mae_px_ltrb": [
+              1.1808504250626684,
+              1.5543783469187646,
+              1.1955814256990978,
+              1.5587682847534277
+            ]
+          },
+          "large": {
+            "pairs": 130,
+            "refined_pairs": 130,
+            "mean_iou": 0.932878162838528,
+            "mean_edge_mae_px": 2.5749391225668097,
+            "edge_mae_px_ltrb": [
+              1.3964934715857873,
+              3.4144741938664365,
+              2.3540385319636417,
+              3.1347502928513746
+            ]
+          }
+        }
+      },
+      "preflight": {
+        "path": "output/visdrone_gt_candidate_oracle_20261013/preflight.json",
+        "status": "passed",
+        "model_class": "DFINEGTCandidateRefiner",
+        "batch_size": 12,
+        "successful_updates": 2,
+        "zero_initialization_max_box_error": 0.0,
+        "classification_preserved_after_updates": true,
+        "frozen_parameters_and_buffers_unchanged": true,
+        "only_refiner_has_gradients": true,
+        "peak_cuda_memory_allocated_gib": 1.584998607635498,
+        "peak_cuda_memory_reserved_gib": 2.0078125
+      }
+    },
+    {
+      "id": "E1",
+      "name": "自适应门控",
+      "status": "completed",
+      "best_epoch": 97,
+      "last_epoch": 119,
+      "checkpoint": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate/best_overall_stg2.pth",
+      "checkpoint_weights": "EMA",
+      "run_path": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate",
+      "metric_source": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate/continue120/log.txt",
+      "training_logs": [
+        "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate/continue120/log.txt"
+      ],
+      "training_job_id": "16998",
+      "metrics_percent": {
+        "AP": 28.418844457115327,
+        "AP50": 48.36593491602093,
+        "AP75": 28.137729313833372,
+        "AP_small": 18.990556461760566,
+        "AP_medium": 40.222163568722024,
+        "AP_large": 55.91370052457992
+      },
+      "selection_record": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate/resume_selection.json",
+      "historical_best": {
+        "epoch": 89,
+        "AP": 28.355244414665627,
+        "checkpoint": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate/archive/pre_resume_best_stg2.pth"
+      }
+    },
+    {
+      "id": "E2",
+      "name": "修正前参考",
+      "status": "completed",
+      "best_epoch": 92,
+      "last_epoch": 119,
+      "checkpoint": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_pre_reference/continue120/best_stg2.pth",
+      "checkpoint_weights": "EMA",
+      "run_path": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_pre_reference",
+      "metric_source": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_pre_reference/continue120/log.txt",
+      "training_logs": [
+        "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_pre_reference/continue120/log.txt",
+        "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_pre_reference/epoch80/log.txt"
+      ],
+      "training_job_id": "16999",
+      "metrics_percent": {
+        "AP": 28.246885488246797,
+        "AP50": 48.04941659090193,
+        "AP75": 27.966833569354616,
+        "AP_small": 18.82493451495247,
+        "AP_medium": 40.04478992984228,
+        "AP_large": 57.97587505735123
+      }
+    },
+    {
+      "id": "E3",
+      "name": "门控+修正前参考",
+      "status": "completed",
+      "best_epoch": 93,
+      "last_epoch": 119,
+      "checkpoint": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate_pre_reference/continue120/best_stg2.pth",
+      "checkpoint_weights": "EMA",
+      "run_path": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate_pre_reference",
+      "metric_source": "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate_pre_reference/continue120/log.txt",
+      "training_logs": [
+        "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate_pre_reference/continue120/log.txt",
+        "output/visdrone_gate_reference_prior_guard_recovery_20261011/results/visdrone/seed0/g5_adaptive_band_gate_pre_reference/epoch80/log.txt"
+      ],
+      "training_job_id": "17000",
+      "metrics_percent": {
+        "AP": 28.666467827163807,
+        "AP50": 48.5340261234943,
+        "AP75": 28.34489127957294,
+        "AP_small": 19.212721812373008,
+        "AP_medium": 40.616040597433326,
+        "AP_large": 59.08907405626264
+      }
+    }
+  ]
+}

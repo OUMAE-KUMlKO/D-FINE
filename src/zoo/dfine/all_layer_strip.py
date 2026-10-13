@@ -15,6 +15,7 @@ class LayerStripHeads(nn.Module):
 
     def __init__(self, num_layers, **head_kwargs):
         super().__init__()
+        self.last_prediction_safety_stats = {}
         self.heads = nn.ModuleList([
             StripProbabilityHead(**head_kwargs, detach_inputs=False)
             for _ in range(num_layers)
@@ -37,6 +38,14 @@ class LayerStripHeads(nn.Module):
                 'pred_corners': prior, 'ref_points': reference,
                 'up': up, 'reg_scale': scale,
             })
+            input_invalid = ~result['input_valid']
+            decode_fallback = result['input_valid'] & ~result['refinement_mask']
+            self.last_prediction_safety_stats[
+                f'layer_{layer_index}_head_input_invalid_queries'
+            ] = int(input_invalid.sum().item())
+            self.last_prediction_safety_stats[
+                f'layer_{layer_index}_head_decode_fallback_queries'
+            ] = int(decode_fallback.sum().item())
             calibrated = result['calibrated_corners'].flatten(-2).to(prior.dtype)
             # Keep logits and decoded boxes consistent when calibration falls back.
             return torch.where(result['refinement_mask'][..., None], calibrated, prior)
@@ -67,13 +76,17 @@ class DFINEAllLayerStrip(DFINE):
         checkpoint_strips=True, normal_points=3, normal_kernel_size=1,
         use_log_prior=True, query_fusion="concat",
         bandwidth_mode="fixed", bandwidth_ratio=0.25, min_offset_pixels=2.0,
-        num_refine_layers=None,
+        num_refine_layers=None, adaptive_correction_gate=False,
+        next_reference_source='corrected',
     ):
         super().__init__(backbone, encoder, decoder)
         if feature_level < 0:
             raise ValueError('feature_level must be nonnegative')
         self.feature_level = feature_level
         self.checkpoint_strips = checkpoint_strips
+        if next_reference_source not in {'corrected', 'pre_correction'}:
+            raise ValueError("next_reference_source must be 'corrected' or 'pre_correction'")
+        self.next_reference_source = next_reference_source
         if num_refine_layers is None:
             num_refine_layers = decoder.num_layers
         if type(num_refine_layers) is not int or not 1 <= num_refine_layers <= decoder.num_layers:
@@ -88,9 +101,11 @@ class DFINEAllLayerStrip(DFINE):
             use_log_prior=use_log_prior, query_fusion=query_fusion,
             bandwidth_mode=bandwidth_mode, bandwidth_ratio=bandwidth_ratio,
             min_offset_pixels=min_offset_pixels,
+            adaptive_correction_gate=adaptive_correction_gate,
         )
 
     def forward(self, images, targets=None):
+        self.refiner.last_prediction_safety_stats = {}
         features = self.encoder(self.backbone(images))
         if self.feature_level >= len(features):
             raise ValueError('feature_level is outside the Encoder output list')
@@ -104,7 +119,10 @@ class DFINEAllLayerStrip(DFINE):
             )
 
         # Targets enter only the original training denoising mechanism and loss.
-        return self.decoder(features, targets, distribution_refiner=refine)
+        decoder_kwargs = {'distribution_refiner': refine}
+        if self.next_reference_source != 'corrected':
+            decoder_kwargs['next_reference_source'] = self.next_reference_source
+        return self.decoder(features, targets, **decoder_kwargs)
 
 
 @register()
@@ -149,6 +167,7 @@ class DFINEAllLayerStripRefiner(DFINEPredRefiner):
         )
 
     def forward(self, images, targets=None):
+        self.refiner.last_prediction_safety_stats = {}
         if not self._baseline_loaded:
             raise RuntimeError('Load a complete baseline checkpoint before all-layer refinement')
         if images.ndim != 4 or images.shape[0] == 0:

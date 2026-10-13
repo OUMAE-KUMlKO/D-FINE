@@ -22,6 +22,9 @@ from ..misc import MetricLogger, SmoothedValue, dist_utils, save_samples
 from ..optim import ModelEMA, Warmup
 from .gt_refinement_metrics import GTRefinementMetrics
 from .validator import Validator, scale_boxes
+from .prediction_safety_diagnostics import (
+    guarded_prediction_forward, prediction_safety_enabled, prediction_safety_stats,
+)
 
 
 def train_one_epoch(
@@ -56,6 +59,8 @@ def train_one_epoch(
 
     output_dir = kwargs.get("output_dir", None)
     num_visualization_sample_batch = kwargs.get("num_visualization_sample_batch", 1)
+    guard_predictions = prediction_safety_enabled(model)
+    safety_totals = {}
 
     for i, (samples, targets) in enumerate(
         metric_logger.log_every(data_loader, print_freq, header)
@@ -70,10 +75,15 @@ def train_one_epoch(
         targets = [{k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in t.items()} for t in targets]
 
         if scaler is not None:
-            with torch.autocast(device_type=str(device), cache_enabled=True):
-                outputs = model(samples, targets=targets)
+            if guard_predictions:
+                outputs = guarded_prediction_forward(
+                    model, samples, targets, output_dir, epoch=epoch, step=i, use_amp=True,
+                )
+            else:
+                with torch.autocast(device_type=str(device), cache_enabled=True):
+                    outputs = model(samples, targets=targets)
 
-            if torch.isnan(outputs["pred_boxes"]).any() or torch.isinf(outputs["pred_boxes"]).any():
+            if not guard_predictions and (torch.isnan(outputs["pred_boxes"]).any() or torch.isinf(outputs["pred_boxes"]).any()):
                 print(outputs["pred_boxes"])
                 state = model.state_dict()
                 new_state = {}
@@ -100,7 +110,12 @@ def train_one_epoch(
             optimizer.zero_grad()
 
         else:
-            outputs = model(samples, targets=targets)
+            if guard_predictions:
+                outputs = guarded_prediction_forward(
+                    model, samples, targets, output_dir, epoch=epoch, step=i, use_amp=False,
+                )
+            else:
+                outputs = model(samples, targets=targets)
             loss_dict = criterion(outputs, targets, **metas)
 
             loss: torch.Tensor = sum(loss_dict.values())
@@ -132,6 +147,9 @@ def train_one_epoch(
         # Candidate coverage statistics are detached metrics, not optimization losses.
         metric_logger.update(**getattr(criterion, "last_candidate_stats", {}))
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
+        if guard_predictions:
+            for key, value in prediction_safety_stats(model).items():
+                safety_totals[key] = safety_totals.get(key, 0) + int(value)
 
         if writer and dist_utils.is_main_process() and global_step % 10 == 0:
             writer.add_scalar("Loss/total", loss_value.item(), global_step)
@@ -147,7 +165,15 @@ def train_one_epoch(
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
-    return {k: meter.global_avg for k, meter in metric_logger.meters.items()}
+    stats = {k: meter.global_avg for k, meter in metric_logger.meters.items()}
+    if safety_totals:
+        keys = sorted(safety_totals)
+        totals = torch.tensor([safety_totals[key] for key in keys], dtype=torch.int64, device=device)
+        if dist_utils.is_dist_available_and_initialized():
+            torch.distributed.all_reduce(totals)
+        stats.update({f'prediction_safety_{key}': int(value)
+                      for key, value in zip(keys, totals.tolist())})
+    return stats
 
 
 @torch.no_grad()

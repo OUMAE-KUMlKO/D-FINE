@@ -1,0 +1,16 @@
+__include__: [
+  './dfine_hgnetv2_l_uavswarm_gt_candidate_oracle.yml',
+  '../../controlled/include/visdrone.yml',
+]
+
+# Reuse UAVSwarm's GT-nearest candidate oracle with the VisDrone G0 baseline.
+output_dir: ./output/visdrone_gt_candidate_oracle/oracle
+exp_name: visdrone_gt_candidate_oracle_seed0
+
+train_dataloader:
+  total_batch_size: 96
+val_dataloader:
+  total_batch_size: 96
+  dataset:
+    # Same positive-ID validation annotations as the GT-boundary oracle.
+    ann_file: ./output/visdrone_oracle/instances_val_positive_ids.json

@@ -1,0 +1,321 @@
+{
+  "model": {
+    "checkpoint": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_continue120_20261009/results/visdrone/seed0/g5_adaptive_band/best_stg2.pth",
+    "checkpoint_last_epoch": 96,
+    "weights": "ema.module",
+    "model_class": "DFINEAllLayerStrip",
+    "config": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_correction_scale_20261010/source/configs/controlled/visdrone_g5_adaptive_band_continue120.yml"
+  },
+  "dataset": {
+    "type": "CocoDetection",
+    "img_folder": "/home/zzy/datasets/visdrone/VisDrone2019-DET-val/images",
+    "ann_file": "./output/visdrone_controlled/instances_val.json",
+    "return_masks": false,
+    "transforms": {
+      "type": "Compose",
+      "ops": [
+        {
+          "type": "Resize",
+          "size": [
+            640,
+            640
+          ]
+        },
+        {
+          "type": "ConvertPILImage",
+          "dtype": "float32",
+          "scale": true
+        }
+      ]
+    }
+  },
+  "images": 548,
+  "valid_gt": 38759,
+  "fixed_pairs": 38725,
+  "full_validation": true,
+  "inference_precision": "float32",
+  "inference_uses_gt": false,
+  "input_sizes_hw": [
+    [
+      640,
+      640
+    ]
+  ],
+  "batch_size": 4,
+  "intervention": "All strip heads: scale score_head output delta before masking and addition to original logits; downstream states propagate normally.",
+  "new_inference_scales": {
+    "alpha_0": 0.0,
+    "alpha_0.5": 0.5
+  },
+  "reused_alpha": 1.0,
+  "baseline_summary": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_feature_ablation_20261010/results/summary.json",
+  "baseline_cache": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_feature_ablation_20261010/results/predictions.pth",
+  "first_batch_reference_close": true,
+  "reference_check_atol": 1e-06,
+  "reference_check_rtol": 1e-06,
+  "max_dets": [
+    1,
+    10,
+    100
+  ],
+  "matching_costs": {
+    "cost_class": 0,
+    "cost_bbox": 5,
+    "cost_giou": 2
+  },
+  "matching_policy": "Reuse saved normal final geometry query/GT assignment for every image; no rematching.",
+  "geometry_before_after": "before=cached alpha=1; after=indicated scale",
+  "interpretation": "Frozen jointly trained G5; alpha=0 is not the independently trained G0. Uniform inference scaling does not prove or rule out target-dependent gating.",
+  "prediction_cache": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_correction_scale_20261010/results/predictions.pth",
+  "elapsed_seconds": 144.0191513139871,
+  "job_id": "16809",
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "wall_time": "00:02:37",
+  "source": "output/visdrone_correction_scale_20261010/results/summary.json",
+  "results": {
+    "alpha_1": {
+      "coco_percent": {
+        "AP": 28.41882907031587,
+        "AP50": 48.28300173307724,
+        "AP75": 28.232184713473824,
+        "APsmall": 19.251392685821838,
+        "APmedium": 39.950574259454974,
+        "APlarge": 59.73972380439957,
+        "AR1": 11.579576510455533,
+        "AR10": 32.555912121575,
+        "AR100": 42.84356178830356,
+        "ARsmall": 33.50312189906346,
+        "ARmedium": 56.07747164430715,
+        "ARlarge": 71.37666164625371
+      },
+      "delta_coco_pp_vs_alpha1": {
+        "AP": 0.0,
+        "AP50": 0.0,
+        "AP75": 0.0,
+        "APsmall": 0.0,
+        "APmedium": 0.0,
+        "APlarge": 0.0,
+        "AR1": 0.0,
+        "AR10": 0.0,
+        "AR100": 0.0,
+        "ARsmall": 0.0,
+        "ARmedium": 0.0,
+        "ARlarge": 0.0
+      },
+      "fixed_geometry_all": {
+        "pairs": 38725,
+        "before": {
+          "mean_iou": 0.6882149488064842,
+          "mean_edge_mae_px": 2.4614045754700338,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.0439823065556735,
+            "top": 2.7877155231228947,
+            "right": 2.075644083701079,
+            "bottom": 2.9382763885004892
+          }
+        },
+        "after": {
+          "mean_iou": 0.6882149488064842,
+          "mean_edge_mae_px": 2.4614045754700338,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.0439823065556735,
+            "top": 2.7877155231228947,
+            "right": 2.075644083701079,
+            "bottom": 2.9382763885004892
+          }
+        },
+        "mean_iou_change": 0.0,
+        "mean_edge_mae_change_px": 0.0,
+        "iou_improved_fraction": 0.0,
+        "iou_degraded_fraction": 0.0,
+        "iou_stable_fraction": 1.0
+      },
+      "invalid_pairs": 0,
+      "short_side_groups": {
+        "short_lt8": {
+          "pairs": 15861,
+          "mean_iou_change": 0.0,
+          "mean_edge_mae_change_px": 0.0
+        },
+        "short_8_to_lt16": {
+          "pairs": 11418,
+          "mean_iou_change": 0.0,
+          "mean_edge_mae_change_px": 0.0
+        },
+        "short_16_to_lt32": {
+          "pairs": 8050,
+          "mean_iou_change": 0.0,
+          "mean_edge_mae_change_px": 0.0
+        },
+        "short_ge32": {
+          "pairs": 3396,
+          "mean_iou_change": 0.0,
+          "mean_edge_mae_change_px": 0.0
+        }
+      }
+    },
+    "alpha_0": {
+      "coco_percent": {
+        "AP": 28.154081319338133,
+        "AP50": 48.22464743803331,
+        "AP75": 27.81241686047771,
+        "APsmall": 19.0098459793614,
+        "APmedium": 39.54515430992608,
+        "APlarge": 57.611399744583935,
+        "AR1": 11.477612661721109,
+        "AR10": 32.11352779196242,
+        "AR100": 42.326407607323745,
+        "ARsmall": 33.09633497793616,
+        "ARmedium": 55.34372405448376,
+        "ARlarge": 69.6160198359925
+      },
+      "delta_coco_pp_vs_alpha1": {
+        "AP": -0.26474775097773673,
+        "AP50": -0.058354295043933746,
+        "AP75": -0.4197678529961131,
+        "APsmall": -0.2415467064604364,
+        "APmedium": -0.40541994952889127,
+        "APlarge": -2.1283240598156326,
+        "AR1": -0.10196384873442454,
+        "AR10": -0.44238432961257956,
+        "AR100": -0.5171541809798157,
+        "ARsmall": -0.4067869211272992,
+        "ARmedium": -0.7337475898233947,
+        "ARlarge": -1.7606418102612054
+      },
+      "fixed_geometry_all": {
+        "pairs": 38725,
+        "before": {
+          "mean_iou": 0.6882149488064842,
+          "mean_edge_mae_px": 2.4614045754700338,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.0439823065556735,
+            "top": 2.7877155231228947,
+            "right": 2.075644083701079,
+            "bottom": 2.9382763885004892
+          }
+        },
+        "after": {
+          "mean_iou": 0.6838315988613759,
+          "mean_edge_mae_px": 2.5034795352610715,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.0654287789813006,
+            "top": 2.833212935043351,
+            "right": 2.112916088515978,
+            "bottom": 3.002360338503657
+          }
+        },
+        "mean_iou_change": -0.00438334994510825,
+        "mean_edge_mae_change_px": 0.0420749597910377,
+        "iou_improved_fraction": 0.4293867010974822,
+        "iou_degraded_fraction": 0.5376630083925112,
+        "iou_stable_fraction": 0.032950290510006454
+      },
+      "invalid_pairs": 0,
+      "short_side_groups": {
+        "short_lt8": {
+          "pairs": 15861,
+          "mean_iou_change": -0.004665632793125929,
+          "mean_edge_mae_change_px": 0.03062986074209606
+        },
+        "short_8_to_lt16": {
+          "pairs": 11418,
+          "mean_iou_change": -0.003933344890040824,
+          "mean_edge_mae_change_px": 0.033052117741761755
+        },
+        "short_16_to_lt32": {
+          "pairs": 8050,
+          "mean_iou_change": -0.003816772387721379,
+          "mean_edge_mae_change_px": 0.03864106824679392
+        },
+        "short_ge32": {
+          "pairs": 3396,
+          "mean_iou_change": -0.005920987990824966,
+          "mean_edge_mae_change_px": 0.13400557035200733
+        }
+      }
+    },
+    "alpha_0.5": {
+      "coco_percent": {
+        "AP": 28.330251531991713,
+        "AP50": 48.23016204630459,
+        "AP75": 28.18907961096072,
+        "APsmall": 19.206225823887436,
+        "APmedium": 39.78994654878261,
+        "APlarge": 58.10089738960931,
+        "AR1": 11.489269428775462,
+        "AR10": 32.29806682546147,
+        "AR100": 42.65295406067138,
+        "ARsmall": 33.36297571100381,
+        "ARmedium": 55.79422264549541,
+        "ARlarge": 70.37255504663311
+      },
+      "delta_coco_pp_vs_alpha1": {
+        "AP": -0.08857753832415582,
+        "AP50": -0.05283968677264994,
+        "AP75": -0.04310510251310262,
+        "APsmall": -0.045166861934401226,
+        "APmedium": -0.16062771067236525,
+        "APlarge": -1.638826414790259,
+        "AR1": -0.09030708168007173,
+        "AR10": -0.2578452961135298,
+        "AR100": -0.1906077276321838,
+        "ARsmall": -0.14014618805964574,
+        "ARmedium": -0.28324899881174304,
+        "ARlarge": -1.0041065996205987
+      },
+      "fixed_geometry_all": {
+        "pairs": 38725,
+        "before": {
+          "mean_iou": 0.6882149488064842,
+          "mean_edge_mae_px": 2.4614045754700338,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.0439823065556735,
+            "top": 2.7877155231228947,
+            "right": 2.075644083701079,
+            "bottom": 2.9382763885004892
+          }
+        },
+        "after": {
+          "mean_iou": 0.6870226953934238,
+          "mean_edge_mae_px": 2.472208711870491,
+          "mean_edge_mae_by_side_px": {
+            "left": 2.048936354563727,
+            "top": 2.8006505446791112,
+            "right": 2.0850573530614263,
+            "bottom": 2.954190595177699
+          }
+        },
+        "mean_iou_change": -0.0011922534130603957,
+        "mean_edge_mae_change_px": 0.01080413640045741,
+        "iou_improved_fraction": 0.4526016785022595,
+        "iou_degraded_fraction": 0.5142156229825694,
+        "iou_stable_fraction": 0.033182698515171076
+      },
+      "invalid_pairs": 0,
+      "short_side_groups": {
+        "short_lt8": {
+          "pairs": 15861,
+          "mean_iou_change": -0.0009967913115473959,
+          "mean_edge_mae_change_px": 0.0047139979391137565
+        },
+        "short_8_to_lt16": {
+          "pairs": 11418,
+          "mean_iou_change": -0.0011509981992852136,
+          "mean_edge_mae_change_px": 0.008934354730946392
+        },
+        "short_16_to_lt32": {
+          "pairs": 8050,
+          "mean_iou_change": -0.0012101711189758113,
+          "mean_edge_mae_change_px": 0.01067572291593355
+        },
+        "short_ge32": {
+          "pairs": 3396,
+          "mean_iou_change": -0.0022013932511981693,
+          "mean_edge_mae_change_px": 0.04583905447708836
+        }
+      }
+    }
+  }
+}

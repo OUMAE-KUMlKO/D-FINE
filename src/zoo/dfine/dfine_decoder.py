@@ -20,6 +20,11 @@ import torch.nn.init as init
 from ...core import register
 from .denoising import get_contrastive_denoising_training_group
 from .dfine_utils import distance2bbox, weighting_function
+from .prediction_safety import (
+    select_safe_correction,
+    validate_prior_boxes,
+    validate_prior_inputs,
+)
 from .utils import (
     bias_init_with_prob,
     deformable_attention_core_func_v2,
@@ -342,6 +347,7 @@ class TransformerDecoder(nn.Module):
         self.num_head = num_head
         self.eval_idx = eval_idx if eval_idx >= 0 else num_layers + eval_idx
         self.up, self.reg_scale, self.reg_max = up, reg_scale, reg_max
+        self.last_prediction_safety_stats = {}
         self.layers = nn.ModuleList(
             [copy.deepcopy(decoder_layer) for _ in range(self.eval_idx + 1)]
             + [copy.deepcopy(decoder_layer_wide) for _ in range(num_layers - self.eval_idx - 1)]
@@ -388,11 +394,17 @@ class TransformerDecoder(nn.Module):
         return_query=False,
         query_refiner=None,
         distribution_refiner=None,
+        next_reference_source="corrected",
     ):
+        self.last_prediction_safety_stats = {}
         if query_refiner is not None and distribution_refiner is not None:
             raise ValueError("query_refiner and distribution_refiner cannot be used together")
         if query_refiner is not None and self.training:
             raise ValueError("query_refiner is only supported with the decoder in eval mode")
+        if next_reference_source not in {"corrected", "pre_correction"}:
+            raise ValueError(
+                "next_reference_source must be 'corrected' or 'pre_correction'"
+            )
         output = target
         output_detach = pred_corners_undetach = 0
         value = self.value_op(memory, None, None, memory_mask, spatial_shapes)
@@ -407,6 +419,7 @@ class TransformerDecoder(nn.Module):
             project = self.project
 
         ref_points_detach = F.sigmoid(ref_points_unact)
+        dn_count = dn_meta["dn_num_split"][0] if dn_meta else 0
 
         for i, layer in enumerate(self.layers):
             ref_points_input = ref_points_detach.unsqueeze(2)
@@ -441,21 +454,52 @@ class TransformerDecoder(nn.Module):
 
             # Refine bounding box corners using FDR, integrating previous layer's corrections
             pred_corners = bbox_head[i](output + output_detach) + pred_corners_undetach
-            inter_ref_bbox = distance2bbox(
-                ref_points_initial, integral(pred_corners, project), reg_scale
-            )
+            if distribution_refiner is None:
+                inter_ref_bbox = distance2bbox(
+                    ref_points_initial, integral(pred_corners, project), reg_scale
+                )
+                pre_correction_bbox = inter_ref_bbox
+            else:
+                checked_key = f"layer_{i}_checked_queries"
+                fallback_key = f"layer_{i}_fallback_queries"
+                self.last_prediction_safety_stats[checked_key] = int(
+                    pred_corners.shape[0] * (pred_corners.shape[1] - dn_count)
+                )
+                self.last_prediction_safety_stats[fallback_key] = 0
+                validate_prior_inputs(
+                    i, pred_corners, ref_points_initial, dn_count,
+                )
 
-            if distribution_refiner is not None:
-                pred_corners = distribution_refiner(i, output, inter_ref_bbox, {
+                def decode(corners):
+                    return distance2bbox(
+                        ref_points_initial, integral(corners, project), reg_scale
+                    )
+
+                inter_ref_bbox = decode(pred_corners)
+                invalid_prior_geometry = validate_prior_boxes(
+                    i, pred_corners, inter_ref_bbox, ref_points_initial, dn_count,
+                )
+                self.last_prediction_safety_stats[
+                    f"layer_{i}_prior_invalid_geometry_queries"
+                ] = invalid_prior_geometry
+                pre_correction_bbox = inter_ref_bbox
+                corrected_corners = distribution_refiner(i, output, inter_ref_bbox, {
                     "pred_corners": pred_corners,
                     "ref_points": ref_points_initial,
                     "up": up,
                     "reg_scale": reg_scale,
-                    "num_denoising": dn_meta["dn_num_split"][0] if dn_meta else 0,
+                    "num_denoising": dn_count,
                 })
-                inter_ref_bbox = distance2bbox(
-                    ref_points_initial, integral(pred_corners, project), reg_scale
+                pred_corners, inter_ref_bbox, safety_stats = select_safe_correction(
+                    i, pred_corners, pre_correction_bbox, corrected_corners,
+                    ref_points_initial, decode, dn_count,
                 )
+                self.last_prediction_safety_stats[checked_key] = safety_stats[
+                    "checked_queries"
+                ]
+                self.last_prediction_safety_stats[fallback_key] = safety_stats[
+                    "fallback_queries"
+                ]
 
             if self.training or i == self.eval_idx:
                 scores = score_head[i](output)
@@ -470,7 +514,10 @@ class TransformerDecoder(nn.Module):
                     break
 
             pred_corners_undetach = pred_corners
-            ref_points_detach = inter_ref_bbox.detach()
+            if distribution_refiner is not None and next_reference_source == "pre_correction":
+                ref_points_detach = pre_correction_bbox.detach()
+            else:
+                ref_points_detach = inter_ref_bbox.detach()
             output_detach = output.detach()
 
         result = (
@@ -868,6 +915,7 @@ class DFINETransformer(nn.Module):
     def forward(
         self, feats, targets=None, return_query=False, return_distribution=False,
         query_refiner=None, distribution_refiner=None,
+        next_reference_source="corrected",
     ):
         if query_refiner is not None and distribution_refiner is not None:
             raise ValueError("query_refiner and distribution_refiner cannot be used together")
@@ -919,6 +967,7 @@ class DFINETransformer(nn.Module):
             return_query=return_query,
             query_refiner=query_refiner,
             distribution_refiner=distribution_refiner,
+            next_reference_source=next_reference_source,
         )
         out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = decoder_outputs[:6]
 
