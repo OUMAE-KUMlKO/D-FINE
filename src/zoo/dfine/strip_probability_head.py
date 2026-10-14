@@ -100,7 +100,10 @@ class StripProbabilityHead(nn.Module):
     def zero_loss(self):
         return sum(parameter.reshape(-1)[0] * 0.0 for parameter in self.parameters())
 
-    def forward(self, feature_map, queries, pred_boxes, image_size, distribution):
+    def forward(
+        self, feature_map, queries, pred_boxes, image_size, distribution,
+        gt_boxes=None, gt_matched=None,
+    ):
         if feature_map.ndim != 4 or feature_map.shape[1] != self.in_channels:
             raise ValueError("feature_map must have shape [B, in_channels, H, W].")
         if queries.ndim != 3 or queries.shape[-1] != self.query_dim:
@@ -110,6 +113,18 @@ class StripProbabilityHead(nn.Module):
             raise ValueError("Features, queries, and boxes must share batch/query dimensions.")
         if any(value.device != feature_map.device for value in (queries, pred_boxes)):
             raise ValueError("Features, queries, and boxes must share a device.")
+        if (gt_boxes is None) != (gt_matched is None):
+            raise ValueError("GT guidance requires both gt_boxes and gt_matched.")
+        if gt_boxes is not None:
+            if gt_boxes.shape != pred_boxes.shape or gt_matched.shape != queries.shape[:2]:
+                raise ValueError("GT guidance must match the ordinary query dimensions.")
+            if gt_matched.dtype != torch.bool:
+                raise ValueError("gt_matched must be a boolean mask.")
+            if gt_boxes.device != feature_map.device or gt_matched.device != feature_map.device:
+                raise ValueError("GT guidance must share the feature device.")
+            selected_boxes = gt_boxes[gt_matched]
+            if not torch.isfinite(selected_boxes).all() or (selected_boxes[:, 2:] <= 0).any():
+                raise ValueError("Matched GT boxes must be finite normalized cxcywh boxes.")
         required = {"pred_corners", "ref_points", "up", "reg_scale"}
         if distribution is None or required - set(distribution):
             raise ValueError(f"distribution must contain {sorted(required)}")
@@ -174,6 +189,18 @@ class StripProbabilityHead(nn.Module):
                 self.strip_encoder, self.edge_fusion, self.hidden_dim,
                 self.num_points, self.query_chunk_size,
             )
+            if gt_boxes is not None:
+                # This oracle reveals the selected visual location, not output
+                # logits or coordinates. Unmatched queries keep ordinary G5.
+                target = gt_boxes.detach().float().reshape(n, 4)
+                target_edges = torch.cat((target[:, :2] - target[:, 2:] / 2,
+                                          target[:, :2] + target[:, 2:] / 2), -1)
+                distance = (positions - target_edges[..., None]).abs()
+                nearest = distance.masked_fill(~candidate_valid, float('inf')).argmin(-1)
+                keep = torch.arange(k, device=feature_map.device)[None, None, :] == nearest[..., None]
+                guided = gt_matched.reshape(n) & input_valid
+                keep = ~guided[:, None, None] | (keep & candidate_valid)
+                candidate_features = candidate_features * keep[..., None].to(candidate_features.dtype)
             encoded_candidate_features = candidate_features
             query_summary = self.query_projection(safe_query)
             query_features = query_summary[:, None, None].expand(n, 4, k, -1)

@@ -19,3 +19,4 @@ from .pred_refinement_criterion import PredRefinementCriterion
 from .probability_refinement import DFINEProbabilityRefiner
 from .probability_refinement_criterion import ProbabilityRefinementCriterion
 from .all_layer_strip import DFINEAllLayerStrip, DFINEAllLayerStripRefiner
+from .gt_all_layer_strip import DFINEGTAllLayerStrip

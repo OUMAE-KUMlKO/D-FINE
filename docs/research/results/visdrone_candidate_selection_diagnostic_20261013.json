@@ -1,0 +1,741 @@
+{
+  "date": "2026-10-13",
+  "base_commit": "7a98634",
+  "job": {
+    "id": 17130,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:02:50",
+    "node": "gpu12"
+  },
+  "run_root": "output/visdrone_candidate_selection_diagnostic_20261013",
+  "images": 548,
+  "precision": "FP32",
+  "batch_size": 4,
+  "training": false,
+  "oracle_pooling": {
+    "model": {
+      "checkpoint": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_gt_candidate_oracle_20261013/results/oracle/best_stg1.pth",
+      "checkpoint_last_epoch": 11,
+      "weights": "model",
+      "model_class": "DFINEGTCandidateRefiner"
+    },
+    "matching_policy": "Frozen G0 class+bbox+GIoU Hungarian matching; identical query/GT pairs across modes.",
+    "classification_matching_and_valid_mask_preserved": true,
+    "gt_nearest_ap_difference_pp": 0.002857677560513139,
+    "reference_check_passed": true,
+    "interpretation": "Inference sensitivity of a head trained with GT one-hot selection; weighted pooling changes its input distribution. Not a G5 selector ablation.",
+    "modes": {
+      "gt_nearest": {
+        "coco_percent": {
+          "AP": 36.90669039840137,
+          "AP50": 51.42295918678178,
+          "AP75": 41.19912286149957,
+          "APsmall": 28.030580823710878,
+          "APmedium": 48.33974406748332,
+          "APlarge": 60.850751712141296,
+          "AR1": 13.160039686446517,
+          "AR10": 40.560632326762615,
+          "AR100": 54.81106218522599,
+          "ARsmall": 47.29892348624603,
+          "ARmedium": 65.40979626820791,
+          "ARlarge": 73.49463825189001
+        },
+        "counts": {
+          "matched": 38725,
+          "refined": 38725,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 0,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 0
+        },
+        "all_geometry": {
+          "pairs": 38725,
+          "refined_pairs": 38725,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              2.3560620310577445,
+              3.107097796800446,
+              2.367676817289547,
+              3.338127828664053
+            ],
+            "mean_edge_mae_px": 2.7922411184529476,
+            "center_mae_px_xy": [
+              2.074009048388495,
+              2.846892912350138
+            ],
+            "size_mae_px_wh": [
+              1.892227959802183,
+              2.7200448349878203
+            ],
+            "mean_iou": 0.6756560755444073
+          },
+          "refined": {
+            "edge_mae_px_ltrb": [
+              1.8682717532054158,
+              2.273778576005113,
+              1.8695499701873959,
+              2.405138321200673
+            ],
+            "mean_edge_mae_px": 2.1041846551496493,
+            "center_mae_px_xy": [
+              1.6821005737920052,
+              2.0803380416469315
+            ],
+            "size_mae_px_wh": [
+              1.269937464188883,
+              1.7768237850833817
+            ],
+            "mean_iou": 0.7671671349040724
+          },
+          "mean_iou_change": 0.09151105935966511,
+          "iou_improved": 32362,
+          "iou_degraded": 5049,
+          "iou_stable": 1314
+        }
+      },
+      "prior_argmax": {
+        "coco_percent": {
+          "AP": 27.323825471371983,
+          "AP50": 48.14615084947471,
+          "AP75": 26.494675192725754,
+          "APsmall": 18.28632472958974,
+          "APmedium": 38.576005134663085,
+          "APlarge": 55.768707622299765,
+          "AR1": 10.9073084155609,
+          "AR10": 31.182249611299234,
+          "AR100": 41.34308495748168,
+          "ARsmall": 32.25841537486032,
+          "ARmedium": 54.172286457245036,
+          "ARlarge": 68.3376237329483
+        },
+        "counts": {
+          "matched": 38725,
+          "refined": 38725,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 0,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 0
+        },
+        "all_geometry": {
+          "pairs": 38725,
+          "refined_pairs": 38725,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              2.3560620310577445,
+              3.107097796800446,
+              2.367676817289547,
+              3.338127828664053
+            ],
+            "mean_edge_mae_px": 2.7922411184529476,
+            "center_mae_px_xy": [
+              2.074009048388495,
+              2.846892912350138
+            ],
+            "size_mae_px_wh": [
+              1.892227959802183,
+              2.7200448349878203
+            ],
+            "mean_iou": 0.6756560755444073
+          },
+          "refined": {
+            "edge_mae_px_ltrb": [
+              2.4421726428804433,
+              3.2293705240767414,
+              2.430438081988448,
+              3.456278225404359
+            ],
+            "mean_edge_mae_px": 2.889564868587498,
+            "center_mae_px_xy": [
+              2.145703086724506,
+              2.9380143741009848
+            ],
+            "size_mae_px_wh": [
+              1.8952615565411732,
+              2.8395903849924973
+            ],
+            "mean_iou": 0.6618977488050864
+          },
+          "mean_iou_change": -0.01375832673932083,
+          "iou_improved": 14733,
+          "iou_degraded": 22495,
+          "iou_stable": 1497
+        }
+      },
+      "prior_weighted": {
+        "coco_percent": {
+          "AP": 27.469889690005754,
+          "AP50": 48.399575765753724,
+          "AP75": 26.845622684780217,
+          "APsmall": 18.396378335519366,
+          "APmedium": 38.687947968607276,
+          "APlarge": 55.952312105089,
+          "AR1": 10.947201713201032,
+          "AR10": 31.41813225183574,
+          "AR100": 41.615103266101,
+          "ARsmall": 32.47746337327437,
+          "ARmedium": 54.51579353934968,
+          "ARlarge": 68.0741949892008
+        },
+        "counts": {
+          "matched": 38725,
+          "refined": 38725,
+          "ignored_gt": 0,
+          "total_gt": 38759,
+          "unmatched_gt": 34,
+          "unmatched_queries": 125675,
+          "invalid_gt_samples": 0,
+          "invalid_baseline_boxes": 0,
+          "invalid_metric_pairs": 0,
+          "unrefined_matched": 0
+        },
+        "all_geometry": {
+          "pairs": 38725,
+          "refined_pairs": 38725,
+          "baseline": {
+            "edge_mae_px_ltrb": [
+              2.3560620310577445,
+              3.107097796800446,
+              2.367676817289547,
+              3.338127828664053
+            ],
+            "mean_edge_mae_px": 2.7922411184529476,
+            "center_mae_px_xy": [
+              2.074009048388495,
+              2.846892912350138
+            ],
+            "size_mae_px_wh": [
+              1.892227959802183,
+              2.7200448349878203
+            ],
+            "mean_iou": 0.6756560755444073
+          },
+          "refined": {
+            "edge_mae_px_ltrb": [
+              2.405275518500551,
+              3.195498924908752,
+              2.4149471819997217,
+              3.4184915774210256
+            ],
+            "mean_edge_mae_px": 2.858553300707513,
+            "center_mae_px_xy": [
+              2.118782432280178,
+              2.90494073729041
+            ],
+            "size_mae_px_wh": [
+              1.882042143947467,
+              2.7964773058198666
+            ],
+            "mean_iou": 0.665514807838029
+          },
+          "mean_iou_change": -0.010141267706378337,
+          "iou_improved": 14796,
+          "iou_degraded": 22422,
+          "iou_stable": 1507
+        }
+      }
+    }
+  },
+  "g5_scores": {
+    "model": {
+      "checkpoint": "/home/zzy/projects/occ_study/D-FINE_mine/D-FINE/output/visdrone_continue120_20261009/results/visdrone/seed0/g5_adaptive_band/best_stg2.pth",
+      "checkpoint_last_epoch": 96,
+      "weights": "ema.module",
+      "model_class": "DFINEAllLayerStrip"
+    },
+    "matching_policy": "Final ordinary G5 geometry assignment fixed across all layers and modes.",
+    "matching_costs": {
+      "cost_class": 0,
+      "cost_bbox": 5,
+      "cost_giou": 2
+    },
+    "valid_gt": 38759,
+    "fixed_pairs": 38725,
+    "first_batch_trace_exact": true,
+    "interpretation": "Local score replay on the same trajectory; zero_visual only zeros visual score inputs, with fixed query/offset/prior. Not propagated ablation. Nearest-bin probability alone is not accuracy because continuous GT can lie between bins.",
+    "definitions": {
+      "assignment": "Caller-fixed final-output geometric Hungarian query/GT pairs; no score filtering.",
+      "eligibility": "Finite geometry, input_valid and refinement_mask, finite positions/logits in all modes, at least one valid candidate per edge.",
+      "aggregation": "Means over eligible edges. pairs counts pairs with at least one eligible edge; exclusions use the listed first failing reason.",
+      "probability": "Original softmax over all K bins, including invalid candidates; no valid-bin renormalization.",
+      "expected_edge_error": "Absolute error of sum_k softmax(logits)[k]*position[k], in input pixels.",
+      "nearest": "Nearest valid candidate; first index breaks distance ties for probability/rank, while top1 accepts any equally near valid bin.",
+      "rank": "One plus the number of all-K logits strictly larger than the nearest valid candidate logit.",
+      "zero_visual": "Local score-head replay at unchanged query/offset/prior/geometry; no downstream trajectory replay.",
+      "interpretation": "Low nearest-bin probability alone is not evidence of an error: neighboring bins can interpolate continuous targets.",
+      "empty": "Empty means are null. Invalid GT geometry is counted in all but excluded from short-side groups."
+    },
+    "layers_one_based": {
+      "1": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8650424432463997,
+        "within1px_coverage": 0.9539767591994835,
+        "prior": {
+          "mean_nearest_valid_probability": 0.06764235964697618,
+          "mean_nearest_valid_rank": 8.50629438347321,
+          "top1_nearest_match_rate": 0.12243382827630729,
+          "mean_within1px_probability": 0.3333150987580145,
+          "mean_invalid_candidate_probability": 0.013722467592632284,
+          "mean_expected_edge_abs_error_px": 2.593605980978362,
+          "mean_argmax_valid_edge_abs_error_px": 2.73399854839964
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.09319557759858596,
+          "mean_nearest_valid_rank": 8.329857972885733,
+          "top1_nearest_match_rate": 0.13380245319561007,
+          "mean_within1px_probability": 0.4019021534584049,
+          "mean_invalid_candidate_probability": 0.014141147751572826,
+          "mean_expected_edge_abs_error_px": 2.5250639858765314,
+          "mean_argmax_valid_edge_abs_error_px": 2.7749650358566935
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.06756108036591803,
+          "mean_nearest_valid_rank": 8.51791478373144,
+          "top1_nearest_match_rate": 0.12260167850225952,
+          "mean_within1px_probability": 0.3332975361587716,
+          "mean_invalid_candidate_probability": 0.014143109272638767,
+          "mean_expected_edge_abs_error_px": 2.5968555773207327,
+          "mean_argmax_valid_edge_abs_error_px": 2.7395123646827266
+        }
+      },
+      "2": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8646586480488541,
+        "within1px_coverage": 0.953989670755326,
+        "prior": {
+          "mean_nearest_valid_probability": 0.09440257972152571,
+          "mean_nearest_valid_rank": 8.119444803098773,
+          "top1_nearest_match_rate": 0.13881859264041316,
+          "mean_within1px_probability": 0.4055832300761425,
+          "mean_invalid_candidate_probability": 0.01412133773230788,
+          "mean_expected_edge_abs_error_px": 2.4801771638297994,
+          "mean_argmax_valid_edge_abs_error_px": 2.73475032642705
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.09542133733284457,
+          "mean_nearest_valid_rank": 8.088870238863784,
+          "top1_nearest_match_rate": 0.13958683021304066,
+          "mean_within1px_probability": 0.40942750070188616,
+          "mean_invalid_candidate_probability": 0.014126373270604224,
+          "mean_expected_edge_abs_error_px": 2.4737249146208664,
+          "mean_argmax_valid_edge_abs_error_px": 2.7483199018039883
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.09427907213951035,
+          "mean_nearest_valid_rank": 8.144280180761783,
+          "top1_nearest_match_rate": 0.13832795351839897,
+          "mean_within1px_probability": 0.40505033039228805,
+          "mean_invalid_candidate_probability": 0.014177580087532534,
+          "mean_expected_edge_abs_error_px": 2.4863937673870424,
+          "mean_argmax_valid_edge_abs_error_px": 2.7621213262449777
+        }
+      },
+      "3": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8645546758950257,
+        "within1px_coverage": 0.9539961265332473,
+        "prior": {
+          "mean_nearest_valid_probability": 0.09583006570332878,
+          "mean_nearest_valid_rank": 8.053602324080051,
+          "top1_nearest_match_rate": 0.13987088444157522,
+          "mean_within1px_probability": 0.4109393643798145,
+          "mean_invalid_candidate_probability": 0.014072412554153833,
+          "mean_expected_edge_abs_error_px": 2.4641601196448493,
+          "mean_argmax_valid_edge_abs_error_px": 2.738484265064139
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.09600471799856836,
+          "mean_nearest_valid_rank": 8.046126533247257,
+          "top1_nearest_match_rate": 0.13959974176888315,
+          "mean_within1px_probability": 0.4114275654008086,
+          "mean_invalid_candidate_probability": 0.014019914103316315,
+          "mean_expected_edge_abs_error_px": 2.4646109946334795,
+          "mean_argmax_valid_edge_abs_error_px": 2.746160494579932
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.09580431576109175,
+          "mean_nearest_valid_rank": 8.054344738540994,
+          "top1_nearest_match_rate": 0.1398192382182053,
+          "mean_within1px_probability": 0.41068639458045,
+          "mean_invalid_candidate_probability": 0.014009168487231652,
+          "mean_expected_edge_abs_error_px": 2.4665013751622515,
+          "mean_argmax_valid_edge_abs_error_px": 2.751965945836919
+        }
+      },
+      "4": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8646074886655638,
+        "within1px_coverage": 0.9539832149774048,
+        "prior": {
+          "mean_nearest_valid_probability": 0.09620708532677182,
+          "mean_nearest_valid_rank": 8.032459651387992,
+          "top1_nearest_match_rate": 0.14025177533892835,
+          "mean_within1px_probability": 0.41226185483387434,
+          "mean_invalid_candidate_probability": 0.014027736328822225,
+          "mean_expected_edge_abs_error_px": 2.461666855944843,
+          "mean_argmax_valid_edge_abs_error_px": 2.738109361762728
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.09629785258036701,
+          "mean_nearest_valid_rank": 8.026804389928987,
+          "top1_nearest_match_rate": 0.14049709489993545,
+          "mean_within1px_probability": 0.41263445633720375,
+          "mean_invalid_candidate_probability": 0.014034405440771409,
+          "mean_expected_edge_abs_error_px": 2.4614235918227076,
+          "mean_argmax_valid_edge_abs_error_px": 2.7456485512883453
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.09616618647226503,
+          "mean_nearest_valid_rank": 8.039257585539058,
+          "top1_nearest_match_rate": 0.1402130406714009,
+          "mean_within1px_probability": 0.41204759754185,
+          "mean_invalid_candidate_probability": 0.013991240323356255,
+          "mean_expected_edge_abs_error_px": 2.4639733653151863,
+          "mean_argmax_valid_edge_abs_error_px": 2.748040246010173
+        }
+      },
+      "5": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8646306361014647,
+        "within1px_coverage": 0.953989670755326,
+        "prior": {
+          "mean_nearest_valid_probability": 0.09635169038352422,
+          "mean_nearest_valid_rank": 8.02056810845707,
+          "top1_nearest_match_rate": 0.14025823111684957,
+          "mean_within1px_probability": 0.4127969035993506,
+          "mean_invalid_candidate_probability": 0.0140249934248631,
+          "mean_expected_edge_abs_error_px": 2.460429285607989,
+          "mean_argmax_valid_edge_abs_error_px": 2.7413553955431444
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.0963446940919956,
+          "mean_nearest_valid_rank": 8.02302775984506,
+          "top1_nearest_match_rate": 0.14010329244673983,
+          "mean_within1px_probability": 0.41274384473066467,
+          "mean_invalid_candidate_probability": 0.01403043757289536,
+          "mean_expected_edge_abs_error_px": 2.461643720909365,
+          "mean_argmax_valid_edge_abs_error_px": 2.7488659503894364
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.09629956312244138,
+          "mean_nearest_valid_rank": 8.026655907036798,
+          "top1_nearest_match_rate": 0.14010329244673983,
+          "mean_within1px_probability": 0.4124849015049633,
+          "mean_invalid_candidate_probability": 0.01403117911294249,
+          "mean_expected_edge_abs_error_px": 2.46262027783023,
+          "mean_argmax_valid_edge_abs_error_px": 2.7525909557486443
+        }
+      },
+      "6": {
+        "total_pairs": 38725,
+        "pairs": 38725,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 154900,
+        "edges": 154900,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.8646200819947475,
+        "within1px_coverage": 0.953989670755326,
+        "prior": {
+          "mean_nearest_valid_probability": 0.09635207264222813,
+          "mean_nearest_valid_rank": 8.021426726920595,
+          "top1_nearest_match_rate": 0.140161394448031,
+          "mean_within1px_probability": 0.412804219666248,
+          "mean_invalid_candidate_probability": 0.014025999194506193,
+          "mean_expected_edge_abs_error_px": 2.4610176997537736,
+          "mean_argmax_valid_edge_abs_error_px": 2.745249011053471
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.09636071887810894,
+          "mean_nearest_valid_rank": 8.019406068431246,
+          "top1_nearest_match_rate": 0.140458360232408,
+          "mean_within1px_probability": 0.412817882105516,
+          "mean_invalid_candidate_probability": 0.014041167605780119,
+          "mean_expected_edge_abs_error_px": 2.461404598174986,
+          "mean_argmax_valid_edge_abs_error_px": 2.750122330808655
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.09632879285057866,
+          "mean_nearest_valid_rank": 8.022504841833442,
+          "top1_nearest_match_rate": 0.14004519044544866,
+          "mean_within1px_probability": 0.4126368908437319,
+          "mean_invalid_candidate_probability": 0.014034795289118216,
+          "mean_expected_edge_abs_error_px": 2.4619568415141724,
+          "mean_argmax_valid_edge_abs_error_px": 2.751856832778631
+        }
+      }
+    },
+    "final_layer_size_groups": {
+      "short_lt8": {
+        "total_pairs": 15861,
+        "pairs": 15861,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 63444,
+        "edges": 63444,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 1.421035448270445,
+        "within1px_coverage": 0.9395529916146523,
+        "prior": {
+          "mean_nearest_valid_probability": 0.05586540915740427,
+          "mean_nearest_valid_rank": 10.526480045394363,
+          "top1_nearest_match_rate": 0.08243490322173885,
+          "mean_within1px_probability": 0.410237673361426,
+          "mean_invalid_candidate_probability": 0.005115922867411591,
+          "mean_expected_edge_abs_error_px": 3.3779134882981277,
+          "mean_argmax_valid_edge_abs_error_px": 3.585862006580373
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.055874436574439953,
+          "mean_nearest_valid_rank": 10.52471470903474,
+          "top1_nearest_match_rate": 0.08262404640312716,
+          "mean_within1px_probability": 0.41019213497756657,
+          "mean_invalid_candidate_probability": 0.0051303769302702435,
+          "mean_expected_edge_abs_error_px": 3.3790048898191887,
+          "mean_argmax_valid_edge_abs_error_px": 3.596221608675283
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.05583137896721748,
+          "mean_nearest_valid_rank": 10.53026290902213,
+          "top1_nearest_match_rate": 0.08213542651787403,
+          "mean_within1px_probability": 0.4099323476001912,
+          "mean_invalid_candidate_probability": 0.005124159517051546,
+          "mean_expected_edge_abs_error_px": 3.37997451497108,
+          "mean_argmax_valid_edge_abs_error_px": 3.599555506065923
+        }
+      },
+      "short_8_to_lt16": {
+        "total_pairs": 11418,
+        "pairs": 11418,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 45672,
+        "edges": 45672,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.48489888960664923,
+        "within1px_coverage": 0.9700035032404974,
+        "prior": {
+          "mean_nearest_valid_probability": 0.08638916908191008,
+          "mean_nearest_valid_rank": 7.526296198984061,
+          "top1_nearest_match_rate": 0.12270099842354178,
+          "mean_within1px_probability": 0.41566972067790364,
+          "mean_invalid_candidate_probability": 0.012902464074330643,
+          "mean_expected_edge_abs_error_px": 2.0039548803704745,
+          "mean_argmax_valid_edge_abs_error_px": 2.1924653050047147
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.08641470767340984,
+          "mean_nearest_valid_rank": 7.523756349623402,
+          "top1_nearest_match_rate": 0.12346733228236119,
+          "mean_within1px_probability": 0.41577445237027144,
+          "mean_invalid_candidate_probability": 0.012919804077837459,
+          "mean_expected_edge_abs_error_px": 2.0039394238442014,
+          "mean_argmax_valid_edge_abs_error_px": 2.19281718688225
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.08636917519697423,
+          "mean_nearest_valid_rank": 7.526296198984061,
+          "top1_nearest_match_rate": 0.1227228936766509,
+          "mean_within1px_probability": 0.41556303090574764,
+          "mean_invalid_candidate_probability": 0.012912877629927632,
+          "mean_expected_edge_abs_error_px": 2.0043635553441446,
+          "mean_argmax_valid_edge_abs_error_px": 2.1947926275182845
+        }
+      },
+      "short_16_to_lt32": {
+        "total_pairs": 8050,
+        "pairs": 8050,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 32200,
+        "edges": 32200,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.3572345564269131,
+        "within1px_coverage": 0.9707142857142858,
+        "prior": {
+          "mean_nearest_valid_probability": 0.13605278204952848,
+          "mean_nearest_valid_rank": 5.465,
+          "top1_nearest_match_rate": 0.19850931677018632,
+          "mean_within1px_probability": 0.4239963721296021,
+          "mean_invalid_candidate_probability": 0.017491787562649578,
+          "mean_expected_edge_abs_error_px": 1.6353477717988198,
+          "mean_argmax_valid_edge_abs_error_px": 1.9102776704737858
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.13605038755856402,
+          "mean_nearest_valid_rank": 5.4620807453416145,
+          "top1_nearest_match_rate": 0.19875776397515527,
+          "mean_within1px_probability": 0.4240076013838592,
+          "mean_invalid_candidate_probability": 0.017502836136368646,
+          "mean_expected_edge_abs_error_px": 1.6351083206361725,
+          "mean_argmax_valid_edge_abs_error_px": 1.9123643651882314
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.13604145275595417,
+          "mean_nearest_valid_rank": 5.463447204968944,
+          "top1_nearest_match_rate": 0.19847826086956522,
+          "mean_within1px_probability": 0.42395270045234335,
+          "mean_invalid_candidate_probability": 0.01749889550822505,
+          "mean_expected_edge_abs_error_px": 1.6353247995731692,
+          "mean_argmax_valid_edge_abs_error_px": 1.910997601362489
+        }
+      },
+      "short_ge32": {
+        "total_pairs": 3396,
+        "pairs": 3396,
+        "excluded_pairs": 0,
+        "partially_excluded_pairs": 0,
+        "total_edges": 13584,
+        "edges": 13584,
+        "excluded_edges": 0,
+        "excluded_edges_by_reason": {
+          "invalid_geometry": 0,
+          "invalid_input": 0,
+          "invalid_refinement": 0,
+          "nonfinite_positions": 0,
+          "nonfinite_logits": 0,
+          "no_valid_candidate": 0
+        },
+        "mean_nearest_valid_error_px": 0.7453049851188741,
+        "within1px_coverage": 0.9279299175500589,
+        "prior": {
+          "mean_nearest_valid_probability": 0.22483401953732082,
+          "mean_nearest_valid_rank": 4.046157243816254,
+          "top1_nearest_match_rate": 0.3301678445229682,
+          "mean_within1px_probability": 0.38862662044942836,
+          "mean_invalid_candidate_probability": 0.05120257406572462,
+          "mean_expected_edge_abs_error_px": 1.6725907532443216,
+          "mean_argmax_valid_edge_abs_error_px": 2.6569807322781416
+        },
+        "post": {
+          "mean_nearest_valid_probability": 0.22481026148001906,
+          "mean_nearest_valid_rank": 4.046819787985866,
+          "top1_nearest_match_rate": 0.3295053003533569,
+          "mean_within1px_probability": 0.38861635552211304,
+          "mean_invalid_candidate_probability": 0.05122354334048945,
+          "mean_expected_edge_abs_error_px": 1.6725247892608521,
+          "mean_argmax_valid_edge_abs_error_px": 2.658037852114165
+        },
+        "zero_visual": {
+          "mean_nearest_valid_probability": 0.22482157369114944,
+          "mean_nearest_valid_rank": 4.044464075382804,
+          "top1_nearest_match_rate": 0.3302414605418139,
+          "mean_within1px_probability": 0.38860680421487404,
+          "mean_invalid_candidate_probability": 0.05121254648157346,
+          "mean_expected_edge_abs_error_px": 1.6723542974666026,
+          "mean_argmax_valid_edge_abs_error_px": 2.658843655968513
+        }
+      }
+    }
+  }
+}

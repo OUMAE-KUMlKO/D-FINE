@@ -1,0 +1,4 @@
+__include__: ['./visdrone_g5_gt_candidate.yml', './include/continue120.yml']
+
+output_dir: ./output/controlled/visdrone/g5_gt_candidate_continue120
+exp_name: controlled_visdrone_g5_gt_candidate_continue120_seed0

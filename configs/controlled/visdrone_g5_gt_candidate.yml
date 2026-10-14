@@ -1,0 +1,40 @@
+__include__: ['./visdrone_g5_adaptive_band.yml']
+
+# Full G5 training protocol, with GT selecting the visual candidate at each layer.
+# Only the HGNetv2 backbone uses pretrained weights; no detector tuning/resume.
+model: DFINEGTAllLayerStrip
+output_dir: ./output/controlled/visdrone/g5_gt_candidate
+exp_name: controlled_visdrone_g5_gt_candidate_seed0
+
+DFINEGTAllLayerStrip:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  matcher:
+    type: HungarianMatcher
+    weight_dict: {cost_class: 2, cost_bbox: 5, cost_giou: 2}
+    alpha: 0.25
+    gamma: 2.0
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  normal_points: 7
+  kernel_size: 3
+  normal_kernel_size: 3
+  offset_pixels: 8.0
+  bandwidth_mode: box_relative
+  bandwidth_ratio: 0.25
+  min_offset_pixels: 2.0
+  use_log_prior: False
+  query_fusion: channel_gate
+  query_chunk_size: 32
+  checkpoint_strips: True
+  num_refine_layers: 6
+  adaptive_correction_gate: False
+  next_reference_source: corrected
+  train_target_format: cxcywh_normalized
+  eval_target_format: xyxy_absolute
+
+val_dataloader:
+  dataset:
+    ann_file: ./output/visdrone_oracle/instances_val_positive_ids.json

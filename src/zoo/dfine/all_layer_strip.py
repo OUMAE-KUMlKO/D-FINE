@@ -26,7 +26,7 @@ class LayerStripHeads(nn.Module):
 
     def forward(
         self, layer_index, feature, queries, boxes, image_size, distribution,
-        checkpoint_strips=False,
+        checkpoint_strips=False, gt_boxes=None, gt_matched=None,
     ):
         head = self.heads[layer_index]
         dn_count = distribution['num_denoising']
@@ -34,10 +34,13 @@ class LayerStripHeads(nn.Module):
         refs = distribution['ref_points']
 
         def calibrate(feature, query, box, prior, reference, up, scale):
+            guidance = {} if gt_boxes is None and gt_matched is None else {
+                'gt_boxes': gt_boxes, 'gt_matched': gt_matched,
+            }
             result = head(feature, query, box, image_size, {
                 'pred_corners': prior, 'ref_points': reference,
                 'up': up, 'reg_scale': scale,
-            })
+            }, **guidance)
             input_invalid = ~result['input_valid']
             decode_fallback = result['input_valid'] & ~result['refinement_mask']
             self.last_prediction_safety_stats[

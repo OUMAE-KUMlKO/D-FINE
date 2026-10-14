@@ -1,0 +1,19 @@
+__include__: [
+  './dfine_hgnetv2_l_uavswarm_pred_p2.yml',
+  '../../controlled/include/visdrone.yml',
+]
+
+# P2 counterpart of the VisDrone GT-nearest candidate oracle.
+# Frozen G0 + a fresh residual head; every valid query uses predicted pooling.
+output_dir: ./output/visdrone_pred_p2/p2
+exp_name: visdrone_pred_p2_seed0
+
+DFINEPredRefiner:
+  baseline_checkpoint: ./output/visdrone_continue120_20261009/results/visdrone/seed0/g0/best_stg2.pth
+
+train_dataloader:
+  total_batch_size: 96
+val_dataloader:
+  total_batch_size: 96
+  dataset:
+    ann_file: ./output/visdrone_oracle/instances_val_positive_ids.json
