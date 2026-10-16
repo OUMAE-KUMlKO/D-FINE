@@ -740,6 +740,6 @@ sbatch slurm_files/run_train_dfine_uavswarm_decoder_strip.slurm
 | 固定配对统计 | `tools/analysis/decoder_strip_metrics.py` | 用同一 B0 匹配和分组，累计 IoU、边误差及移动量 |
 | 诊断编排入口 | `tools/analysis/diagnose_decoder_strip.py`；`slurm_files/run_diagnose_dfine_uavswarm_decoder_strip.slurm` | 对应已完成作业 15436，比较最佳/末轮及层开关 |
 | 已有局部测试 | `tests/test_decoder_strip_{adapter,feedback,refinement,trace,metrics}.py` | 保留阶段测试，不因文档整理重新运行 |
-| 结果归档 | `docs/research/results/decoder_strip_*_beststg2.json` | 接入检查与 96 图诊断原始结果 |
+| 结果归档 | `docs/history/results/decoder_strip_*_beststg2.json` | 接入检查与 96 图诊断原始结果 |
 
 正式训练权重目录为 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/decoder_strip_last2`。其中 `best_stg1.pth` 是本次适配器实验最佳轮，`last.pth` 是末轮；它们均不替代 B0 初始化权重 `/cluster/home/zzy/D-FINE/output/uavswarm_strip_20260923/b0/best_stg2.pth`。训练日志保留在 `logs/dfine_uavswarm_decoder_strip/`，诊断日志保留在 `logs/dfine_decoder_strip_diagnostic/`。
