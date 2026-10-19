@@ -53,6 +53,9 @@ def train_one_epoch(
     scaler: GradScaler = kwargs.get("scaler", None)
     lr_warmup_scheduler: Warmup = kwargs.get("lr_warmup_scheduler", None)
     losses = []
+    log_optimizer_updates = kwargs.get("log_optimizer_updates", False)
+    optimizer_updates = 0
+    optimizer_skipped_steps = 0
 
     output_dir = kwargs.get("output_dir", None)
     num_visualization_sample_batch = kwargs.get("num_visualization_sample_batch", 1)
@@ -95,8 +98,15 @@ def train_one_epoch(
                 scaler.unscale_(optimizer)
                 torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
 
+            if log_optimizer_updates:
+                scale_before_step = scaler.get_scale()
             scaler.step(optimizer)
             scaler.update()
+            if log_optimizer_updates:
+                if scaler.get_scale() < scale_before_step:
+                    optimizer_skipped_steps += 1
+                else:
+                    optimizer_updates += 1
             optimizer.zero_grad()
 
         else:
@@ -111,6 +121,8 @@ def train_one_epoch(
                 torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm)
 
             optimizer.step()
+            if log_optimizer_updates:
+                optimizer_updates += 1
 
         # ema
         if ema is not None:
@@ -129,6 +141,9 @@ def train_one_epoch(
             sys.exit(1)
 
         metric_logger.update(loss=loss_value, **loss_dict_reduced)
+        ddf_stats = getattr(criterion, "last_ddf_stats", {})
+        if ddf_stats:
+            metric_logger.update(**dist_utils.reduce_dict(ddf_stats))
         # Candidate coverage statistics are detached metrics, not optimization losses.
         metric_logger.update(**getattr(criterion, "last_candidate_stats", {}))
         metric_logger.update(lr=optimizer.param_groups[0]["lr"])
@@ -147,7 +162,11 @@ def train_one_epoch(
     # gather the stats from all processes
     metric_logger.synchronize_between_processes()
     print("Averaged stats:", metric_logger)
-    return {k: meter.global_avg for k, meter in metric_logger.meters.items()}
+    stats = {k: meter.global_avg for k, meter in metric_logger.meters.items()}
+    if log_optimizer_updates:
+        stats["optimizer_updates"] = optimizer_updates
+        stats["optimizer_skipped_steps"] = optimizer_skipped_steps
+    return stats
 
 
 @torch.no_grad()

@@ -245,6 +245,13 @@ class BaseSolver(object):
 
         # state['model'] = remove_module_prefix(state['model'])
         self.load_state_dict(state)
+        return {
+            "checkpoint_epoch": state.get("last_epoch"),
+            "optimizer_restored": "optimizer" in state and getattr(self, "optimizer", None) is not None,
+            "ema_restored": "ema" in state and getattr(self, "ema", None) is not None,
+            "lr_scheduler_restored": "lr_scheduler" in state and getattr(self, "lr_scheduler", None) is not None,
+            "scaler_restored": "scaler" in state and getattr(self, "scaler", None) is not None,
+        }
 
     def load_tuning_state(self, path: str):
         """Load model for tuning and adjust mismatched head parameters"""

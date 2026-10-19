@@ -1,0 +1,323 @@
+{
+  "as_of": "2026-10-19",
+  "metric_unit": "percent",
+  "delta_unit": "percentage_points",
+  "base_code_commit": "f0756eace7096c0b3986da3d6d471d8153a6c01c",
+  "protocol": {
+    "dataset": "UAVSwarm",
+    "train_images": 3450,
+    "validation_images": 3394,
+    "gpus": 8,
+    "global_batch_size": 64,
+    "epochs": 80,
+    "initialization": "相同backbone预训练；检测器和六层G5重新初始化；非历史检测权重微调。",
+    "comparison_variable": "普通辅助层与DN的DDF权重1.5或0；FGL及其余损失与原训练规则保持。"
+  },
+  "selection": {
+    "best": "按总AP选择一轮，AP50/AP75/APsmall全部取该轮。",
+    "epochs": "外层训练日志epoch，零起始；不使用checkpoint内部epoch。",
+    "last8_available": "每个作业最后8个已完成epoch；seed1_on为63..70，其余为72..79；不同长度窗口不可当作完整配对。"
+  },
+  "runs": {
+    "seed0_on": {
+      "job_id": 17360,
+      "seed": 0,
+      "ddf_weight": 1.5,
+      "slurm_state": "COMPLETED",
+      "planned_epochs": 80,
+      "completed_epochs": 80,
+      "complete": true,
+      "completed_epoch_range": [
+        0,
+        79
+      ],
+      "log_path": "output/uavswarm_g5_ddf_ablation_20261016_145524/results/g5_ddf_on/log.txt",
+      "best_by_AP": {
+        "epoch": 77,
+        "AP": 61.067297,
+        "AP50": 94.754326,
+        "AP75": 66.907553,
+        "APsmall": 59.739864
+      },
+      "last8_available_mean": {
+        "epoch_range": [
+          72,
+          79
+        ],
+        "count": 8,
+        "AP": 60.752909,
+        "AP50": 94.700033,
+        "AP75": 66.481552,
+        "APsmall": 59.529404
+      },
+      "diagnostics": {
+        "nonfinite_scalar_keys": [
+          "train_ddf_raw_dn_5",
+          "train_ddf_weighted_dn_5"
+        ],
+        "actual_train_loss_ddf_dn_5_always_zero": true,
+        "other_train_losses_finite": true,
+        "bbox_metrics_finite": true
+      }
+    },
+    "seed0_off": {
+      "job_id": 17361,
+      "seed": 0,
+      "ddf_weight": 0.0,
+      "slurm_state": "COMPLETED",
+      "planned_epochs": 80,
+      "completed_epochs": 80,
+      "complete": true,
+      "completed_epoch_range": [
+        0,
+        79
+      ],
+      "log_path": "output/uavswarm_g5_ddf_ablation_20261016_145524/results/g5_ddf_off/log.txt",
+      "best_by_AP": {
+        "epoch": 78,
+        "AP": 61.231608,
+        "AP50": 94.762391,
+        "AP75": 67.598768,
+        "APsmall": 59.980522
+      },
+      "last8_available_mean": {
+        "epoch_range": [
+          72,
+          79
+        ],
+        "count": 8,
+        "AP": 60.989528,
+        "AP50": 94.883216,
+        "AP75": 67.079761,
+        "APsmall": 59.786922
+      },
+      "diagnostics": {
+        "nonfinite_scalar_keys": [
+          "train_ddf_raw_dn_5",
+          "train_ddf_weighted_dn_5"
+        ],
+        "actual_train_loss_ddf_dn_5_always_zero": true,
+        "other_train_losses_finite": true,
+        "bbox_metrics_finite": true
+      }
+    },
+    "seed1_on": {
+      "job_id": 17367,
+      "seed": 1,
+      "ddf_weight": 1.5,
+      "slurm_state": "NODE_FAIL",
+      "planned_epochs": 80,
+      "completed_epochs": 71,
+      "complete": false,
+      "completed_epoch_range": [
+        0,
+        70
+      ],
+      "log_path": "output/uavswarm_g5_ddf_seed1_20261017_130434/results/g5_ddf_on/log.txt",
+      "best_by_AP": {
+        "epoch": 66,
+        "AP": 59.201798,
+        "AP50": 94.666009,
+        "AP75": 63.706775,
+        "APsmall": 57.844276
+      },
+      "last8_available_mean": {
+        "epoch_range": [
+          63,
+          70
+        ],
+        "count": 8,
+        "AP": 58.766809,
+        "AP50": 94.728978,
+        "AP75": 62.646758,
+        "APsmall": 57.405441
+      },
+      "interruption": {
+        "node": "gpu2",
+        "outer_epoch_started_but_not_completed": 71,
+        "cause": "NODE_FAIL",
+        "planned_epoch72_79_mean": null
+      },
+      "diagnostics": {
+        "nonfinite_scalar_keys": [
+          "train_ddf_raw_dn_5",
+          "train_ddf_weighted_dn_5"
+        ],
+        "actual_train_loss_ddf_dn_5_always_zero": true,
+        "other_train_losses_finite": true,
+        "bbox_metrics_finite": true
+      }
+    },
+    "seed1_off": {
+      "job_id": 17368,
+      "seed": 1,
+      "ddf_weight": 0.0,
+      "slurm_state": "COMPLETED",
+      "planned_epochs": 80,
+      "completed_epochs": 80,
+      "complete": true,
+      "completed_epoch_range": [
+        0,
+        79
+      ],
+      "log_path": "output/uavswarm_g5_ddf_seed1_20261017_130434/results/g5_ddf_off/log.txt",
+      "best_by_AP": {
+        "epoch": 75,
+        "AP": 61.089437,
+        "AP50": 94.964341,
+        "AP75": 67.57172,
+        "APsmall": 59.923425
+      },
+      "last8_available_mean": {
+        "epoch_range": [
+          72,
+          79
+        ],
+        "count": 8,
+        "AP": 60.900812,
+        "AP50": 94.94616,
+        "AP75": 66.834793,
+        "APsmall": 59.844765
+      },
+      "diagnostics": {
+        "nonfinite_scalar_keys": [
+          "train_ddf_raw_dn_5",
+          "train_ddf_weighted_dn_5"
+        ],
+        "actual_train_loss_ddf_dn_5_always_zero": true,
+        "other_train_losses_finite": true,
+        "bbox_metrics_finite": true
+      }
+    },
+    "historical_g5": {
+      "job_id": 15526,
+      "seed": 0,
+      "ddf_weight": 1.5,
+      "slurm_state": "COMPLETED",
+      "planned_epochs": 80,
+      "completed_epochs": 80,
+      "complete": true,
+      "completed_epoch_range": [
+        0,
+        79
+      ],
+      "log_path": "/cluster/home/zzy/D-FINE/output/uavswarm_strip_beststg2_20260923/all_layer_band2d_query_gate_full/log.txt",
+      "best_by_AP": {
+        "epoch": 79,
+        "AP": 61.066159,
+        "AP50": 94.459636,
+        "AP75": 67.586497,
+        "APsmall": 59.76628
+      },
+      "last8_available_mean": {
+        "epoch_range": [
+          72,
+          79
+        ],
+        "count": 8,
+        "AP": 60.764603,
+        "AP50": 94.490424,
+        "AP75": 66.892234,
+        "APsmall": 59.490726
+      },
+      "code_commit": "f0756eace7096c0b3986da3d6d471d8153a6c01c",
+      "best_checkpoint_last_epoch": 76,
+      "checkpoint_epoch_note": "历史阶段回载造成checkpoint内部epoch与外层日志epoch不同；结果统一使用日志外层epoch。"
+    }
+  },
+  "comparisons": {
+    "seed0_full_pair": {
+      "epoch_range": [
+        0,
+        79
+      ],
+      "best_off_minus_on": {
+        "AP": 0.164311,
+        "AP50": 0.008065,
+        "AP75": 0.691215,
+        "APsmall": 0.240658
+      },
+      "epoch72_79_mean_off_minus_on": {
+        "AP": 0.236619,
+        "AP50": 0.183183,
+        "AP75": 0.598209,
+        "APsmall": 0.257518
+      }
+    },
+    "seed1_fair_common": {
+      "epoch_range": [
+        0,
+        70
+      ],
+      "seed1_on": {
+        "best_by_AP": {
+          "epoch": 66,
+          "AP": 59.201798,
+          "AP50": 94.666009,
+          "AP75": 63.706775,
+          "APsmall": 57.844276
+        },
+        "last8_common_mean": {
+          "epoch_range": [
+            63,
+            70
+          ],
+          "count": 8,
+          "AP": 58.766809,
+          "AP50": 94.728978,
+          "AP75": 62.646758,
+          "APsmall": 57.405441
+        }
+      },
+      "seed1_off": {
+        "best_by_AP": {
+          "epoch": 69,
+          "AP": 59.514169,
+          "AP50": 95.104845,
+          "AP75": 64.472815,
+          "APsmall": 58.38311
+        },
+        "last8_common_mean": {
+          "epoch_range": [
+            63,
+            70
+          ],
+          "count": 8,
+          "AP": 59.32418,
+          "AP50": 94.919308,
+          "AP75": 64.408491,
+          "APsmall": 58.112576
+        }
+      },
+      "best_off_minus_on": {
+        "AP": 0.312371,
+        "AP50": 0.438836,
+        "AP75": 0.76604,
+        "APsmall": 0.538834
+      },
+      "epoch63_70_mean_off_minus_on": {
+        "AP": 0.557371,
+        "AP50": 0.19033,
+        "AP75": 1.761733,
+        "APsmall": 0.707135
+      }
+    },
+    "best_completed_off_vs_historical": {
+      "run": "seed0_off",
+      "best_off_minus_historical": {
+        "AP": 0.165449,
+        "AP50": 0.302755,
+        "AP75": 0.012271,
+        "APsmall": 0.214242
+      },
+      "interpretation": "跨运行历史参考；AP75几乎相同，不能将相对本轮seed0_on的+0.691215点误写为相对历史G5的提升。"
+    }
+  },
+  "limitations": [
+    "仅seed0是完整80轮配对；seed1_on因gpu2节点NODE_FAIL仅完成71轮，因此不计算两个完整seed的平均收益或统计显著性。",
+    "seed1公平比较仅使用两组共同完成的epoch0..70；完整seed1_off结果单独记录。",
+    "最后DN层自对齐诊断raw/weighted可能非有限，实际train_loss_ddf_dn_5始终为0，其他训练损失及评估指标有限。低精度求和溢出只是解释假设，未直接复现；不得据诊断NaN认定训练发散。",
+    "同一阶段回载规则下DDF会改变验证与回载轨迹；结果只支持此UAVSwarm六层G5协议，不能自动外推VisDrone。"
+  ],
+  "artifact_scope": "只归档统计摘要与来源路径，不复制原始日志、数据集或checkpoint。"
+}

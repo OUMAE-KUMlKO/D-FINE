@@ -18,6 +18,26 @@ from .det_engine import evaluate, train_one_epoch
 
 
 class DetSolver(BaseSolver):
+    def _load_stage_checkpoint(self, epoch, reason):
+        """Keep the original reload, recording its actual state for the DDF study."""
+        path = str(self.output_dir / "best_stg1.pth")
+        before = self.last_epoch
+        restored = self.load_resume_state(path)
+        if not self.cfg.yaml_cfg.get("DFINECriterion", {}).get("log_ddf_diagnostics", False):
+            return None
+        event = {
+            "outer_epoch": epoch,
+            "reason": reason,
+            "checkpoint": path,
+            "internal_epoch_before": before,
+            "internal_epoch_after": self.last_epoch,
+            **restored,
+        }
+        if dist_utils.is_main_process():
+            with (self.output_dir / "stage_reload_events.jsonl").open("a") as stream:
+                stream.write(json.dumps(event) + "\n")
+        return event
+
     def fit(self):
         self.train()
         args = self.cfg
@@ -61,7 +81,11 @@ class DetSolver(BaseSolver):
         best_stat_print = best_stat.copy()
         start_time = time.time()
         start_epoch = self.last_epoch + 1
+        trace_training = args.yaml_cfg.get("DFINECriterion", {}).get("log_ddf_diagnostics", False)
+        optimizer_updates_total = 0
         for epoch in range(start_epoch, args.epochs):
+            internal_epoch_before = self.last_epoch
+            reload_events = []
             self.train_dataloader.set_epoch(epoch)
             # self.train_dataloader.dataset.set_epoch(epoch)
             if dist_utils.is_dist_available_and_initialized():
@@ -70,11 +94,12 @@ class DetSolver(BaseSolver):
             if epoch == self.train_dataloader.collate_fn.stop_epoch:
                 if dist_utils.is_dist_available_and_initialized():
                     torch.distributed.barrier()
-                self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+                reload_events.append(self._load_stage_checkpoint(epoch, "stage_transition"))
                 if self.ema:
                     self.ema.decay = self.train_dataloader.collate_fn.ema_restart_decay
                     print(f"Refresh EMA at epoch {epoch} with decay {self.ema.decay}")
 
+            lr_before = [group["lr"] for group in self.optimizer.param_groups] if trace_training else None
             train_stats = train_one_epoch(
                 self.model,
                 self.criterion,
@@ -91,12 +116,15 @@ class DetSolver(BaseSolver):
                 writer=self.writer,
                 use_wandb=self.use_wandb,
                 output_dir=self.output_dir,
+                log_optimizer_updates=trace_training,
             )
 
             if self.lr_warmup_scheduler is None or self.lr_warmup_scheduler.finished():
                 self.lr_scheduler.step()
 
             self.last_epoch += 1
+            internal_epoch_after_training = self.last_epoch
+            optimizer_updates_total += train_stats.get("optimizer_updates", 0)
 
             if self.output_dir and epoch < self.train_dataloader.collate_fn.stop_epoch:
                 checkpoint_paths = [self.output_dir / "last.pth"]
@@ -171,7 +199,7 @@ class DetSolver(BaseSolver):
                     }
                     if self.ema:
                         self.ema.decay -= 0.0001
-                        self.load_resume_state(str(self.output_dir / "best_stg1.pth"))
+                        reload_events.append(self._load_stage_checkpoint(epoch, "stage2_ema_refresh"))
                         print(f"Refresh EMA at epoch {epoch} with decay {self.ema.decay}")
 
             log_stats = {
@@ -180,6 +208,18 @@ class DetSolver(BaseSolver):
                 "epoch": epoch,
                 "n_parameters": n_parameters,
             }
+            if trace_training:
+                log_stats["training_trace"] = {
+                    "outer_epoch": epoch,
+                    "internal_epoch_before": internal_epoch_before,
+                    "internal_epoch_after_training": internal_epoch_after_training,
+                    "internal_epoch_after_validation": self.last_epoch,
+                    "optimizer_updates_total": optimizer_updates_total,
+                    "lr_before_training": lr_before,
+                    "lr_after_validation": [group["lr"] for group in self.optimizer.param_groups],
+                    "ema_updates_after_validation": self.ema.updates if self.ema else None,
+                    "reload_events": reload_events,
+                }
 
             if self.use_wandb:
                 wandb_logs = {}

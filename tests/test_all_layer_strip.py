@@ -116,6 +116,70 @@ class AllLayerStripTests(unittest.TestCase):
             self.assertTrue(any(g is not None and g.abs().sum() > 0 for g in gradients))
             self.assertTrue(all(g is None or torch.isfinite(g).all() for g in gradients))
 
+    def test_ddf_diagnostics_report_raw_and_weighted_aux_and_dn_without_changing_losses(self):
+        model = make_model().train()
+        with torch.no_grad():
+            for head in model.refiner.heads:
+                head.score_head[-1].weight.normal_(std=0.02)
+        output = model(self.images, normalized_targets())
+        weights_on = {'loss_vfl': 1, 'loss_bbox': 5, 'loss_giou': 2,
+                      'loss_fgl': 0.15, 'loss_ddf': 1.5}
+        weights_off = {**weights_on, 'loss_ddf': 0.0}
+        enabled = DFINECriterion(
+            matcher(), weights_on, ['vfl', 'boxes', 'local'],
+            num_classes=2, reg_max=4, log_ddf_diagnostics=True,
+        )
+        disabled = DFINECriterion(
+            matcher(), weights_off, ['vfl', 'boxes', 'local'],
+            num_classes=2, reg_max=4, log_ddf_diagnostics=True,
+        )
+
+        losses_on = enabled(output, normalized_targets())
+        losses_off = disabled(output, normalized_targets())
+
+        self.assertEqual(losses_on.keys(), losses_off.keys())
+        self.assertIn('loss_fgl_aux_0', losses_off)
+        self.assertIn('loss_fgl_dn_0', losses_off)
+        expected = {
+            *(f'ddf_raw_aux_{i}' for i in range(5)),
+            *(f'ddf_weighted_aux_{i}' for i in range(5)),
+            *(f'ddf_raw_dn_{i}' for i in range(6)),
+            *(f'ddf_weighted_dn_{i}' for i in range(6)),
+        }
+        self.assertEqual(set(enabled.last_ddf_stats), expected)
+        self.assertEqual(set(disabled.last_ddf_stats), expected)
+        for key, value in enabled.last_ddf_stats.items():
+            self.assertFalse(value.requires_grad, key)
+            if key.startswith('ddf_weighted_'):
+                raw_key = key.replace('ddf_weighted_', 'ddf_raw_')
+                torch.testing.assert_close(value, enabled.last_ddf_stats[raw_key] * 1.5)
+        for key, value in disabled.last_ddf_stats.items():
+            if key.startswith('ddf_weighted_'):
+                torch.testing.assert_close(value, torch.zeros_like(value))
+        for key in (k for k in losses_off if k.startswith('loss_ddf_')):
+            torch.testing.assert_close(losses_off[key], torch.zeros_like(losses_off[key]))
+
+        parameters = [p for p in model.parameters() if p.requires_grad]
+        gradients_with_zero_ddf = torch.autograd.grad(
+            sum(losses_off.values()), parameters, retain_graph=True, allow_unused=True
+        )
+        gradients_without_ddf = torch.autograd.grad(
+            sum(v for k, v in losses_off.items() if not k.startswith('loss_ddf')),
+            parameters, allow_unused=True,
+        )
+        for with_zero, without in zip(gradients_with_zero_ddf, gradients_without_ddf):
+            if with_zero is None or without is None:
+                self.assertIs(with_zero, without)
+            else:
+                torch.testing.assert_close(with_zero, without, atol=0, rtol=0)
+
+    def test_ddf_diagnostics_are_opt_in(self):
+        criterion = DFINECriterion(
+            matcher(), {'loss_ddf': 1.5}, ['local'], num_classes=2, reg_max=4,
+        )
+        self.assertFalse(criterion.log_ddf_diagnostics)
+        self.assertEqual(criterion.last_ddf_stats, {})
+
     def test_checkpointing_preserves_outputs_and_gradients(self):
         plain = make_model(frozen=True, checkpoint_strips=False).train()
         checked = make_model(frozen=True, checkpoint_strips=True).train()

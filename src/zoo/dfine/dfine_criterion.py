@@ -42,6 +42,7 @@ class DFINECriterion(nn.Module):
         reg_max=32,
         boxes_weight_format=None,
         share_matched_indices=False,
+        log_ddf_diagnostics=False,
     ):
         """Create the criterion.
         Parameters:
@@ -65,6 +66,16 @@ class DFINECriterion(nn.Module):
         self.own_targets, self.own_targets_dn = None, None
         self.reg_max = reg_max
         self.num_pos, self.num_neg = None, None
+        self.log_ddf_diagnostics = log_ddf_diagnostics
+        self.last_ddf_stats = {}
+
+    def _weight_losses(self, losses, ddf_suffix=None):
+        if self.log_ddf_diagnostics and ddf_suffix is not None and "loss_ddf" in losses:
+            raw = losses["loss_ddf"].detach()
+            weight = self.weight_dict.get("loss_ddf", 0)
+            self.last_ddf_stats[f"ddf_raw_{ddf_suffix}"] = raw
+            self.last_ddf_stats[f"ddf_weighted_{ddf_suffix}"] = (raw * weight).detach()
+        return {k: losses[k] * self.weight_dict[k] for k in losses if k in self.weight_dict}
 
     def loss_labels_focal(self, outputs, targets, indices, num_boxes):
         assert "pred_logits" in outputs
@@ -287,6 +298,7 @@ class DFINECriterion(nn.Module):
              targets: list of dicts, such that len(targets) == batch_size.
                       The expected keys in each dict depends on the losses applied, see each loss' doc
         """
+        self.last_ddf_stats = {}
         outputs_without_aux = {k: v for k, v in outputs.items() if "aux" not in k}
 
         # Retrieve the matching between the outputs of the last layer and the targets
@@ -347,9 +359,7 @@ class DFINECriterion(nn.Module):
                         loss, aux_outputs, targets, indices_in, num_boxes_in, **meta
                     )
 
-                    l_dict = {
-                        k: l_dict[k] * self.weight_dict[k] for k in l_dict if k in self.weight_dict
-                    }
+                    l_dict = self._weight_losses(l_dict, f"aux_{i}")
                     l_dict = {k + f"_aux_{i}": v for k, v in l_dict.items()}
                     losses.update(l_dict)
 
@@ -413,9 +423,7 @@ class DFINECriterion(nn.Module):
                     l_dict = self.get_loss(
                         loss, aux_outputs, targets, indices_dn, dn_num_boxes, **meta
                     )
-                    l_dict = {
-                        k: l_dict[k] * self.weight_dict[k] for k in l_dict if k in self.weight_dict
-                    }
+                    l_dict = self._weight_losses(l_dict, f"dn_{i}")
                     l_dict = {k + f"_dn_{i}": v for k, v in l_dict.items()}
                     losses.update(l_dict)
 
