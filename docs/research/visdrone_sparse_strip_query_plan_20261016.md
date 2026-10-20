@@ -1,8 +1,8 @@
 # UAVSwarm G5蒸馏消融结果与VisDrone后续计划
 
-创建日期：2026-10-16；更新日期：2026-10-19。状态：UAVSwarm两轮DDF对照结果已归档，其中seed0两组及seed1关闭组完成80轮，seed1开启组因节点故障中断。
+创建日期：2026-10-16；更新日期：2026-10-20。状态：UAVSwarm两轮DDF对照结果已归档；VisDrone关闭DDF作业17479已完成80轮，最佳AP为28.5186。
 
-当前顺序为**先归档UAVSwarm G5的DDF开/关结果，再执行用户于2026-10-19明确指定的VisDrone现有六层G5关闭DDF实验**。VisDrone沿用现有G5结构，具体训练配置在确认既有基线后记录，不以UAVSwarm结果自动推断VisDrone收益。
+当前顺序为**先归档UAVSwarm G5的DDF开/关结果，再执行用户于2026-10-19明确指定的VisDrone现有六层G5关闭DDF实验**。UAVSwarm归档已提交为`fb8e459`；VisDrone作业`17479`已提交，训练配置与源码来源见第11节，不以UAVSwarm结果自动推断VisDrone收益。
 
 原先认可的稀疏中心strip＋query写回方案暂缓；第3～6节、第7.2～7.3节及第8～9节保留为待后续批准的技术提案，其结构、24轮筛选和DDF设置不适用于当前获批的VisDrone六层G5任务。本文第7.1节和[结果摘要JSON](../history/results/uavswarm_g5_ddf_summary_20261019.json)记录本次UAVSwarm归档。
 
@@ -434,3 +434,60 @@ git show research/visdrone-boundary-refinement:docs/research/visdrone_candidate_
 ```
 
 本文作为`docs/research/`中的当前活动计划，已记录UAVSwarm两轮DDF对照及历史G5比较；后续先推进用户指定的VisDrone现有六层G5关闭DDF实验，原稀疏strip-query技术提案暂缓保留。本次阶段归档使用中文提交说明，不将后续VisDrone实现混入UAVSwarm结果归档。
+
+## 11. VisDrone六层G5关闭DDF：已完成实验
+
+### 11.1 对照和训练设置
+
+用户明确选择沿用六层G5，仅关闭DDF。对照为旧VisDrone固定带宽G5作业`15543`，其80轮最佳AP为27.9700、AP50为47.5302、AP75为27.7728（旧验证标注口径）。本次不采用后续自适应门控、候选交互或稀疏strip-query结构。
+
+- 新配置：[dfine_hgnetv2_l_visdrone_g5_ddf_off.yml](../../configs/dfine/ablation/dfine_hgnetv2_l_visdrone_g5_ddf_off.yml)。
+- 启动入口：[run_train_visdrone_g5_ddf_off.slurm](../../slurm_files/run_train_visdrone_g5_ddf_off.slurm)。
+- 80轮，seed和controlled_seed均为0，8 GPU，总train/val batch均为32，AMP与EMA开启；第72轮进入第二阶段，保持原阶段回载逻辑。
+- 原六层`DFINEAllLayerStrip`：5个沿边采样点、7个法向采样点、固定8像素带宽、channel_gate、原stride 8/16/32特征。
+- DDF权重从1.5变为0；保留FGL=0.15、VFL=1、bbox=5、GIoU=2及原辅助层/DN监督。这里的“关闭”指DDF不参与优化，不额外修改其前向计算路径。
+- 正式训练仅使用`PPHGNetV2_B4_stage1.pth`主干预训练，从头训练检测器；旧G5检测器checkpoint只用于独立复评。
+- 资源为32 CPU、128 GiB内存、8 GPU，时限48小时，禁用自动requeue。
+
+### 11.2 源码与评估口径
+
+为保持旧对照的训练行为，本次冻结复制`output/controlled_20260926_212304/source/`的`src`、配置和`train.py`；模型起点为`f0756ea`，并保留15543当时已有的三文件补丁：controlled_seed模型初始化、独立DataLoader随机数，以及solver轮次/保存时机修正。补丁副本保存在新实验的`manifest/baseline_runtime.patch`。没有把当前UAVSwarm日志诊断改动或后续VisDrone模型改动混入此运行时。当前分支仅新增实验配置、启动脚本和本节记录，运行代码来源由manifest明确固定。
+
+旧验证集52859个标注的ID为0～52858；已有修正版仅将ID统一加1，其他GT字段、顺序和图像完全一致。实际评估器对GT ID 0的完美预测仍会漏计为TP。因此本次使用`output/visdrone_oracle/instances_val_positive_ids.json`，训练前先以相同正值ID版本复评15543的`best_stg2.pth` EMA。**最终比较使用复评后的基线，不能直接减旧口径27.9700。** 标注编号修正可能轻微影响验证选优/阶段回载，因此这不是逐步随机轨迹的严格复刻；除此评估修正外，训练配置唯一实质差异为DDF权重。
+
+已完成：展开配置逐项比较（仅DDF、验证标注路径、配置继承元数据和实验名称/输出路径不同），冻结运行时实际criterion权重检查，以及Slurm脚本语法检查。作业开始时会再次检查配置，再依次执行旧checkpoint复评与全新训练，两者各自启动独立进程。
+
+### 11.3 作业和产物
+
+- 作业`17479`，2026-10-19 22:47:25开始，2026-10-20 11:36:26结束；`COMPLETED`、退出码`0:0`，运行12:49:01，节点`gpu4`，完整完成epoch0～79。
+- 实验目录：`output/visdrone_g5_ddf_off_20261019_103206/`。
+- [源码来源及协议manifest](../../output/visdrone_g5_ddf_off_20261019_103206/manifest/provenance.json)。
+- 训练启动后：`results/g5_ddf_off/log.txt`为逐轮指标，`results/g5_ddf_off/train.log`为训练控制台日志。
+- 基线复评：`results/g5_ddf_on_reference/evaluate.log`及`metrics.json`。
+- Slurm日志启动后生成于`logs/visdrone_g5_ddf_off_17479.out`与对应`.err`。
+
+### 11.4 完整结果与解释
+
+所有最佳指标均取各组总AP最佳的同一轮；两组最佳均为epoch79。下表开启组为正值ID标注下的checkpoint复评，单位为百分数，差值为百分点：
+
+| 指标 | G5开启DDF | G5关闭DDF | 关闭−开启 |
+| --- | ---: | ---: | ---: |
+| AP | 27.970754 | 28.518592 | +0.547837 |
+| AP50 | 47.531368 | 48.081990 | +0.550622 |
+| AP75 | 27.773722 | 28.309960 | +0.536239 |
+| APsmall | 18.535202 | 19.068958 | +0.533756 |
+| APmedium | 39.523399 | 40.242896 | +0.719497 |
+| APlarge | 55.410345 | 59.990765 | +4.580420 |
+
+最后8轮平均AP为开启27.757300、关闭28.303623，差值+0.546323；收益贯穿后期，并非只出现在最佳单轮。开启组历史曲线仍为原ID口径，正值ID修正仅使其最佳AP增加0.000794。两组仅在epoch72开始时加载stage1最佳checkpoint，没有额外的验证退化回载。本轮所有epoch的普通辅助层及DN的实际DDF损失贡献均为0，FGL保留，记录的训练损失与评估指标均有限。
+
+同批次原版D-FINE作业15542（无G5）的最佳AP/AP50/AP75/APsmall为28.119640/47.853372/27.965542/18.497119，本轮分别提高约0.398952/0.228618/0.344419/0.571839。原版仍为历史ID口径，尚未统一复评；它也没有关闭DDF的配对，故这说明“G5＋关闭DDF”组合超过当前历史原版参照，不能把全部收益归因于G5结构。
+
+当前只有一个VisDrone种子结果。证据支持当前G5设置下关闭DDF更好，但不证明蒸馏普遍有害，也不直接证明某种具体梯度冲突。后续结构实验保留DDF=0、FGL=0.15；不能沿用第8节旧提案中的开启DDF设置。
+
+- [关闭组逐轮指标](../../output/visdrone_g5_ddf_off_20261019_103206/results/g5_ddf_off/log.txt)与[训练日志](../../output/visdrone_g5_ddf_off_20261019_103206/results/g5_ddf_off/train.log)。
+- [关闭组最佳checkpoint](../../output/visdrone_g5_ddf_off_20261019_103206/results/g5_ddf_off/best_stg2.pth)。
+- [开启组统一口径复评](../../output/visdrone_g5_ddf_off_20261019_103206/results/g5_ddf_on_reference/metrics.json)。
+- [历史原版D-FINE日志](../../output/controlled_20260926_212304/results/visdrone/g0/log.txt)。
+
+本节、VisDrone配置和启动脚本在开始稀疏strip-query实现前按用户要求归档提交；后续实现作为独立工作阶段。

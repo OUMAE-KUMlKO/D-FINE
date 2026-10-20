@@ -1,0 +1,47 @@
+__include__: ['../dfine_hgnetv2_l_coco.yml']
+
+# Match fixed-band, six-layer G5 job 15543. Run with its frozen runtime via
+# run_train_visdrone_g5_ddf_off.slurm, which preserves controlled_seed behavior.
+output_dir: ./output/visdrone_g5_ddf_off/results/g5_ddf_off
+exp_name: dfine_l_visdrone_g5_ddf_off_seed0
+seed: 0
+controlled_seed: 0
+epochs: 80
+num_classes: 10
+remap_mscoco_category: False
+
+model: DFINEAllLayerStrip
+DFINEAllLayerStrip:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  normal_points: 7
+  kernel_size: 3
+  normal_kernel_size: 3
+  offset_pixels: 8.0
+  use_log_prior: False
+  query_fusion: channel_gate
+  query_chunk_size: 32
+  checkpoint_strips: True
+
+HGNetv2:
+  pretrained: True
+  local_model_dir: weight/hgnetv2/
+
+DFINECriterion:
+  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 0.0}
+
+train_dataloader:
+  total_batch_size: 32
+  dataset:
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-train/images
+    ann_file: ./output/visdrone_controlled/instances_train.json
+val_dataloader:
+  total_batch_size: 32
+  dataset:
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-val/images
+    # Same GT as job 15543; positive IDs avoid losing a match to annotation 0.
+    ann_file: ./output/visdrone_oracle/instances_val_positive_ids.json
