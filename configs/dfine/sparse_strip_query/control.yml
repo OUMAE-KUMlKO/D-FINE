@@ -1,0 +1,4 @@
+__include__: ['./common.yml']
+exp_name: sparse_strip_query_control_seed0
+DFINESparseStripQuery:
+  enabled: False

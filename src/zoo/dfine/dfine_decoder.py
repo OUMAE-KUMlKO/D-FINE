@@ -388,10 +388,11 @@ class TransformerDecoder(nn.Module):
         return_query=False,
         query_refiner=None,
         distribution_refiner=None,
+        query_refiner_trainable=False,
     ):
         if query_refiner is not None and distribution_refiner is not None:
             raise ValueError("query_refiner and distribution_refiner cannot be used together")
-        if query_refiner is not None and self.training:
+        if query_refiner is not None and self.training and not query_refiner_trainable:
             raise ValueError("query_refiner is only supported with the decoder in eval mode")
         output = target
         output_detach = pred_corners_undetach = 0
@@ -435,8 +436,10 @@ class TransformerDecoder(nn.Module):
                 output = query_refiner(i, output, ref_points_detach, {
                     "pred_corners": pred_corners_undetach,
                     "ref_points": ref_points_initial,
+                    "project": project,
                     "up": up,
                     "reg_scale": reg_scale,
+                    "num_denoising": dn_meta["dn_num_split"][0] if dn_meta else 0,
                 })
 
             # Refine bounding box corners using FDR, integrating previous layer's corrections
@@ -868,6 +871,7 @@ class DFINETransformer(nn.Module):
     def forward(
         self, feats, targets=None, return_query=False, return_distribution=False,
         query_refiner=None, distribution_refiner=None,
+        query_refiner_trainable=False,
     ):
         if query_refiner is not None and distribution_refiner is not None:
             raise ValueError("query_refiner and distribution_refiner cannot be used together")
@@ -876,7 +880,7 @@ class DFINETransformer(nn.Module):
             raise ValueError("return_query is only supported with the decoder in eval mode")
         if return_distribution and self.training:
             raise ValueError("return_distribution is only supported with the decoder in eval mode")
-        if query_refiner is not None and self.training:
+        if query_refiner is not None and self.training and not query_refiner_trainable:
             raise ValueError("query_refiner is only supported with the decoder in eval mode")
         # input projection and embedding
         memory, spatial_shapes = self._get_encoder_input(feats)
@@ -919,6 +923,7 @@ class DFINETransformer(nn.Module):
             return_query=return_query,
             query_refiner=query_refiner,
             distribution_refiner=distribution_refiner,
+            query_refiner_trainable=query_refiner_trainable,
         )
         out_bboxes, out_logits, out_corners, out_refs, pre_bboxes, pre_logits = decoder_outputs[:6]
 

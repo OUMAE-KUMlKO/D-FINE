@@ -1,0 +1,60 @@
+__include__: ['../ablation/dfine_hgnetv2_l_visdrone_g5_ddf_off.yml']
+model: DFINESparseStripQuery
+epochs: 24
+seed: 0
+use_amp: True
+use_ema: True
+use_wandb: False
+HGNetv2:
+  pretrained: False
+DFINESparseStripQuery:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  freeze_visual: True
+  hidden_dim: 32
+  max_strips: 9
+  min_separation_px: 2.0
+  compile_eval: True
+DFINECriterion:
+  weight_dict: {loss_vfl: 1, loss_bbox: 5, loss_giou: 2, loss_fgl: 0.15, loss_ddf: 0.0}
+ema:
+  type: ModelEMA
+  decay: 0.999
+  warmups: 0
+  start: 0
+optimizer:
+  type: AdamW
+  lr: 0.000025
+  betas: [0.9, 0.999]
+  weight_decay: 0.000125
+  params:
+    - {params: '^sparse_refiner\.', lr: 0.001}
+# The isolated runner constructs its fixed optimizer directly; no schedules/reload.
+lr_scheduler: null
+lr_warmup_scheduler: null
+train_dataloader:
+  total_batch_size: 32
+  num_workers: 4
+  dataset:
+    transforms:
+      ops:
+        - {type: RandomHorizontalFlip, p: 0.5}
+        - {type: Resize, size: [640, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: True}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: True}
+      policy:
+        name: default
+        ops: []
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 0
+val_dataloader:
+  total_batch_size: 32
+  num_workers: 4
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 0
