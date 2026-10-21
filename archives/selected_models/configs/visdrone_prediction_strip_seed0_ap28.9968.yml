@@ -1,0 +1,224 @@
+task: detection
+evaluator:
+  type: CocoEvaluator
+  iou_types:
+  - bbox
+num_classes: 10
+remap_mscoco_category: false
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-train/images
+    ann_file: ./annotations/train.json
+    return_masks: false
+    transforms:
+      type: Compose
+      ops:
+      - type: Resize
+        size:
+        - 640
+        - 640
+      - type: ConvertPILImage
+        dtype: float32
+        scale: true
+      - type: ConvertBoxes
+        fmt: cxcywh
+        normalize: true
+      policy:
+        name: stop_epoch
+        epoch: 72
+        ops:
+        - RandomPhotometricDistort
+        - RandomZoomOut
+        - RandomIoUCrop
+  shuffle: true
+  num_workers: 4
+  drop_last: true
+  collate_fn:
+    type: BatchImageCollateFunction
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 1000000
+    ema_restart_decay: 0.9999
+  total_batch_size: 96
+val_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /home/zzy/datasets/visdrone/VisDrone2019-DET-val/images
+    ann_file: ./annotations/val.json
+    return_masks: false
+    transforms:
+      type: Compose
+      ops:
+      - type: Resize
+        size:
+        - 640
+        - 640
+      - type: ConvertPILImage
+        dtype: float32
+        scale: true
+  shuffle: false
+  num_workers: 4
+  drop_last: false
+  collate_fn:
+    type: BatchImageCollateFunction
+  total_batch_size: 96
+print_freq: 100
+output_dir: ./evaluation/manual
+checkpoint_freq: 1
+sync_bn: false
+find_unused_parameters: false
+use_amp: true
+scaler:
+  type: GradScaler
+  enabled: true
+use_ema: false
+ema:
+  type: ModelEMA
+  decay: 0.9999
+  warmups: 1000
+  start: 0
+use_wandb: false
+project_name: D-FINE
+exp_name: visdrone_pred_p2_seed0
+epochs: 12
+clip_max_norm: 0.1
+optimizer:
+  type: AdamW
+  params:
+  - params: ^refiner\.
+    lr: 0.00025
+  lr: 0.00025
+  betas:
+  - 0.9
+  - 0.999
+  weight_decay: 0.000125
+lr_scheduler:
+  type: MultiStepLR
+  milestones:
+  - 10
+  gamma: 0.1
+lr_warmup_scheduler:
+  type: LinearWarmup
+  warmup_duration: 50
+model: DFINEPredRefiner
+criterion: PredRefinementCriterion
+postprocessor: DFINEPostProcessor
+use_focal_loss: true
+eval_spatial_size:
+- 640
+- 640
+DFINE:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+HGNetv2:
+  pretrained: false
+  local_model_dir: weight/hgnetv2/
+  name: B4
+  return_idx:
+  - 1
+  - 2
+  - 3
+  freeze_stem_only: true
+  freeze_at: 0
+  freeze_norm: true
+HybridEncoder:
+  in_channels:
+  - 512
+  - 1024
+  - 2048
+  feat_strides:
+  - 8
+  - 16
+  - 32
+  hidden_dim: 256
+  use_encoder_idx:
+  - 2
+  num_encoder_layers: 1
+  nhead: 8
+  dim_feedforward: 1024
+  dropout: 0.0
+  enc_act: gelu
+  expansion: 1.0
+  depth_mult: 1
+  act: silu
+DFINETransformer:
+  feat_channels:
+  - 256
+  - 256
+  - 256
+  feat_strides:
+  - 8
+  - 16
+  - 32
+  hidden_dim: 256
+  num_levels: 3
+  num_layers: 6
+  eval_idx: -1
+  num_queries: 300
+  num_denoising: 100
+  label_noise_ratio: 0.5
+  box_noise_scale: 1.0
+  reg_max: 32
+  reg_scale: 4
+  layer_scale: 1
+  num_points:
+  - 3
+  - 6
+  - 3
+  cross_attn_method: default
+  query_select_method: default
+DFINEPostProcessor:
+  num_top_queries: 300
+DFINECriterion:
+  weight_dict:
+    loss_vfl: 1
+    loss_bbox: 5
+    loss_giou: 2
+    loss_fgl: 0.15
+    loss_ddf: 1.5
+  losses:
+  - vfl
+  - boxes
+  - local
+  alpha: 0.75
+  gamma: 2.0
+  reg_max: 32
+  matcher:
+    type: HungarianMatcher
+    weight_dict:
+      cost_class: 2
+      cost_bbox: 5
+      cost_giou: 2
+    alpha: 0.25
+    gamma: 2.0
+DFINEPredRefiner:
+  backbone: HGNetv2
+  encoder: HybridEncoder
+  decoder: DFINETransformer
+  baseline_checkpoint: null
+  feature_level: 0
+  hidden_dim: 64
+  num_points: 5
+  kernel_size: 3
+  offset_pixels: 1.0
+  max_log_scale: 2.0
+  sampling_mode: distribution
+  query_chunk_size: 32
+PredRefinementCriterion:
+  matcher:
+    type: HungarianMatcher
+    weight_dict:
+      cost_class: 2
+      cost_bbox: 5
+      cost_giou: 2
+    alpha: 0.25
+    gamma: 2.0
+  weight_dict:
+    loss_bbox: 5
+    loss_giou: 2
+seed: 0
+summary_dir: ./evaluation/manual/summary

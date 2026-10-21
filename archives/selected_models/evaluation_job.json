@@ -1,0 +1,18 @@
+{
+  "job_id": "17770",
+  "submitted_at": "2026-10-21T11:04:06.567673+08:00",
+  "command": [
+    "sbatch",
+    "--parsable",
+    "--output=/cluster/home/zzy/D-FINE/desired_results/logs/evaluation_%j.out",
+    "--error=/cluster/home/zzy/D-FINE/desired_results/logs/evaluation_%j.err",
+    "/cluster/home/zzy/D-FINE/desired_results/run_evaluations.slurm"
+  ],
+  "archive_root": "/cluster/home/zzy/D-FINE/desired_results",
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "elapsed": "00:04:01",
+  "node": "gpu6",
+  "gpu": "8 × NVIDIA GeForce RTX 3090",
+  "driver": "550.144.03"
+}
