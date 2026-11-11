@@ -1,0 +1,12 @@
+__include__: ['frozen_target_probe.yml']
+DFINEAllLayerStrip:
+  selection_enabled: false
+epochs: 12
+adapt_lr: 0.000025
+adapt_weight_decay: 0.000125
+adapt_ema_decay: 0.999
+selection_candidates: 1200
+selection_budget: 40
+expected_gt_initial_ap: 0.293640914590742
+# Fixed 640 + horizontal flip inherited from frozen_target_probe.yml.
+# Only decoder adaptation; candidate generation and original G5 strip heads freeze.

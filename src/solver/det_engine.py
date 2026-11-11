@@ -189,10 +189,14 @@ def evaluate(
     coco_evaluator.cleanup()
 
     requires_gt = bool(getattr(dist_utils.de_parallel(model), "requires_gt", False))
+    selection_only = bool(getattr(dist_utils.de_parallel(model), "gt_selection_only", False))
+    selection_records = []
     oracle_metrics = GTRefinementMetrics(
         device=device, sampler=getattr(data_loader, "sampler", None)
-    ) if requires_gt else None
-    if requires_gt:
+    ) if requires_gt and not selection_only else None
+    if selection_only:
+        print("ORACLE EVALUATION: GT selects query indices; these are not GT-free detection results.")
+    elif requires_gt:
         print(
             "ORACLE EVALUATION: ground-truth boxes guide refinement; "
             "all queries and baseline scores are retained. These are not GT-free detection results."
@@ -223,6 +227,8 @@ def evaluate(
         targets = [{k: v.to(device) if isinstance(v, torch.Tensor) else v for k, v in t.items()} for t in targets]
 
         outputs = model(samples, targets=targets) if requires_gt else model(samples)
+        if selection_only:
+            selection_records.extend(outputs["gt_selection_records"])
         if oracle_metrics is not None:
             oracle_metrics.update(outputs, input_size=samples.shape[-2:])
         # with torch.autocast(device_type=str(device)):
@@ -282,7 +288,7 @@ def evaluate(
     if coco_evaluator is not None:
         coco_evaluator.accumulate()
         if requires_gt:
-            print("ORACLE COCO results (GT-guided boxes, fixed baseline scores):")
+            print("ORACLE COCO results (GT query selection):" if selection_only else "ORACLE COCO results (GT-guided boxes, fixed baseline scores):")
         coco_evaluator.summarize()
 
     stats = {}
@@ -293,6 +299,21 @@ def evaluate(
         if "segm" in iou_types:
             stats["coco_eval_masks"] = coco_evaluator.coco_eval["segm"].stats.tolist()
 
+    if requires_gt:
+        stats["oracle_evaluation"] = True
+    if selection_only:
+        if dist_utils.is_dist_available_and_initialized():
+            gathered = [None] * dist_utils.get_world_size()
+            torch.distributed.all_gather_object(gathered, selection_records)
+            selection_records = [record for chunk in gathered for record in chunk]
+        records = list({r["image_id"]: r for r in selection_records}.values())
+        total_gt = sum(r["gt"] for r in records)
+        stats["oracle_query_coverage"] = {
+            key: sum(r[key+"_covered"] for r in records)/max(1,total_gt)
+            for key in ("native", "selected", "pool")}
+        stats["oracle_query_coverage"].update(images=len(records), gt=total_gt,
+            replaced_per_image=sum(r["replaced"] for r in records)/max(1,len(records)))
+        print("GT query coverage:", stats["oracle_query_coverage"])
     if oracle_metrics is not None:
         oracle_metrics.synchronize_between_processes()
         stats["oracle_evaluation"] = True

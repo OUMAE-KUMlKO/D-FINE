@@ -1,0 +1,25 @@
+__include__: ['common.yml']
+HGNetv2:
+  pretrained: false
+DFINEAllLayerStrip:
+  selection_enabled: true
+probe_epochs: 6
+probe_lr: 0.001
+expected_baseline_ap: 0.2921347651827664
+# Target validation uses stable candidates: fixed 640, only horizontal flip.
+train_dataloader:
+  dataset:
+    transforms:
+      ops:
+        - {type: RandomHorizontalFlip, p: 0.5}
+        - {type: Resize, size: [640, 640]}
+        - {type: SanitizeBoundingBoxes, min_size: 1}
+        - {type: ConvertPILImage, dtype: float32, scale: true}
+        - {type: ConvertBoxes, fmt: cxcywh, normalize: true}
+      policy:
+        name: default
+        ops: []
+  collate_fn:
+    base_size: 640
+    base_size_repeat: null
+    stop_epoch: 0

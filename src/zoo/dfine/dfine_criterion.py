@@ -441,6 +441,13 @@ class DFINECriterion(nn.Module):
                     l_dict = {k + "_dn_pre": v for k, v in l_dict.items()}
                     losses.update(l_dict)
 
+        if 'query_aux_outputs' in outputs:
+            from .boundary_query_selection import selection_losses
+            query_losses = selection_losses(outputs['query_aux_outputs'], targets)
+            if not all(torch.isfinite(value).all() for value in query_losses.values()):
+                raise FloatingPointError('Nonfinite query selection loss')
+            losses.update(query_losses)
+
         # For debugging Objects365 pre-train.
         losses = {k: torch.nan_to_num(v, nan=0.0) for k, v in losses.items()}
         return losses

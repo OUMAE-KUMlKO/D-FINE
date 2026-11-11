@@ -1,0 +1,6 @@
+__include__: ['frozen_target_probe.yml']
+DFINEAllLayerStrip:
+  selection_supervision: quality_rank
+# Keep the previous 6-epoch fixed-detector protocol, seed and optimizer unchanged.
+# Loss weights: existence=1, class-correct IoU quality=1,
+# within-GT ranking=0.5, relation (including background negatives)=0.25.

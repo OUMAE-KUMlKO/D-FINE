@@ -5,6 +5,7 @@ import torch.nn as nn
 from torch.utils.checkpoint import checkpoint
 
 from ...core import register
+from .boundary_query_selection import BoundaryQuerySelector
 from .dfine import DFINE
 from .pred_refinement import DFINEPredRefiner
 from .strip_probability_head import StripProbabilityHead
@@ -66,6 +67,8 @@ class DFINEAllLayerStrip(DFINE):
         num_points=5, kernel_size=3, offset_pixels=1.0, query_chunk_size=32,
         checkpoint_strips=True, normal_points=3, normal_kernel_size=1,
         use_log_prior=True, query_fusion="concat",
+        selection_enabled=False, selection_candidates=1200, selection_neighbors=8,
+        selection_supervision="representative",
     ):
         super().__init__(backbone, encoder, decoder)
         if feature_level < 0:
@@ -81,6 +84,16 @@ class DFINEAllLayerStrip(DFINE):
             use_log_prior=use_log_prior, query_fusion=query_fusion,
         )
 
+        self.query_selector = None
+        if selection_enabled:
+            if decoder.query_select_method != 'default' or decoder.learn_query_content:
+                raise ValueError('Boundary selection requires native candidate content and default selection')
+            # Extra module initialization must not change paired data/DN RNG streams.
+            with torch.random.fork_rng(devices=[]):
+                self.query_selector = BoundaryQuerySelector(
+                    encoder.hidden_dim, decoder.num_classes, selection_candidates, selection_neighbors,
+                    supervision=selection_supervision)
+
     def forward(self, images, targets=None):
         features = self.encoder(self.backbone(images))
         if self.feature_level >= len(features):
@@ -93,7 +106,13 @@ class DFINEAllLayerStrip(DFINE):
             )
 
         # Targets enter only the original training denoising mechanism and loss.
-        return self.decoder(features, targets, distribution_refiner=refine)
+        select = None
+        if self.query_selector is not None:
+            def select(memory, logits, anchors, bbox_head, count):
+                return self.query_selector(memory, logits, anchors, bbox_head,
+                                           features[0], images.shape[-2:], count)
+        return self.decoder(features, targets, distribution_refiner=refine,
+                            candidate_selector=select)
 
 
 @register()

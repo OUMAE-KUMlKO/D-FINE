@@ -1,0 +1,13 @@
+# VisDrone 单组 80 轮：主干预训练初始化，训练和验证均使用 GT 筛选。
+# 保留 300 个 query；从 Top1200 中最多交换 40 个，增益不为正时提前停止。
+# 复用 common.yml 的六卡总 batch 24、学习率、EMA 和第 72 轮增强切换。
+__include__: ['common.yml']
+DFINEAllLayerStrip:
+  selection_enabled: false
+HGNetv2:
+  pretrained: true
+epochs: 80
+gt_selection_candidates: 1200
+gt_selection_budget: 40
+output_dir: ./output/g5_gt_coverage_full80_20261109/results
+exp_name: visdrone_g5_gt_coverage_full80_seed0_6gpu

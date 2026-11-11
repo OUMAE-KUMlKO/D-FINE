@@ -1,0 +1,6 @@
+__include__:
+- common.yml
+DFINEAllLayerStrip:
+  selection_enabled: true
+output_dir: ./output/g5_boundary_selection_scratch80_20261107/results/selection
+exp_name: visdrone_g5_selection_scratch80_seed0_6gpu

@@ -785,7 +785,8 @@ class DFINETransformer(nn.Module):
         return anchors, valid_mask
 
     def _get_decoder_input(
-        self, memory: torch.Tensor, spatial_shapes, denoising_logits=None, denoising_bbox_unact=None
+        self, memory: torch.Tensor, spatial_shapes, denoising_logits=None, denoising_bbox_unact=None,
+        candidate_selector=None
     ):
         # prepare input for decoder
         if self.training or self.eval_spatial_size is None:
@@ -804,11 +805,16 @@ class DFINETransformer(nn.Module):
         enc_outputs_logits: torch.Tensor = self.enc_score_head(output_memory)
 
         enc_topk_bboxes_list, enc_topk_logits_list = [], []
-        enc_topk_memory, enc_topk_logits, enc_topk_anchors = self._select_topk(
-            output_memory, enc_outputs_logits, anchors, self.num_queries
-        )
-
-        enc_topk_bbox_unact: torch.Tensor = self.enc_bbox_head(enc_topk_memory) + enc_topk_anchors
+        query_aux = None
+        if candidate_selector is None:
+            enc_topk_memory, enc_topk_logits, enc_topk_anchors = self._select_topk(
+                output_memory, enc_outputs_logits, anchors, self.num_queries
+            )
+            enc_topk_bbox_unact = self.enc_bbox_head(enc_topk_memory) + enc_topk_anchors
+        else:
+            enc_topk_memory, enc_topk_logits, enc_topk_bbox_unact, query_aux = candidate_selector(
+                output_memory, enc_outputs_logits, anchors, self.enc_bbox_head, self.num_queries
+            )
 
         if self.training:
             enc_topk_bboxes = F.sigmoid(enc_topk_bbox_unact)
@@ -829,7 +835,7 @@ class DFINETransformer(nn.Module):
             enc_topk_bbox_unact = torch.concat([denoising_bbox_unact, enc_topk_bbox_unact], dim=1)
             content = torch.concat([denoising_logits, content], dim=1)
 
-        return content, enc_topk_bbox_unact, enc_topk_bboxes_list, enc_topk_logits_list
+        return content, enc_topk_bbox_unact, enc_topk_bboxes_list, enc_topk_logits_list, query_aux
 
     def _select_topk(
         self,
@@ -871,7 +877,7 @@ class DFINETransformer(nn.Module):
     def forward(
         self, feats, targets=None, return_query=False, return_distribution=False,
         query_refiner=None, distribution_refiner=None,
-        query_refiner_trainable=False,
+        query_refiner_trainable=False, candidate_selector=None,
     ):
         if query_refiner is not None and distribution_refiner is not None:
             raise ValueError("query_refiner and distribution_refiner cannot be used together")
@@ -901,8 +907,8 @@ class DFINETransformer(nn.Module):
         else:
             denoising_logits, denoising_bbox_unact, attn_mask, dn_meta = None, None, None, None
 
-        init_ref_contents, init_ref_points_unact, enc_topk_bboxes_list, enc_topk_logits_list = (
-            self._get_decoder_input(memory, spatial_shapes, denoising_logits, denoising_bbox_unact)
+        init_ref_contents, init_ref_points_unact, enc_topk_bboxes_list, enc_topk_logits_list, query_aux = (
+            self._get_decoder_input(memory, spatial_shapes, denoising_logits, denoising_bbox_unact, candidate_selector)
         )
 
         # decoder
@@ -947,6 +953,8 @@ class DFINETransformer(nn.Module):
             }
         else:
             out = {"pred_logits": out_logits[-1], "pred_boxes": out_bboxes[-1]}
+        if self.training and query_aux is not None:
+            out["query_aux_outputs"] = query_aux
         if return_query:
             out["pred_queries"] = decoder_outputs[6]
 
